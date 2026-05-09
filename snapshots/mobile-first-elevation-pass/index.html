@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="MirrorTale creates premium personalized children's books where your child becomes the hero of a magical storybook."
+    />
+    <title>MirrorTale | Personalized Children's Books</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;500;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css?v=enchanted-premium-4" />
+  </head>
+  <body>
+    <div class="sky-grain" aria-hidden="true"></div>
+    <svg class="icon-sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+      <symbol id="icon-face" viewBox="0 0 24 24">
+        <path d="M7.5 8.4c1.1-1.1 2.6-1.7 4.5-1.7s3.4.6 4.5 1.7" />
+        <path d="M6.8 11.8c.6 4 2.5 6 5.2 6s4.6-2 5.2-6" />
+        <path d="M9 11.2h.1M15 11.2h.1" />
+        <path d="M9.8 14.8c1.3 1 3.1 1 4.4 0" />
+        <path d="M4.5 12.4c0-4.8 3-8 7.5-8s7.5 3.2 7.5 8c0 4.7-3 7.4-7.5 7.4s-7.5-2.7-7.5-7.4Z" />
+      </symbol>
+      <symbol id="icon-shield-check" viewBox="0 0 24 24">
+        <path d="M12 3.2 19 6v5.7c0 4.4-2.7 7.4-7 9.1-4.3-1.7-7-4.7-7-9.1V6l7-2.8Z" />
+        <path d="m8.5 12 2.3 2.3 4.8-5.2" />
+      </symbol>
+      <symbol id="icon-clock" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="8.4" />
+        <path d="M12 7.5V12l3.2 2.1" />
+      </symbol>
+      <symbol id="icon-book" viewBox="0 0 24 24">
+        <path d="M5.4 4.4h5.1c1 0 1.5.5 1.5 1.5v13.4c0-.9-.7-1.4-1.7-1.4H5.4V4.4Z" />
+        <path d="M18.6 4.4h-5.1c-1 0-1.5.5-1.5 1.5v13.4c0-.9.7-1.4 1.7-1.4h4.9V4.4Z" />
+        <path d="M12 5.9v13.4" />
+      </symbol>
+      <symbol id="icon-heart" viewBox="0 0 24 24">
+        <path d="M12 19.2S5 15.3 5 9.8c0-2.1 1.5-3.7 3.5-3.7 1.4 0 2.6.8 3.5 2 .9-1.2 2.1-2 3.5-2 2 0 3.5 1.6 3.5 3.7 0 5.5-7 9.4-7 9.4Z" />
+      </symbol>
+      <symbol id="icon-star" viewBox="0 0 24 24">
+        <path d="m12 3.8 2.3 5 5.4.6-4 3.7 1.1 5.4L12 15.8l-4.8 2.7 1.1-5.4-4-3.7 5.4-.6L12 3.8Z" />
+      </symbol>
+      <symbol id="icon-lock" viewBox="0 0 24 24">
+        <rect x="5.2" y="10.3" width="13.6" height="9.2" rx="2" />
+        <path d="M8.2 10.3V8.2a3.8 3.8 0 0 1 7.6 0v2.1" />
+        <path d="M12 14v2.2" />
+      </symbol>
+      <symbol id="icon-upload" viewBox="0 0 24 24">
+        <path d="M7.5 17.8H7a4.2 4.2 0 0 1 .1-8.4 5.1 5.1 0 0 1 9.7 1.2 3.6 3.6 0 0 1 .2 7.2h-.5" />
+        <path d="M12 17.8V9.5" />
+        <path d="m8.9 12.4 3.1-3.1 3.1 3.1" />
+      </symbol>
+      <symbol id="icon-chevron" viewBox="0 0 24 24">
+        <path d="m7 9 5 5 5-5" />
+      </symbol>
+      <symbol id="icon-check" viewBox="0 0 24 24">
+        <path d="m5.5 12.5 4.1 4.1 8.9-9.2" />
+      </symbol>
+      <symbol id="icon-arrow" viewBox="0 0 24 24">
+        <path d="M5 12h13" />
+        <path d="m13 7 5 5-5 5" />
+      </symbol>
+      <symbol id="icon-sparkle" viewBox="0 0 24 24">
+        <path d="M12 3.5 14.1 9l5.4 2.1-5.4 2.1L12 18.5l-2.1-5.3-5.4-2.1L9.9 9 12 3.5Z" />
+      </symbol>
+    </svg>
+
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="#top" aria-label="MirrorTale home">
+          <span>MirrorTale</span>
+          <i class="brand-mark" aria-hidden="true">
+            <svg class="ui-icon brand-spark"><use href="#icon-sparkle"></use></svg>
+          </i>
+        </a>
+        <nav class="main-nav" aria-label="Primary navigation">
+          <a href="#how-it-works">How It Works</a>
+          <a href="#examples">Example Books</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+        <a class="button button-gold header-cta" href="#intake">Create My Book</a>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-inner section-shell">
+          <div class="hero-copy reveal">
+            <h1>
+              <span>Your child.</span>
+              <span>Their story.</span>
+              <span class="headline-accent">Their adventure.</span>
+            </h1>
+            <p class="hero-lede">
+              We turn <strong>your child</strong> into the hero of a
+              <strong>beautifully personalized storybook</strong> they’ll treasure forever.
+            </p>
+            <div class="hero-actions" aria-label="Hero actions">
+              <a class="button button-gold" href="#intake">Create My Book</a>
+              <a class="button button-outline" href="#examples">See Example Books</a>
+            </div>
+          </div>
+
+          <div
+            class="hero-art reveal"
+            aria-label="Child reading a magical personalized storybook"
+            data-replace-with="provided-true-book-example"
+          >
+            <img
+              src="assets/hero-aiden-morning-bell-real.webp"
+              width="1536"
+              height="1024"
+              alt="A child reading a realistic Aiden Braves the Morning Bell personalized storybook under a starry night sky"
+            />
+            <div class="delivery-badge">
+              <span>Digital book</span>
+              <strong>in 24–48h</strong>
+              <small>after payment</small>
+            </div>
+          </div>
+
+          <ul class="hero-trust reveal" aria-label="Key trust points">
+            <li>
+              <span class="trust-orb" aria-hidden="true">
+                <svg class="ui-icon trust-icon"><use href="#icon-face"></use></svg>
+              </span>
+              <span class="trust-copy">
+                <strong>Maximum likeness</strong>
+                <em>of your child</em>
+              </span>
+            </li>
+            <li>
+              <span class="trust-orb" aria-hidden="true">
+                <svg class="ui-icon trust-icon"><use href="#icon-shield-check"></use></svg>
+              </span>
+              <span class="trust-copy">
+                <strong>Human quality check</strong>
+                <em>before delivery</em>
+              </span>
+            </li>
+            <li>
+              <span class="trust-orb" aria-hidden="true">
+                <svg class="ui-icon trust-icon"><use href="#icon-clock"></use></svg>
+              </span>
+              <span class="trust-copy">
+                <strong>Digital book</strong>
+                <em>in 24–48h</em>
+              </span>
+            </li>
+            <li>
+              <span class="trust-orb" aria-hidden="true">
+                <svg class="ui-icon trust-icon"><use href="#icon-book"></use></svg>
+              </span>
+              <span class="trust-copy">
+                <strong>Premium hardcover</strong>
+                <em>option available</em>
+              </span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="proof-section section-shell" id="how-it-works">
+        <div class="section-title centered reveal">
+          <span class="sparkline" aria-hidden="true"></span>
+          <h2>From photo to finished storybook</h2>
+          <span class="sparkline" aria-hidden="true"></span>
+        </div>
+
+        <div class="proof-flow reveal">
+          <article class="proof-step">
+            <div class="proof-image">
+              <img src="assets/proof-photo.webp" width="620" height="620" alt="Uploaded child portrait" />
+            </div>
+            <div class="proof-caption">
+              <span>1</span>
+              <p>Upload photo<br />+ details</p>
+            </div>
+          </article>
+          <span class="flow-arrow" aria-hidden="true">→</span>
+          <article class="proof-step">
+            <div class="proof-image">
+              <img src="assets/proof-aiden-anchor.webp" width="705" height="705" alt="Generated animated likeness of Aiden" />
+            </div>
+            <div class="proof-caption">
+              <span>2</span>
+              <p>We create your child’s<br />animated likeness</p>
+            </div>
+          </article>
+          <span class="flow-arrow" aria-hidden="true">→</span>
+          <article class="proof-step">
+            <div class="proof-image cover-proof real-cover-proof">
+              <img src="assets/books/aiden/cover-front.webp" width="1024" height="1024" alt="Aiden Braves the Morning Bell book cover" />
+            </div>
+            <div class="proof-caption">
+              <span>3</span>
+              <p>We build their<br />personalized story</p>
+            </div>
+          </article>
+          <span class="flow-arrow" aria-hidden="true">→</span>
+          <article class="proof-step">
+            <div class="proof-image">
+              <img src="assets/books/aiden/page-14.webp" width="1024" height="1024" alt="Aiden soccer story scene" />
+            </div>
+            <div class="proof-caption">
+              <span>4</span>
+              <p>You receive the final<br />book in 24–48h</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="examples section-shell" id="examples">
+        <div class="example-intro reveal">
+          <h2>Example books</h2>
+          <span class="gold-rule" aria-hidden="true"></span>
+          <p>Magical stories. Beautifully designed. Made for your child.</p>
+          <a
+            class="button button-outline"
+            href="#noah-flipbook"
+            data-preview-target="noah-flipbook"
+            data-book-key="elena"
+          >
+            View Book Preview
+          </a>
+        </div>
+
+        <div class="example-gallery reveal">
+          <p class="example-instruction">
+            Click or tap any cover to open the interactive book preview below.
+          </p>
+
+          <div class="book-rack" data-pdf-flipbook-section="pending-provided-pdfs">
+            <article
+              class="example-book real-book"
+              data-book-slot="aiden"
+              aria-controls="noah-flipbook"
+            >
+              <a
+                class="example-book-link"
+                href="#noah-flipbook"
+                data-preview-target="noah-flipbook"
+                data-book-key="aiden"
+                aria-label="Open Aiden Braves the Morning Bell book preview"
+              >
+                <img
+                  src="assets/books/aiden/cover-front.webp"
+                  width="1024"
+                  height="1024"
+                  alt="Aiden Braves the Morning Bell book cover"
+                />
+                <span class="example-book-badge">Tap to preview</span>
+              </a>
+            </article>
+            <article
+              class="example-book featured-book real-book"
+              data-book-slot="elena"
+              aria-controls="noah-flipbook"
+            >
+              <a
+                class="example-book-link"
+                href="#noah-flipbook"
+                data-preview-target="noah-flipbook"
+                data-book-key="elena"
+                aria-label="Open Elena Stirs Up a Friendship book preview"
+              >
+                <img
+                  src="assets/books/elena/cover-front.webp"
+                  width="1024"
+                  height="1024"
+                  alt="Elena Stirs Up a Friendship book cover"
+                />
+                <span class="example-book-badge">Previewing</span>
+              </a>
+            </article>
+            <article
+              class="example-book real-book"
+              data-book-slot="noah"
+              data-pdf-cover="Noah_Cover_Spread.pdf"
+              data-pdf-interior="Noah_Interior_Pages.pdf"
+              aria-controls="noah-flipbook"
+            >
+              <a
+                class="example-book-link"
+                href="#noah-flipbook"
+                data-preview-target="noah-flipbook"
+                data-book-key="noah"
+                aria-label="Open Noah Rides the Silver Wind book preview"
+              >
+                <img
+                  src="assets/books/noah/cover-front.webp"
+                  width="1061"
+                  height="1144"
+                  alt="Noah Rides the Silver Wind book cover"
+                />
+                <span class="example-book-badge">Tap to preview</span>
+              </a>
+            </article>
+          </div>
+        </div>
+
+        <div class="flipbook-viewer reveal" id="noah-flipbook" data-book="elena">
+          <div class="flipbook-preview-header" aria-live="polite">
+            <span class="mini-kicker">Book preview</span>
+            <h3 id="active-preview-title">Now previewing Elena Stirs Up a Friendship</h3>
+            <p id="active-preview-helper">Tap the page or swipe to turn.</p>
+          </div>
+          <div class="flipbook-stage" aria-live="polite">
+            <div class="pageflip-shell" id="noah-pageflip-shell">
+              <div class="pageflip-book" id="noah-pageflip" aria-label="Interactive Elena Stirs Up a Friendship flipbook">
+                <div class="pageflip-loading">Loading book preview...</div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="mobile-book-reader"
+            id="mobile-book-reader"
+            tabindex="0"
+            role="group"
+            aria-label="Mobile Elena Stirs Up a Friendship book preview"
+            aria-describedby="mobile-book-help"
+          >
+            <div class="mobile-book-frame">
+              <span class="mobile-book-spine" aria-hidden="true"></span>
+              <span class="mobile-page-depth mobile-page-depth-right" aria-hidden="true"></span>
+              <span class="mobile-page-depth mobile-page-depth-bottom" aria-hidden="true"></span>
+              <img
+                class="mobile-book-image"
+                src="assets/books/elena/cover-front.webp"
+                width="1024"
+                height="1024"
+                alt="Elena Stirs Up a Friendship front cover"
+                draggable="false"
+              />
+              <span class="mobile-page-turn-sheet" aria-hidden="true"></span>
+              <span class="mobile-tap-hint" aria-hidden="true">Tap to open</span>
+            </div>
+            <p class="mobile-book-progress" id="mobile-book-progress">Cover</p>
+            <p class="visually-hidden" id="mobile-book-help">
+              Tap the right side or swipe left to turn forward. Tap the left side or swipe right to go back.
+            </p>
+          </div>
+          <span class="visually-hidden" id="noah-page-count" aria-live="polite">Cover</span>
+        </div>
+      </section>
+
+      <section class="cta-strip section-shell reveal">
+        <p>Ready to create a book for your child?</p>
+        <a class="button button-gold" href="#intake">Start Your Book</a>
+      </section>
+
+      <section class="trust section-shell">
+        <div class="section-title centered reveal">
+          <h2>Why parents choose MirrorTale</h2>
+        </div>
+        <div class="trust-grid reveal">
+          <article>
+            <span class="trust-orb" aria-hidden="true">
+              <svg class="ui-icon trust-icon"><use href="#icon-face"></use></svg>
+            </span>
+            <h3>Looks like<br />your child</h3>
+            <p>Created from their real photo, not a generic avatar.</p>
+          </article>
+          <article>
+            <span class="trust-orb" aria-hidden="true">
+              <svg class="ui-icon trust-icon"><use href="#icon-heart"></use></svg>
+            </span>
+            <h3>Real details<br />woven in</h3>
+            <p>Names, interests, and family notes shape the story.</p>
+          </article>
+          <article>
+            <span class="trust-orb" aria-hidden="true">
+              <svg class="ui-icon trust-icon"><use href="#icon-star"></use></svg>
+            </span>
+            <h3>Consistent<br />page to page</h3>
+            <p>Your child’s character is kept coherent throughout.</p>
+          </article>
+          <article>
+            <span class="trust-orb" aria-hidden="true">
+              <svg class="ui-icon trust-icon"><use href="#icon-shield-check"></use></svg>
+            </span>
+            <h3>Human checked<br />before delivery</h3>
+            <p>Every finished book gets a final quality review.</p>
+          </article>
+          <article>
+            <span class="trust-orb" aria-hidden="true">
+              <svg class="ui-icon trust-icon"><use href="#icon-clock"></use></svg>
+            </span>
+            <h3>Digital delivery<br />in 24–48h</h3>
+            <p>The ready-to-print PDF arrives fast after payment.</p>
+          </article>
+          <article>
+            <span class="trust-orb" aria-hidden="true">
+              <svg class="ui-icon trust-icon"><use href="#icon-lock"></use></svg>
+            </span>
+            <h3>Secure photo<br />handling</h3>
+            <p>Your photos are used only to create the book.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="pricing section-shell" id="pricing">
+        <div class="pricing-layout reveal">
+          <div class="pricing-heading">
+            <h2>Simple,<br />transparent<br />pricing</h2>
+          </div>
+          <div class="pricing-cards">
+            <article class="price-card">
+              <span class="card-medallion" aria-hidden="true">
+                <svg class="ui-icon"><use href="#icon-book"></use></svg>
+              </span>
+              <h3>Digital Only</h3>
+              <div class="price">€50</div>
+              <ul>
+                <li>
+                  <svg class="ui-icon check-icon" aria-hidden="true"><use href="#icon-check"></use></svg>
+                  <span>Ready-to-print PDF</span>
+                </li>
+                <li>
+                  <svg class="ui-icon check-icon" aria-hidden="true"><use href="#icon-check"></use></svg>
+                  <span>Delivered in 24–48h</span>
+                </li>
+              </ul>
+            </article>
+            <article class="price-card premium-card">
+              <span class="card-medallion" aria-hidden="true">
+                <svg class="ui-icon"><use href="#icon-book"></use></svg>
+              </span>
+              <h3>Digital + Print</h3>
+              <div class="price">€100 <small>+ shipping</small></div>
+              <ul>
+                <li>
+                  <svg class="ui-icon check-icon" aria-hidden="true"><use href="#icon-check"></use></svg>
+                  <span>PDF book</span>
+                </li>
+                <li>
+                  <svg class="ui-icon check-icon" aria-hidden="true"><use href="#icon-check"></use></svg>
+                  <span>Premium hardcover photo book</span>
+                </li>
+                <li>
+                  <svg class="ui-icon check-icon" aria-hidden="true"><use href="#icon-check"></use></svg>
+                  <span>Square 8.5 x 8.5 in | 216 x 216 mm</span>
+                </li>
+                <li>
+                  <svg class="ui-icon check-icon" aria-hidden="true"><use href="#icon-check"></use></svg>
+                  <span>Premium Color</span>
+                </li>
+                <li>
+                  <svg class="ui-icon check-icon" aria-hidden="true"><use href="#icon-check"></use></svg>
+                  <span>80# Paper</span>
+                </li>
+              </ul>
+            </article>
+          </div>
+        </div>
+        <p class="pricing-note reveal">
+          Every book is custom-made from your child’s photo and story details.
+        </p>
+      </section>
+
+      <section class="faq section-shell" id="faq">
+        <div class="faq-layout">
+          <div class="faq-heading reveal">
+            <h2>Frequently<br />asked questions</h2>
+          </div>
+          <div class="faq-list reveal">
+            <details open>
+              <summary>
+                <span>How long does it take to receive my book?</span>
+                <svg class="ui-icon faq-chevron" aria-hidden="true"><use href="#icon-chevron"></use></svg>
+              </summary>
+              <p>Your ready-to-print digital PDF is delivered within 24–48h after payment.</p>
+            </details>
+            <details>
+              <summary>
+                <span>Will my child’s likeness look the same throughout the book?</span>
+                <svg class="ui-icon faq-chevron" aria-hidden="true"><use href="#icon-chevron"></use></svg>
+              </summary>
+              <p>We build from an anchor likeness and manually review the final book for consistency.</p>
+            </details>
+            <details>
+              <summary>
+                <span>What photo works best?</span>
+                <svg class="ui-icon faq-chevron" aria-hidden="true"><use href="#icon-chevron"></use></svg>
+              </summary>
+              <p>A clear, front-facing photo in good light works best. Avoid sunglasses, filters, or covered faces.</p>
+            </details>
+            <details>
+              <summary>
+                <span>Can I preview the book before it’s finalized?</span>
+                <svg class="ui-icon faq-chevron" aria-hidden="true"><use href="#icon-chevron"></use></svg>
+              </summary>
+              <p>The book is manually checked before delivery, and the final PDF is sent digitally for your review and use.</p>
+            </details>
+            <details>
+              <summary>
+                <span>What is your refund policy?</span>
+                <svg class="ui-icon faq-chevron" aria-hidden="true"><use href="#icon-chevron"></use></svg>
+              </summary>
+              <p>Because each book is custom-made, orders move into production after payment and photo submission.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section class="intake section-shell" id="intake">
+        <form class="intake-form reveal" action="#" method="post">
+          <h2>Create your child’s one-of-a-kind storybook</h2>
+          <p class="form-reassurance">
+            Takes about 2 minutes. Secure upload, human quality check, and digital delivery in 24–48h.
+          </p>
+          <div class="form-columns">
+            <fieldset>
+              <legend>Parent details</legend>
+              <label>
+                Parent / Guardian Name
+                <input type="text" name="parent-name" placeholder="Enter your name" required />
+              </label>
+              <label>
+                Email Address
+                <input type="email" name="email" placeholder="Enter your email" required />
+              </label>
+            </fieldset>
+
+            <fieldset>
+              <legend>Child details</legend>
+              <label>
+                Child’s Name
+                <input type="text" name="child-name" placeholder="Enter child’s name" required />
+              </label>
+              <label>
+                Gender
+                <select name="gender" required>
+                  <option value="">Select gender</option>
+                  <option>Boy</option>
+                  <option>Girl</option>
+                </select>
+              </label>
+              <label>
+                Age
+                <select name="age" required>
+                  <option value="">Select age</option>
+                  <option>0–2</option>
+                  <option>3–5</option>
+                  <option>6–8</option>
+                  <option>9–12</option>
+                </select>
+              </label>
+            </fieldset>
+
+            <fieldset>
+              <legend>Story details</legend>
+              <label>
+                Story Theme
+                <textarea
+                  name="theme"
+                  rows="2"
+                  placeholder="Example: a brave moonlit forest quest, an ocean adventure, a bedtime dragon story..."
+                  required
+                ></textarea>
+                <small class="form-hint">
+                  Suggestions: theme, tone, favorite setting, magical creature, lesson, or dream adventure.
+                </small>
+              </label>
+              <label>
+                Hobbies, Toys &amp; Activities
+                <input
+                  type="text"
+                  name="interests"
+                  placeholder="Favorite hobbies, toys, activities, animals, colors..."
+                  required
+                />
+              </label>
+              <label>
+                Dedication Message
+                <textarea
+                  name="dedication"
+                  rows="2"
+                  placeholder="Example: For Leo, whose courage and imagination light up every room."
+                  required
+                ></textarea>
+              </label>
+            </fieldset>
+
+            <fieldset>
+              <legend>Upload child photo</legend>
+              <label class="upload-card">
+                <svg class="ui-icon upload-cloud" aria-hidden="true"><use href="#icon-upload"></use></svg>
+                <strong>Click to upload</strong>
+                <em>or drag and drop</em>
+                <input type="file" name="child-photo" accept="image/*" required />
+              </label>
+              <p class="upload-note">
+                A clear, front-facing photo works best. Your photos are handled securely
+                and used only to create your child’s book.
+              </p>
+            </fieldset>
+
+            <fieldset>
+              <legend>Choose your package</legend>
+              <div class="package-selector" aria-label="Choose a package">
+                <label>
+                  <input type="radio" name="package" value="digital" checked />
+                  <span>
+                    <strong>Digital Only — €50</strong>
+                    <em>Ready-to-print PDF</em>
+                  </span>
+                </label>
+                <label>
+                  <input type="radio" name="package" value="print" />
+                  <span>
+                    <strong>Digital + Print — €100 + shipping</strong>
+                    <em>PDF plus premium hardcover</em>
+                  </span>
+                </label>
+              </div>
+              <button class="button button-gold form-submit" type="submit">
+                Continue to Payment
+              </button>
+              <p class="secure-note">
+                <svg class="ui-icon secure-icon" aria-hidden="true"><use href="#icon-lock"></use></svg>
+                Secure &amp; Private
+              </p>
+            </fieldset>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner section-shell">
+        <span><svg class="ui-icon trust-icon" aria-hidden="true"><use href="#icon-shield-check"></use></svg> Secure &amp; Private</span>
+        <span><svg class="ui-icon trust-icon" aria-hidden="true"><use href="#icon-star"></use></svg> Made with Care</span>
+        <span><svg class="ui-icon trust-icon" aria-hidden="true"><use href="#icon-clock"></use></svg> Fast Digital Delivery</span>
+        <span><svg class="ui-icon trust-icon" aria-hidden="true"><use href="#icon-book"></use></svg> Premium Quality</span>
+      </div>
+      <p>© 2025 MirrorTale. All rights reserved.</p>
+    </footer>
+
+    <script src="assets/vendor/page-flip.browser.js"></script>
+    <script src="script.js?v=mobile-reader-2"></script>
+  </body>
+</html>
