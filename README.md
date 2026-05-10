@@ -26,4 +26,11 @@ http://localhost:8000/
 
 ## Next Phase
 
-The public website should stay separate from the book-generation engine. The intake form should eventually submit to a backend/API that handles payment, secure uploads, and generation orchestration. Browser code should never call AI Studio or model APIs directly with secret keys.
+The public website stays separate from the book-generation engine. Firebase Hosting serves this static repo, while Cloud Run handles payment, secure uploads, Firestore order records, Cloud Storage files, and calls into `nelu-droid/mirrortale-engine`.
+
+See:
+
+- `docs/deployment-architecture.md`
+- `docs/backend-contract.md`
+
+To enable live form submission, deploy the Cloud Run API and set the `mirrortale-api-base-url` meta tag in `index.html`. If it is blank, the forms keep their local mock behavior.
