@@ -8,6 +8,17 @@ const mobileStickyCta = document.querySelector(".mobile-sticky-cta");
 const packageOptions = document.querySelectorAll(".package-selector label");
 const exampleBooks = document.querySelectorAll(".example-book[data-book-slot]");
 const mobileStickyCtaMedia = window.matchMedia("(max-width: 760px)");
+const normalizeApiBaseUrl = (value) => String(value || "").trim().replace(/\/+$/, "");
+const siteConfig = {
+  apiBaseUrl: normalizeApiBaseUrl(
+    window.MirrorTaleConfig?.apiBaseUrl ||
+      document.querySelector('meta[name="mirrortale-api-base-url"]')?.content
+  ),
+};
+const apiEndpoints = {
+  orders: "/orders",
+  contact: "/contact",
+};
 const createBookPages = ({ title, directory, interiorCount }) => [
   {
     src: `${directory}/cover-front.webp`,
@@ -98,6 +109,72 @@ let mobileSwipeHandledAt = 0;
 let mobileReaderAnimationTimer = null;
 let mobileImageLoadToken = 0;
 const mobilePreloadCache = new Set();
+
+const buildApiUrl = (path) => {
+  if (!siteConfig.apiBaseUrl) return "";
+  const normalizedPath = path.startsWith("/") ? path : `/${path}`;
+  return `${siteConfig.apiBaseUrl}${normalizedPath}`;
+};
+
+const parseApiResponse = async (response) => {
+  const contentType = response.headers.get("content-type") || "";
+  const body = await response.text();
+  let payload = { message: body };
+
+  if (body && contentType.includes("application/json")) {
+    try {
+      payload = JSON.parse(body);
+    } catch {
+      payload = { message: body };
+    }
+  }
+
+  if (!response.ok) {
+    const message =
+      payload?.error?.message || payload?.message || "Something went wrong. Please try again.";
+    throw new Error(message);
+  }
+
+  return payload;
+};
+
+const getButtonText = (button) => {
+  if (!button.dataset.originalText) {
+    button.dataset.originalText = button.textContent.trim();
+  }
+
+  return button.dataset.originalText;
+};
+
+const setSubmitState = (button, text, isLoading = false) => {
+  button.textContent = text;
+  button.disabled = isLoading;
+  button.toggleAttribute("aria-busy", isLoading);
+};
+
+const setFormStatus = (statusElement, message, tone = "neutral") => {
+  if (!statusElement) return;
+  statusElement.textContent = message;
+  statusElement.dataset.tone = tone;
+};
+
+const clearFormStatusSoon = (statusElement, delay = 3200) => {
+  window.setTimeout(() => setFormStatus(statusElement, ""), delay);
+};
+
+const createContactPayload = (formElement) => {
+  const fields = Object.fromEntries(new FormData(formElement).entries());
+
+  return {
+    name: String(fields["contact-name"] || "").trim(),
+    email: String(fields["contact-email"] || "").trim(),
+    message: String(fields["contact-message"] || "").trim(),
+    source: {
+      page: window.location.href,
+      referrer: document.referrer || null,
+    },
+  };
+};
 
 if ("IntersectionObserver" in window) {
   const observer = new IntersectionObserver(
@@ -637,34 +714,135 @@ if (flipbook.viewer) {
   if (initialBookKey) selectBook(initialBookKey);
 }
 
-form?.addEventListener("submit", (event) => {
+form?.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   const button = form.querySelector(".form-submit");
   if (!button) return;
 
-  const originalText = button.textContent;
-  button.textContent = "Payment step mocked";
-  button.classList.add("is-complete");
+  const statusElement = form.querySelector(".form-status");
+  const originalText = getButtonText(button);
+  const ordersUrl = buildApiUrl(apiEndpoints.orders);
 
-  window.setTimeout(() => {
-    button.textContent = originalText;
-    button.classList.remove("is-complete");
-  }, 2400);
+  if (!ordersUrl) {
+    setSubmitState(button, "Payment step mocked");
+    setFormStatus(
+      statusElement,
+      "Backend URL not configured yet. The live payment flow will start here.",
+      "neutral"
+    );
+    button.classList.add("is-complete");
+
+    window.setTimeout(() => {
+      setSubmitState(button, originalText);
+      button.classList.remove("is-complete");
+      setFormStatus(statusElement, "");
+    }, 2600);
+
+    return;
+  }
+
+  button.classList.remove("is-complete");
+  setSubmitState(button, "Preparing secure checkout...", true);
+  setFormStatus(statusElement, "Uploading your order details securely...", "neutral");
+
+  try {
+    const response = await fetch(ordersUrl, {
+      method: "POST",
+      headers: { Accept: "application/json" },
+      body: new FormData(form),
+    });
+    const payload = await parseApiResponse(response);
+
+    button.classList.add("is-complete");
+    setSubmitState(button, "Checkout ready");
+
+    if (payload.checkoutUrl) {
+      setFormStatus(statusElement, "Opening secure checkout...", "success");
+      window.location.assign(payload.checkoutUrl);
+      return;
+    }
+
+    setFormStatus(
+      statusElement,
+      "Your request is saved. We will email the next step shortly.",
+      "success"
+    );
+
+    window.setTimeout(() => {
+      setSubmitState(button, originalText);
+      button.classList.remove("is-complete");
+    }, 3200);
+  } catch (error) {
+    setSubmitState(button, "Try again");
+    setFormStatus(statusElement, error.message, "error");
+
+    window.setTimeout(() => {
+      setSubmitState(button, originalText);
+    }, 3200);
+  }
 });
 
-contactForm?.addEventListener("submit", (event) => {
+contactForm?.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   const button = contactForm.querySelector(".contact-submit");
   if (!button) return;
 
-  const originalText = button.textContent;
-  button.textContent = "Message ready";
-  button.classList.add("is-complete");
+  const statusElement = contactForm.querySelector(".contact-status");
+  const originalText = getButtonText(button);
+  const contactUrl = buildApiUrl(apiEndpoints.contact);
 
-  window.setTimeout(() => {
-    button.textContent = originalText;
-    button.classList.remove("is-complete");
-  }, 2200);
+  if (!contactUrl) {
+    setSubmitState(button, "Message ready");
+    setFormStatus(
+      statusElement,
+      "Backend URL not configured yet. This will send through Cloud Run.",
+      "neutral"
+    );
+    button.classList.add("is-complete");
+
+    window.setTimeout(() => {
+      setSubmitState(button, originalText);
+      button.classList.remove("is-complete");
+      setFormStatus(statusElement, "");
+    }, 2400);
+
+    return;
+  }
+
+  button.classList.remove("is-complete");
+  setSubmitState(button, "Sending...", true);
+  setFormStatus(statusElement, "Sending your message securely...", "neutral");
+
+  try {
+    await parseApiResponse(
+      await fetch(contactUrl, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(createContactPayload(contactForm)),
+      })
+    );
+
+    setSubmitState(button, "Message sent");
+    setFormStatus(statusElement, "Thanks. We will reply by email soon.", "success");
+    button.classList.add("is-complete");
+
+    window.setTimeout(() => {
+      setSubmitState(button, originalText);
+      button.classList.remove("is-complete");
+      contactForm.reset();
+      clearFormStatusSoon(statusElement);
+    }, 2600);
+  } catch (error) {
+    setSubmitState(button, "Try again");
+    setFormStatus(statusElement, error.message, "error");
+
+    window.setTimeout(() => {
+      setSubmitState(button, originalText);
+    }, 3200);
+  }
 });
