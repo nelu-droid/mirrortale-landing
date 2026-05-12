@@ -22,12 +22,12 @@ If no API base URL is configured, both forms keep the current mock behavior.
 
 ## `POST /orders`
 
-Creates an order, stores the child photo securely, and returns the next payment step.
+Creates a digital-only order, stores the child photo securely, creates a Stripe Checkout session, and returns the checkout URL.
 
 Request:
 
 - Content type: `multipart/form-data`
-- Fields: `parent-name`, `email`, `child-name`, `gender`, `age`, `theme`, `interests`, `dedication`, `package`
+- Fields: `parent-name`, `email`, `child-name`, `gender`, `age`, `theme`, `interests`, `dedication`, `package=digital`, `photo-consent=accepted`
 - File: `child-photo`
 
 Successful response:
@@ -35,16 +35,8 @@ Successful response:
 ```json
 {
   "orderId": "ord_123",
+  "status": "checkout_started",
   "checkoutUrl": "https://checkout.stripe.com/..."
-}
-```
-
-If payment is not ready yet, the backend can return:
-
-```json
-{
-  "orderId": "ord_123",
-  "status": "received"
 }
 ```
 
@@ -60,7 +52,7 @@ Errors should use:
 
 ## `POST /contact`
 
-Sends a pre-order question to the MirrorTale inbox or CRM.
+Stores a pre-order question and sends an owner notification through Resend when configured.
 
 Request:
 
@@ -81,6 +73,18 @@ Successful response:
 ```json
 {
   "status": "received"
+}
+```
+
+## `POST /stripe/webhook`
+
+Accepts Stripe webhook events only. The backend verifies the `Stripe-Signature` header against `STRIPE_WEBHOOK_SECRET`, marks completed checkout sessions as `paid`, and records email delivery state after sending confirmation/owner notifications.
+
+Successful response:
+
+```json
+{
+  "received": true
 }
 ```
 

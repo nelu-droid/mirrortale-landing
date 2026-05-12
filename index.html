@@ -15,7 +15,7 @@
       href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;500;700;800&family=Cormorant+Garamond:ital,wght@1,700;1,800&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,700;1,9..144,800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=brand-proof-polish-1" />
+    <link rel="stylesheet" href="styles.css?v=paid-intake-mvp-1" />
   </head>
   <body>
     <div class="sky-grain" aria-hidden="true"></div>
@@ -177,7 +177,7 @@
               </span>
               <span class="trust-copy">
                 <strong>Hardcover upgrade</strong>
-                <em>premium print option</em>
+                <em>premium print coming soon</em>
               </span>
             </li>
           </ul>
@@ -445,7 +445,7 @@
                 <svg class="ui-icon"><use href="#icon-book"></use></svg>
               </span>
               <h3>Digital Only</h3>
-              <div class="price">49€</div>
+              <div class="price">49 EUR</div>
               <ul>
                 <li>
                   <svg class="ui-icon check-icon" aria-hidden="true"><use href="#icon-check"></use></svg>
@@ -465,12 +465,12 @@
                 </li>
               </ul>
             </article>
-            <article class="price-card premium-card">
+            <article class="price-card premium-card is-disabled">
               <span class="card-medallion" aria-hidden="true">
                 <svg class="ui-icon"><use href="#icon-book"></use></svg>
               </span>
               <h3>Digital + Print</h3>
-              <div class="price">99€ <small>+ shipping</small></div>
+              <div class="price">Coming soon</div>
               <ul>
                 <li>
                   <svg class="ui-icon check-icon" aria-hidden="true"><use href="#icon-check"></use></svg>
@@ -478,7 +478,7 @@
                 </li>
                 <li>
                   <svg class="ui-icon check-icon" aria-hidden="true"><use href="#icon-check"></use></svg>
-                  <span>Premium hardcover photo book</span>
+                  <span>Premium hardcover photo book planned next</span>
                 </li>
                 <li>
                   <svg class="ui-icon check-icon" aria-hidden="true"><use href="#icon-check"></use></svg>
@@ -512,7 +512,7 @@
                 <span>How long does it take to receive my book?</span>
                 <svg class="ui-icon faq-chevron" aria-hidden="true"><use href="#icon-chevron"></use></svg>
               </summary>
-              <p>Your ready-to-print digital PDF is delivered within 24–48h after payment. The hardcover version arrives in 10-15 business days.</p>
+              <p>Your ready-to-print digital PDF is delivered within 24–48h after payment. Hardcover checkout is coming soon.</p>
             </details>
             <details>
               <summary>
@@ -659,20 +659,30 @@
                 <label>
                   <input type="radio" name="package" value="digital" checked />
                   <span>
-                    <strong>Digital Only — 49€</strong>
+                    <strong>Digital Only - 49 EUR</strong>
                     <em>Ready-to-print PDF</em>
                   </span>
                 </label>
-                <label>
-                  <input type="radio" name="package" value="print" />
+                <label class="is-disabled">
+                  <input type="radio" name="package" value="print" disabled />
                   <span>
-                    <strong>Digital + Print — 99€ + shipping</strong>
-                    <em>PDF plus premium hardcover</em>
+                    <strong>Digital + Print</strong>
+                    <em>Premium hardcover coming soon</em>
                   </span>
                 </label>
               </div>
+              <label class="consent-check">
+                <input type="checkbox" name="photo-consent" value="accepted" required />
+                <span>
+                  I confirm I am the parent/guardian or have permission to upload this
+                  child's photo, and I agree to the
+                  <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a>
+                  and
+                  <a href="terms.html" target="_blank" rel="noopener">Terms</a>.
+                </span>
+              </label>
               <button class="button button-gold form-submit" type="submit">
-                Continue to Payment
+                Continue to Secure Payment
               </button>
               <p class="secure-note">
                 <svg class="ui-icon secure-icon" aria-hidden="true"><use href="#icon-lock"></use></svg>
@@ -747,10 +757,14 @@
         <span><svg class="ui-icon trust-icon" aria-hidden="true"><use href="#icon-clock"></use></svg> Fast Digital Delivery</span>
         <span><svg class="ui-icon trust-icon" aria-hidden="true"><use href="#icon-book"></use></svg> Premium Quality</span>
       </div>
+      <nav class="footer-legal" aria-label="Legal links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms</a>
+      </nav>
       <p>© 2026 MirrorTale. All rights reserved.</p>
     </footer>
 
     <script src="assets/vendor/page-flip.browser.js"></script>
-    <script src="script.js?v=brand-proof-polish-1"></script>
+    <script src="script.js?v=paid-intake-mvp-1"></script>
   </body>
 </html>

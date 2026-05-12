@@ -255,6 +255,7 @@ document.querySelectorAll(".faq-list details").forEach((detail) => {
 const updateSelectedPackage = () => {
   packageOptions.forEach((option) => {
     const input = option.querySelector("input");
+    option.classList.toggle("is-disabled", Boolean(input?.disabled));
     option.classList.toggle("is-selected", Boolean(input?.checked));
   });
 };

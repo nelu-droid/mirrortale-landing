@@ -19,6 +19,7 @@ http://localhost:8000/
 ## Project Structure
 
 - `index.html` - landing page markup, icons, form, book preview data.
+- `privacy.html`, `terms.html`, `checkout-success.html` - paid intake support pages.
 - `styles.css` - visual system, responsive layout, animations, book preview styling.
 - `script.js` - FAQ, reveal effects, package selection, sticky CTA, and book preview behavior.
 - `assets/` - local visual assets for hero, proof flow, covers, and book pages.
@@ -33,4 +34,4 @@ See:
 - `docs/deployment-architecture.md`
 - `docs/backend-contract.md`
 
-To enable live form submission, deploy the Cloud Run API and set the `mirrortale-api-base-url` meta tag in `index.html`. If it is blank, the forms keep their local mock behavior.
+Live form submission posts to the Cloud Run API set in the `mirrortale-api-base-url` meta tag in `index.html`. If it is blank, the forms keep their local mock behavior.
