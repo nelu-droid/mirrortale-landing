@@ -2015,6 +2015,11 @@ p {
   font-size: clamp(2rem, 4vw, 2.6rem);
 }
 
+.price-card.print-card .price {
+  font-size: clamp(2rem, 4vw, 2.6rem);
+  line-height: 1;
+}
+
 .price small {
   color: var(--cream);
   font-family: var(--body);

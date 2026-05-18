@@ -1,6 +1,6 @@
 # MirrorTale Landing Page
 
-Static mobile-first landing page mockup for MirrorTale, a premium personalized children's book brand.
+Static mobile-first landing page for MirrorTale, a premium personalized children's book brand with digital and print package checkout.
 
 ## Local Preview
 
@@ -23,11 +23,12 @@ http://localhost:8000/
 - `styles.css` - visual system, responsive layout, animations, book preview styling.
 - `script.js` - FAQ, reveal effects, package selection, sticky CTA, and book preview behavior.
 - `assets/` - local visual assets for hero, proof flow, covers, and book pages.
+- `marketing-automation/` - local organic TikTok/Instagram slideshow factory and review-gated batch tools.
 - `snapshots/` - restore checkpoints from previous design passes.
 
 ## Next Phase
 
-The public website stays separate from the book-generation engine. Firebase Hosting serves this static repo, while Cloud Run handles payment, secure uploads, Firestore order records, Cloud Storage files, and calls into `nelu-droid/mirrortale-engine`.
+The public website stays separate from the book-generation engine. Firebase Hosting serves this static repo, while Cloud Run handles payment, secure uploads, Stripe shipping collection for print packages, Firestore order records, Cloud Storage files, and calls into `nelu-droid/mirrortale-engine`.
 
 See:
 

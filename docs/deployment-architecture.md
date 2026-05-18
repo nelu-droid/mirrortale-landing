@@ -10,9 +10,9 @@ This keeps the public website fast and cacheable while the backend owns every se
 
 - Firebase Hosting: serves `index.html`, `styles.css`, `script.js`, and `assets/` on `mirrortale.com`.
 - Cloud Run API: exposes public HTTPS endpoints for `/orders` and `/contact`.
-- Firestore: stores order records, contact messages, payment state, generation state, delivery metadata, and audit timestamps.
+- Firestore: stores order records, contact messages, payment state, generation state, digital delivery metadata, print fulfillment state, shipping details, and audit timestamps.
 - Cloud Storage: stores original uploads and generated book files under private buckets.
-- Stripe or chosen PSP: creates checkout sessions and sends signed webhooks to Cloud Run.
+- Stripe or chosen PSP: creates checkout sessions, collects shipping address for print packages, and sends signed webhooks to Cloud Run.
 - `mirrortale-engine`: runs behind Cloud Run as the generation worker or as a callable internal service. It should not be called from the browser.
 
 ## Order Flow
@@ -21,12 +21,13 @@ This keeps the public website fast and cacheable while the backend owns every se
 2. Browser posts `multipart/form-data` to Cloud Run `POST /orders`.
 3. Cloud Run validates fields and image constraints.
 4. Cloud Run writes the photo to Cloud Storage and creates a Firestore order with status `draft`.
-5. Cloud Run creates a checkout session and returns `checkoutUrl`.
+5. Cloud Run creates a checkout session and returns `checkoutUrl`. Print packages collect shipping address in Stripe Checkout.
 6. Browser redirects to hosted checkout.
 7. Payment webhook marks the order `paid` and starts generation.
 8. The engine creates the book from the private order payload and upload.
 9. Generated PDF and print assets are written to Cloud Storage.
-10. Cloud Run or a worker sends the customer delivery email and updates Firestore to `delivered`.
+10. Cloud Run or a worker sends the customer digital PDF delivery email.
+11. For print packages, Studio tracks the manual print checklist, Lulu/manual print order ID, tracking URL, and print status. The customer gets print ordered and shipped emails when those statuses are saved.
 
 ## Firestore Shape
 
@@ -43,7 +44,15 @@ orders/{orderId}
   interests
   dedication
   package
-  status: draft | checkout_started | paid | generating | review | delivered | failed
+  status: draft | checkout_started | paid | generating | review | delivered | print_ready | print_ordered | print_shipped | print_delivered | print_blocked | failed
+  fulfillment.type
+  fulfillment.digitalStatus
+  fulfillment.printStatus
+  shipping
+  print.status
+  print.checklist
+  print.printOrderId
+  print.trackingUrl
   uploadPath
   generatedPdfPath
   checkoutSessionId

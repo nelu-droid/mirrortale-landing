@@ -22,13 +22,23 @@ If no API base URL is configured, both forms keep the current mock behavior.
 
 ## `POST /orders`
 
-Creates a digital-only order, stores the child photo securely, creates a Stripe Checkout session, and returns the checkout URL.
+Creates a digital or Digital + Print order, stores the child photo securely, creates a Stripe Checkout session, and returns the checkout URL.
 
 Request:
 
 - Content type: `multipart/form-data`
-- Fields: `parent-name`, `email`, `child-name`, `gender`, `age`, `theme`, `interests`, `dedication`, `package=digital`, `photo-consent=accepted`
+- Fields: `parent-name`, `email`, `child-name`, `gender`, `age`, `theme`, `interests`, `dedication`, `package=digital|print`, `photo-consent=accepted`
 - File: `child-photo`
+- Stripe behavior:
+  - `package=digital` uses the digital price and does not collect shipping.
+  - `package=print` uses the print price and must collect a shipping address in Stripe Checkout.
+- Optional marketing attribution fields from organic social links:
+  `marketing_firstTouch_utm_source`, `marketing_firstTouch_utm_medium`,
+  `marketing_firstTouch_utm_campaign`, `marketing_firstTouch_utm_content`,
+  `marketing_firstTouch_creative_id`, `marketing_firstTouch_landing_url`,
+  `marketing_firstTouch_referrer`, and matching `marketing_lastTouch_*`
+  fields. Unknown attribution fields should be stored if convenient and ignored
+  safely otherwise.
 
 Successful response:
 
@@ -63,7 +73,23 @@ Request:
   "message": "Question text",
   "source": {
     "page": "https://mirrortale.com/",
-    "referrer": null
+    "referrer": null,
+    "attribution": {
+      "firstTouch": {
+        "utm_source": "tiktok",
+        "utm_medium": "organic_social",
+        "utm_campaign": "organic_routine_storybooks",
+        "utm_content": "mt-2026w20-001",
+        "creative_id": "mt-2026w20-001"
+      },
+      "lastTouch": {
+        "utm_source": "instagram",
+        "utm_medium": "organic_social",
+        "utm_campaign": "organic_routine_storybooks",
+        "utm_content": "mt-2026w20-004",
+        "creative_id": "mt-2026w20-004"
+      }
+    }
   }
 }
 ```
@@ -78,7 +104,7 @@ Successful response:
 
 ## `POST /stripe/webhook`
 
-Accepts Stripe webhook events only. The backend verifies the `Stripe-Signature` header against `STRIPE_WEBHOOK_SECRET`, marks completed checkout sessions as `paid`, and records email delivery state after sending confirmation/owner notifications.
+Accepts Stripe webhook events only. The backend verifies the `Stripe-Signature` header against `STRIPE_WEBHOOK_SECRET`, marks completed checkout sessions as `paid`, stores shipping details for print orders, and records email delivery state after sending confirmation/owner notifications.
 
 Successful response:
 
@@ -87,6 +113,32 @@ Successful response:
   "received": true
 }
 ```
+
+## Print Fulfillment Fields
+
+Print orders should keep digital generation and delivery separate from physical fulfillment:
+
+```text
+orders/{orderId}
+  package: digital | print
+  status: paid | generating | needs_review | approved | delivered | print_ready | print_ordered | print_shipped | print_delivered | print_blocked | failed
+  fulfillment.type: digital | print
+  fulfillment.digitalStatus
+  fulfillment.printStatus: waiting_for_pdfs | ready_to_order | ordered | shipped | delivered | blocked | not_applicable
+  shipping.name
+  shipping.phone
+  shipping.address
+  print.status
+  print.checklist.pdfsVerified
+  print.checklist.shippingAddressChecked
+  print.checklist.printOrderPlaced
+  print.checklist.trackingAdded
+  print.printOrderId
+  print.luluOrderId
+  print.trackingUrl
+```
+
+Studio owns manual print updates through `POST /api/admin/orders/:orderId/print-fulfillment`. Lulu API automation stays out of scope for this pass.
 
 ## CORS
 
