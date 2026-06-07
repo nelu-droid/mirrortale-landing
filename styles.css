@@ -2290,6 +2290,8 @@ textarea:focus {
 .upload-card strong,
 .upload-card em {
   display: block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
   font-style: normal;
 }
 
@@ -2305,6 +2307,26 @@ textarea:focus {
   margin-bottom: 0.55rem;
   color: var(--gold-soft);
   filter: drop-shadow(0 0 14px rgba(217, 166, 70, 0.28));
+}
+
+.upload-status {
+  margin: 0 0 0.45rem;
+  color: var(--muted);
+  font-size: 0.68rem;
+  line-height: 1.45;
+  text-align: center;
+}
+
+.upload-status:empty {
+  display: none;
+}
+
+.upload-status[data-tone="success"] {
+  color: #cce6a2;
+}
+
+.upload-status[data-tone="error"] {
+  color: #ffb39f;
 }
 
 .upload-note,
@@ -3709,6 +3731,33 @@ textarea:focus {
   background:
     radial-gradient(circle at 50% 20%, rgba(224, 138, 92, 0.14), transparent 5rem),
     rgba(21, 54, 52, 0.62);
+}
+
+.upload-card.is-selected,
+.upload-card.is-selected:hover,
+.upload-card.is-selected:focus-within {
+  border-color: rgba(204, 230, 162, 0.74);
+  background:
+    radial-gradient(circle at 50% 20%, rgba(204, 230, 162, 0.16), transparent 5rem),
+    rgba(31, 67, 50, 0.62);
+  box-shadow: 0 0 22px rgba(104, 135, 59, 0.18);
+}
+
+.upload-card.has-error,
+.upload-card.has-error:hover,
+.upload-card.has-error:focus-within {
+  border-color: rgba(255, 179, 159, 0.76);
+  background:
+    radial-gradient(circle at 50% 20%, rgba(224, 138, 92, 0.16), transparent 5rem),
+    rgba(70, 38, 34, 0.58);
+}
+
+.upload-card.is-selected .upload-cloud {
+  color: #cce6a2;
+}
+
+.upload-card.has-error .upload-cloud {
+  color: #ffb39f;
 }
 
 .package-selector label {

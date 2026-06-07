@@ -7,6 +7,11 @@ const contactSection = document.querySelector("#contact");
 const mobileStickyCta = document.querySelector(".mobile-sticky-cta");
 const packageOptions = document.querySelectorAll(".package-selector label");
 const exampleBooks = document.querySelectorAll(".example-book[data-book-slot]");
+const orderPhotoInput = form?.querySelector('input[name="child-photo"]');
+const uploadCard = orderPhotoInput?.closest(".upload-card");
+const uploadTitle = uploadCard?.querySelector("[data-upload-title]");
+const uploadDetail = uploadCard?.querySelector("[data-upload-detail]");
+const uploadStatus = form?.querySelector("[data-upload-status]");
 const mobileStickyCtaMedia = window.matchMedia("(max-width: 760px)");
 const normalizeApiBaseUrl = (value) => String(value || "").trim().replace(/\/+$/, "");
 const siteConfig = {
@@ -19,6 +24,52 @@ const apiEndpoints = {
   orders: "/orders",
   contact: "/contact",
 };
+const photoUploadFieldName = "child-photo";
+const maxPhotoUploadBytes = 10 * 1024 * 1024;
+const maxOriginalPhotoUploadBytes = 35 * 1024 * 1024;
+const photoUploadCanvasMaxEdges = [2400, 2000, 1600];
+const photoUploadJpegQualities = [0.9, 0.82, 0.74, 0.66];
+const defaultUploadTitle = uploadTitle?.textContent?.trim() || "Click to upload";
+const defaultUploadDetail = uploadDetail?.textContent?.trim() || "Camera-roll photos accepted";
+const photoMimeAliases = new Map([
+  ["image/jpeg", "image/jpeg"],
+  ["image/jpg", "image/jpeg"],
+  ["image/pjpeg", "image/jpeg"],
+  ["image/png", "image/png"],
+  ["image/x-png", "image/png"],
+  ["image/heic", "image/heic"],
+  ["image/heif", "image/heif"],
+  ["image/webp", "image/webp"],
+  ["image/gif", "image/gif"],
+  ["image/bmp", "image/bmp"],
+  ["image/tiff", "image/tiff"],
+  ["image/avif", "image/avif"],
+]);
+const photoMimeByExtension = new Map([
+  ["jpg", "image/jpeg"],
+  ["jpeg", "image/jpeg"],
+  ["jfif", "image/jpeg"],
+  ["png", "image/png"],
+  ["heic", "image/heic"],
+  ["heif", "image/heif"],
+  ["webp", "image/webp"],
+  ["gif", "image/gif"],
+  ["bmp", "image/bmp"],
+  ["tif", "image/tiff"],
+  ["tiff", "image/tiff"],
+  ["avif", "image/avif"],
+]);
+const photoExtensionByMime = new Map([
+  ["image/jpeg", "jpg"],
+  ["image/png", "png"],
+  ["image/heic", "heic"],
+  ["image/heif", "heif"],
+  ["image/webp", "webp"],
+  ["image/gif", "gif"],
+  ["image/bmp", "bmp"],
+  ["image/tiff", "tif"],
+  ["image/avif", "avif"],
+]);
 const createBookPages = ({ title, directory, interiorCount }) => [
   {
     src: `${directory}/cover-front.webp`,
@@ -162,6 +213,346 @@ const clearFormStatusSoon = (statusElement, delay = 3200) => {
   window.setTimeout(() => setFormStatus(statusElement, ""), delay);
 };
 
+const formatPhotoFileSize = (bytes) => {
+  if (!Number.isFinite(bytes) || bytes <= 0) return "";
+
+  const megabytes = bytes / (1024 * 1024);
+  if (megabytes >= 1) {
+    return `${megabytes.toFixed(megabytes >= 10 ? 0 : 1)} MB`;
+  }
+
+  return `${Math.max(1, Math.round(bytes / 1024))} KB`;
+};
+
+const getFileExtension = (fileName = "") => {
+  const match = String(fileName).toLowerCase().match(/\.([a-z0-9]+)$/);
+  return match?.[1] || "";
+};
+
+const getDeclaredFileType = (file) => String(file?.type || "").split(";")[0].trim().toLowerCase();
+
+const getPhotoMimeType = (file) => {
+  const declaredType = getDeclaredFileType(file);
+  if (photoMimeAliases.has(declaredType)) return photoMimeAliases.get(declaredType);
+  if (declaredType.startsWith("image/") && declaredType !== "image/svg+xml") return declaredType;
+
+  const extension = getFileExtension(file?.name);
+  return photoMimeByExtension.get(extension) || "";
+};
+
+const isLikelyPhotoFile = (file) => {
+  const declaredType = getDeclaredFileType(file);
+  const extension = getFileExtension(file?.name);
+
+  if (declaredType === "image/svg+xml" || extension === "svg") return false;
+  if (declaredType.startsWith("image/")) return true;
+  if (photoMimeByExtension.has(extension)) return true;
+  if (declaredType === "application/octet-stream" && !extension) return true;
+
+  // Some in-app browsers strip name/type metadata from camera-roll picks.
+  return !declaredType && !extension;
+};
+
+const getPhotoUploadBaseName = (file) => {
+  const originalName = String(file?.name || "").trim();
+  const cleanedName = originalName
+    ? originalName.replace(/[\\/:*?"<>|]+/g, "-")
+    : "child-photo";
+
+  return cleanedName.replace(/\.[^.]*$/, "") || "child-photo";
+};
+
+const getPhotoUploadFileName = (file, mimeType) => {
+  const fallbackExtension = photoExtensionByMime.get(mimeType) || "jpg";
+  const originalName = String(file?.name || "").trim();
+  const cleanedName = originalName
+    ? originalName.replace(/[\\/:*?"<>|]+/g, "-")
+    : `child-photo.${fallbackExtension}`;
+  const extension = getFileExtension(cleanedName);
+
+  if (photoMimeByExtension.get(extension) === mimeType) return cleanedName;
+
+  return `${getPhotoUploadBaseName(file)}.${fallbackExtension}`;
+};
+
+const getJpegPhotoUploadFileName = (file) => `${getPhotoUploadBaseName(file)}.jpg`;
+
+const createPhotoUploadFile = (file, mimeType, fileName) => {
+  if (file.type === mimeType && file.name === fileName) return file;
+
+  try {
+    return new File([file], fileName, {
+      type: mimeType,
+      lastModified: file.lastModified || Date.now(),
+    });
+  } catch {
+    return new Blob([file], { type: mimeType });
+  }
+};
+
+const canvasToBlob = (canvas, type, quality) =>
+  new Promise((resolve) => {
+    canvas.toBlob((blob) => resolve(blob), type, quality);
+  });
+
+const loadPhotoImage = (file) =>
+  new Promise((resolve, reject) => {
+    const image = new Image();
+    const url = URL.createObjectURL(file);
+
+    image.onload = () => {
+      URL.revokeObjectURL(url);
+      resolve(image);
+    };
+
+    image.onerror = () => {
+      URL.revokeObjectURL(url);
+      reject(new Error("The selected photo could not be read in this browser."));
+    };
+
+    image.decoding = "async";
+    image.src = url;
+  });
+
+const renderPhotoToJpegBlob = async (image, maxEdge, quality) => {
+  const sourceWidth = image.naturalWidth || image.width;
+  const sourceHeight = image.naturalHeight || image.height;
+
+  if (!sourceWidth || !sourceHeight) {
+    throw new Error("The selected photo does not have readable dimensions.");
+  }
+
+  const scale = Math.min(1, maxEdge / Math.max(sourceWidth, sourceHeight));
+  const width = Math.max(1, Math.round(sourceWidth * scale));
+  const height = Math.max(1, Math.round(sourceHeight * scale));
+  const canvas = document.createElement("canvas");
+  canvas.width = width;
+  canvas.height = height;
+
+  const context = canvas.getContext("2d", { alpha: false });
+  if (!context) throw new Error("This browser could not prepare the photo.");
+
+  context.fillStyle = "#ffffff";
+  context.fillRect(0, 0, width, height);
+  context.drawImage(image, 0, 0, width, height);
+
+  return canvasToBlob(canvas, "image/jpeg", quality);
+};
+
+const convertPhotoToJpeg = async (file) => {
+  const image = await loadPhotoImage(file);
+  let smallestBlob = null;
+
+  for (const maxEdge of photoUploadCanvasMaxEdges) {
+    for (const quality of photoUploadJpegQualities) {
+      const blob = await renderPhotoToJpegBlob(image, maxEdge, quality);
+      if (!blob) continue;
+
+      if (!smallestBlob || blob.size < smallestBlob.size) {
+        smallestBlob = blob;
+      }
+
+      if (blob.size <= maxPhotoUploadBytes) return blob;
+    }
+  }
+
+  return smallestBlob;
+};
+
+const isBackendReadyPhoto = (file, mimeType) =>
+  (mimeType === "image/jpeg" || mimeType === "image/png") && file.size <= maxPhotoUploadBytes;
+
+const getPhotoValidation = () => {
+  const files = orderPhotoInput?.files;
+  const fileCount = files?.length || 0;
+
+  if (!fileCount) {
+    return {
+      isValid: false,
+      file: null,
+      message: "Please upload one child photo before checkout.",
+    };
+  }
+
+  if (fileCount !== 1) {
+    return {
+      isValid: false,
+      file: files[0] || null,
+      message: "Please upload one child photo only.",
+    };
+  }
+
+  const file = files[0];
+
+  if (!Number.isFinite(file.size) || file.size <= 0) {
+    return {
+      isValid: false,
+      file,
+      message: "That photo did not attach correctly. Please choose it again, or open this page in your browser.",
+    };
+  }
+
+  if (file.size > maxOriginalPhotoUploadBytes) {
+    return {
+      isValid: false,
+      file,
+      message: "Please choose a photo under 35 MB.",
+    };
+  }
+
+  if (!isLikelyPhotoFile(file)) {
+    return {
+      isValid: false,
+      file,
+      message: "Please choose an image file from your camera roll.",
+    };
+  }
+
+  const mimeType = getPhotoMimeType(file);
+  const fileName = mimeType ? getPhotoUploadFileName(file, mimeType) : getJpegPhotoUploadFileName(file);
+
+  return {
+    isValid: true,
+    file,
+    fileName,
+    mimeType,
+    uploadFile: isBackendReadyPhoto(file, mimeType)
+      ? createPhotoUploadFile(file, mimeType, fileName)
+      : null,
+    message: "Photo selected. We will prepare it securely when you proceed to checkout.",
+  };
+};
+
+const preparePhotoUpload = async (validation) => {
+  if (!validation?.isValid || !validation.file) return validation;
+
+  const { file } = validation;
+  const mimeType = getPhotoMimeType(file);
+
+  if (isBackendReadyPhoto(file, mimeType)) {
+    const fileName = getPhotoUploadFileName(file, mimeType);
+    return {
+      ...validation,
+      fileName,
+      mimeType,
+      uploadFile: createPhotoUploadFile(file, mimeType, fileName),
+      message: "Photo ready for secure upload.",
+    };
+  }
+
+  setUploadStatus("Preparing your photo for secure upload...", "neutral");
+
+  try {
+    const jpegBlob = await convertPhotoToJpeg(file);
+
+    if (!jpegBlob || jpegBlob.size <= 0) {
+      throw new Error("The selected photo could not be prepared.");
+    }
+
+    if (jpegBlob.size > maxPhotoUploadBytes) {
+      return {
+        ...validation,
+        isValid: false,
+        uploadFile: null,
+        message: "That photo is too large to upload. Please choose a smaller photo.",
+      };
+    }
+
+    const fileName = getJpegPhotoUploadFileName(file);
+    return {
+      ...validation,
+      isValid: true,
+      file,
+      fileName,
+      mimeType: "image/jpeg",
+      uploadFile: createPhotoUploadFile(jpegBlob, "image/jpeg", fileName),
+      message: "Photo prepared successfully. It will upload as a JPG for checkout.",
+    };
+  } catch {
+    return {
+      ...validation,
+      isValid: false,
+      uploadFile: null,
+      message:
+        "This photo format could not be prepared in Instagram. Please open the page in your phone browser or choose another photo.",
+    };
+  }
+};
+
+const setUploadStatus = (message = "", tone = "neutral") => {
+  if (!uploadStatus) return;
+  uploadStatus.textContent = message;
+  uploadStatus.dataset.tone = tone;
+};
+
+const resetPhotoUploadState = () => {
+  uploadCard?.classList.remove("is-selected", "has-error");
+  if (uploadTitle) uploadTitle.textContent = defaultUploadTitle;
+  if (uploadDetail) uploadDetail.textContent = defaultUploadDetail;
+  setUploadStatus("");
+};
+
+const updatePhotoUploadState = ({ showMissingError = false } = {}) => {
+  const validation = getPhotoValidation();
+
+  if (!validation.file && !showMissingError) {
+    resetPhotoUploadState();
+    return validation;
+  }
+
+  uploadCard?.classList.toggle("is-selected", validation.isValid);
+  uploadCard?.classList.toggle("has-error", !validation.isValid);
+
+  if (uploadTitle) {
+    uploadTitle.textContent = validation.isValid ? "Photo ready" : "Photo not ready";
+  }
+
+  if (uploadDetail) {
+    const fileSize = formatPhotoFileSize(validation.file?.size);
+    uploadDetail.textContent = validation.isValid
+      ? [validation.file?.name || "Selected photo", fileSize].filter(Boolean).join(" - ")
+      : validation.message;
+  }
+
+  setUploadStatus(validation.message, validation.isValid ? "success" : "error");
+  return validation;
+};
+
+const showPhotoUploadResult = (validation) => {
+  if (!validation) return;
+
+  uploadCard?.classList.toggle("is-selected", validation.isValid);
+  uploadCard?.classList.toggle("has-error", !validation.isValid);
+
+  if (uploadTitle) {
+    uploadTitle.textContent = validation.isValid ? "Photo ready" : "Photo not ready";
+  }
+
+  if (uploadDetail) {
+    const fileSize = formatPhotoFileSize(validation.file?.size);
+    uploadDetail.textContent = validation.isValid
+      ? [validation.file?.name || "Selected photo", fileSize].filter(Boolean).join(" - ")
+      : validation.message;
+  }
+
+  setUploadStatus(validation.message, validation.isValid ? "success" : "error");
+};
+
+const setFormDataPhoto = (formData, validation) => {
+  if (!validation?.uploadFile) return;
+
+  if (typeof formData.set === "function") {
+    formData.set(photoUploadFieldName, validation.uploadFile, validation.fileName);
+    return;
+  }
+
+  if (typeof formData.delete === "function") {
+    formData.delete(photoUploadFieldName);
+  }
+
+  formData.append(photoUploadFieldName, validation.uploadFile, validation.fileName);
+};
+
 const createContactPayload = (formElement) => {
   const fields = Object.fromEntries(new FormData(formElement).entries());
 
@@ -265,6 +656,22 @@ packageOptions.forEach((option) => {
 });
 
 updateSelectedPackage();
+
+orderPhotoInput?.addEventListener("change", () => {
+  updatePhotoUploadState();
+});
+
+orderPhotoInput?.addEventListener("cancel", () => {
+  updatePhotoUploadState();
+});
+
+orderPhotoInput?.addEventListener("invalid", () => {
+  updatePhotoUploadState({ showMissingError: true });
+});
+
+window.addEventListener("pageshow", () => {
+  updatePhotoUploadState();
+});
 
 const flipbook = {
   viewer: document.querySelector("#noah-flipbook"),
@@ -724,6 +1131,13 @@ form?.addEventListener("submit", async (event) => {
   const statusElement = form.querySelector(".form-status");
   const originalText = getButtonText(button);
   const ordersUrl = buildApiUrl(apiEndpoints.orders);
+  const photoValidation = updatePhotoUploadState({ showMissingError: true });
+
+  if (!photoValidation.isValid) {
+    setFormStatus(statusElement, photoValidation.message, "error");
+    orderPhotoInput?.focus();
+    return;
+  }
 
   if (!ordersUrl) {
     setSubmitState(button, "Payment step mocked");
@@ -745,13 +1159,25 @@ form?.addEventListener("submit", async (event) => {
 
   button.classList.remove("is-complete");
   setSubmitState(button, "Preparing secure checkout...", true);
-  setFormStatus(statusElement, "Uploading your order details securely...", "neutral");
+  setFormStatus(statusElement, "Preparing your photo securely...", "neutral");
 
   try {
+    const preparedPhoto = await preparePhotoUpload(photoValidation);
+    showPhotoUploadResult(preparedPhoto);
+
+    if (!preparedPhoto?.isValid || !preparedPhoto.uploadFile) {
+      throw new Error(preparedPhoto?.message || "Please upload one valid child photo.");
+    }
+
+    const orderData = new FormData(form);
+    setFormDataPhoto(orderData, preparedPhoto);
+
+    setFormStatus(statusElement, "Uploading your order details securely...", "neutral");
+
     const response = await fetch(ordersUrl, {
       method: "POST",
       headers: { Accept: "application/json" },
-      body: new FormData(form),
+      body: orderData,
     });
     const payload = await parseApiResponse(response);
 

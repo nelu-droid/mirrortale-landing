@@ -29,6 +29,11 @@ Request:
 - Content type: `multipart/form-data`
 - Fields: `parent-name`, `email`, `child-name`, `gender`, `age`, `theme`, `interests`, `dedication`, `package=digital|print`, `photo-consent=accepted`
 - File: `child-photo`
+  - Accept normal camera-roll photo uploads, including JPG, PNG, HEIC/HEIF,
+    WebP, and other safe raster image formats when decodable.
+  - Convert accepted originals to a backend-safe JPG or PNG before storage or
+    engine handoff.
+  - Reject SVG and non-image files.
 - Stripe behavior:
   - `package=digital` uses the digital price and does not collect shipping.
   - `package=print` uses the print price and must collect a shipping address in Stripe Checkout.
@@ -55,7 +60,7 @@ Errors should use:
 ```json
 {
   "error": {
-    "message": "Please upload a JPG or PNG under 10 MB."
+    "message": "Please upload one valid child photo image."
   }
 }
 ```

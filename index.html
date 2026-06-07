@@ -647,10 +647,11 @@
               <legend>Upload child photo</legend>
               <label class="upload-card">
                 <svg class="ui-icon upload-cloud" aria-hidden="true"><use href="#icon-upload"></use></svg>
-                <strong>Click to upload</strong>
-                <em>or drag and drop</em>
-                <input type="file" name="child-photo" accept="image/*" required />
+                <strong data-upload-title>Click to upload</strong>
+                <em data-upload-detail>Camera-roll photos accepted</em>
+                <input type="file" name="child-photo" accept="image/*,.heic,.heif" required />
               </label>
+              <p class="upload-status" data-upload-status aria-live="polite"></p>
               <p class="upload-note">
                 A clear, front-facing photo works best. Your photos are handled securely
                 and used only to create your child’s book.
