@@ -4,9 +4,12 @@ const form = document.querySelector(".intake-form");
 const intakeSection = document.querySelector("#intake");
 const contactForm = document.querySelector(".contact-form");
 const contactSection = document.querySelector("#contact");
+const pricingSection = document.querySelector("#pricing");
 const mobileStickyCta = document.querySelector(".mobile-sticky-cta");
 const packageOptions = document.querySelectorAll(".package-selector label");
+const packageTargetButtons = document.querySelectorAll("[data-package-target]");
 const exampleBooks = document.querySelectorAll(".example-book[data-book-slot]");
+const heroVideo = document.querySelector("[data-hero-video]");
 const orderPhotoInput = form?.querySelector('input[name="child-photo"]');
 const uploadCard = orderPhotoInput?.closest(".upload-card");
 const uploadTitle = uploadCard?.querySelector("[data-upload-title]");
@@ -24,6 +27,16 @@ const apiEndpoints = {
   orders: "/orders",
   contact: "/contact",
 };
+const attributionStorageKey = "mirrortale-attribution-v1";
+const attributionKeys = [
+  "utm_source",
+  "utm_medium",
+  "utm_campaign",
+  "utm_content",
+  "utm_term",
+  "platform",
+  "creative_id",
+];
 const photoUploadFieldName = "child-photo";
 const maxPhotoUploadBytes = 10 * 1024 * 1024;
 const maxOriginalPhotoUploadBytes = 35 * 1024 * 1024;
@@ -151,9 +164,11 @@ const bookCatalog = {
 let activeBook = bookCatalog.elena;
 let activeViewIndex = 0;
 let pageFlip = null;
+let pageFlipBookKey = "";
 let isSyncingPageFlip = false;
 let lastPageTapAt = 0;
 let activeMobilePageIndex = 0;
+let isBookPreviewActive = false;
 let mobileTouchStart = null;
 let mobileMouseStart = null;
 let mobileSwipeHandledAt = 0;
@@ -553,6 +568,100 @@ const setFormDataPhoto = (formData, validation) => {
   formData.append(photoUploadFieldName, validation.uploadFile, validation.fileName);
 };
 
+const safeStorageGet = (key) => {
+  try {
+    return window.localStorage?.getItem(key) || "";
+  } catch {
+    return "";
+  }
+};
+
+const safeStorageSet = (key, value) => {
+  try {
+    window.localStorage?.setItem(key, value);
+  } catch {
+    // Attribution is helpful for measurement, but it must never block checkout.
+  }
+};
+
+const readStoredAttribution = () => {
+  const stored = safeStorageGet(attributionStorageKey);
+  if (!stored) return {};
+
+  try {
+    return JSON.parse(stored);
+  } catch {
+    return {};
+  }
+};
+
+const cleanAttributionValue = (value) => String(value || "").trim().slice(0, 240);
+
+const getUrlAttribution = () => {
+  const params = new URLSearchParams(window.location.search);
+  const attribution = {};
+
+  attributionKeys.forEach((key) => {
+    const value = cleanAttributionValue(params.get(key));
+    if (value) attribution[key] = value;
+  });
+
+  if (!attribution.creative_id && attribution.utm_content) {
+    attribution.creative_id = attribution.utm_content;
+  }
+
+  return attribution;
+};
+
+const captureMarketingAttribution = () => {
+  const current = getUrlAttribution();
+  if (!Object.keys(current).length) return;
+
+  const stored = readStoredAttribution();
+  const touch = {
+    ...current,
+    landing_url: window.location.href,
+    referrer: document.referrer || null,
+    captured_at: new Date().toISOString(),
+  };
+
+  safeStorageSet(
+    attributionStorageKey,
+    JSON.stringify({
+      firstTouch: stored.firstTouch || touch,
+      lastTouch: touch,
+    })
+  );
+};
+
+const getMarketingAttribution = () => {
+  const stored = readStoredAttribution();
+  const current = getUrlAttribution();
+  const fallbackTouch = Object.keys(current).length
+    ? {
+        ...current,
+        landing_url: window.location.href,
+        referrer: document.referrer || null,
+      }
+    : {};
+
+  return {
+    firstTouch: stored.firstTouch || fallbackTouch,
+    lastTouch: stored.lastTouch || fallbackTouch,
+  };
+};
+
+const appendMarketingAttribution = (formData) => {
+  const attribution = getMarketingAttribution();
+
+  ["firstTouch", "lastTouch"].forEach((touchKey) => {
+    Object.entries(attribution[touchKey] || {}).forEach(([key, value]) => {
+      const cleanValue = cleanAttributionValue(value);
+      if (cleanValue) formData.append(`marketing_${touchKey}_${key}`, cleanValue);
+    });
+  });
+};
+
 const createContactPayload = (formElement) => {
   const fields = Object.fromEntries(new FormData(formElement).entries());
 
@@ -563,9 +672,71 @@ const createContactPayload = (formElement) => {
     source: {
       page: window.location.href,
       referrer: document.referrer || null,
+      attribution: getMarketingAttribution(),
     },
   };
 };
+
+captureMarketingAttribution();
+
+const shouldKeepHeroPoster = () =>
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+  Boolean(navigator.connection?.saveData);
+
+const hydrateHeroVideo = () => {
+  if (!heroVideo || heroVideo.dataset.loaded === "true") return;
+
+  if (shouldKeepHeroPoster()) {
+    heroVideo.dataset.state = "poster";
+    return;
+  }
+
+  heroVideo.dataset.loaded = "true";
+  heroVideo.querySelectorAll("source[data-src]").forEach((source) => {
+    source.src = source.dataset.src;
+    source.removeAttribute("data-src");
+  });
+
+  const markPosterFallback = () => {
+    heroVideo.dataset.state = "poster";
+  };
+
+  const playHeroVideo = () => {
+    const playback = heroVideo.play();
+    if (!playback?.catch) return;
+
+    playback
+      .then(() => {
+        heroVideo.dataset.state = "playing";
+      })
+      .catch(markPosterFallback);
+  };
+
+  heroVideo.addEventListener("error", markPosterFallback, { once: true });
+  heroVideo.addEventListener("canplay", playHeroVideo, { once: true });
+  heroVideo.load();
+};
+
+const scheduleHeroVideo = () => {
+  if (!heroVideo) return;
+
+  const queueHydration = () => {
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(hydrateHeroVideo, { timeout: 1600 });
+      return;
+    }
+
+    window.setTimeout(hydrateHeroVideo, 700);
+  };
+
+  if (document.readyState === "complete") {
+    queueHydration();
+  } else {
+    window.addEventListener("load", queueHydration, { once: true });
+  }
+};
+
+scheduleHeroVideo();
 
 if ("IntersectionObserver" in window) {
   const observer = new IntersectionObserver(
@@ -610,11 +781,24 @@ const updateMobileStickyCta = () => {
       contactRect.top < window.innerHeight * 0.82 &&
       contactRect.bottom > window.innerHeight * 0.18
   );
+  const pricingRect = pricingSection?.getBoundingClientRect();
+  const pricingIsVisible = Boolean(
+    pricingRect &&
+      pricingRect.top < window.innerHeight * 0.82 &&
+      pricingRect.bottom > window.innerHeight * 0.18
+  );
   const shouldShow =
-    mobileStickyCtaMedia.matches && window.scrollY > 280 && !intakeIsVisible && !contactIsVisible;
+    mobileStickyCtaMedia.matches &&
+    window.scrollY > 280 &&
+    !pricingIsVisible &&
+    !intakeIsVisible &&
+    !contactIsVisible;
 
   mobileStickyCta.classList.toggle("is-visible", shouldShow);
-  mobileStickyCta.classList.toggle("is-near-intake", intakeIsVisible || contactIsVisible);
+  mobileStickyCta.classList.toggle(
+    "is-near-intake",
+    pricingIsVisible || intakeIsVisible || contactIsVisible
+  );
   document.body.classList.toggle("has-mobile-sticky-cta", shouldShow);
 };
 
@@ -651,6 +835,20 @@ const updateSelectedPackage = () => {
   });
 };
 
+const selectPackage = (packageValue) => {
+  const input = Array.from(document.querySelectorAll('input[name="package"]')).find(
+    (option) => option.value === packageValue
+  );
+
+  if (!input || input.disabled) return false;
+
+  input.checked = true;
+  input.dispatchEvent(new Event("change", { bubbles: true }));
+  updateSelectedPackage();
+
+  return true;
+};
+
 packageOptions.forEach((option) => {
   option.addEventListener("change", updateSelectedPackage);
 });
@@ -671,6 +869,12 @@ orderPhotoInput?.addEventListener("invalid", () => {
 
 window.addEventListener("pageshow", () => {
   updatePhotoUploadState();
+});
+
+packageTargetButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    selectPackage(button.dataset.packageTarget);
+  });
 });
 
 const flipbook = {
@@ -817,7 +1021,7 @@ const renderMobileReader = (direction = 0) => {
     flipbook.mobileReader.classList.remove("is-loading");
     updatePreviewChrome();
     animateLoadedPage();
-    preloadNearbyMobilePages();
+    if (isBookPreviewActive) preloadNearbyMobilePages();
   };
 
   flipbook.mobileReader.classList.add("is-loading");
@@ -984,7 +1188,9 @@ document.querySelectorAll("[data-preview-target]").forEach((trigger) => {
     nextUrl.searchParams.set("book", selectedBookKey);
     nextUrl.hash = target.id;
 
+    isBookPreviewActive = true;
     selectBook(selectedBookKey);
+    ensurePageFlipInitialized();
     window.history.replaceState(null, "", nextUrl);
     target.scrollIntoView({
       behavior: "smooth",
@@ -1028,7 +1234,9 @@ function selectBook(bookKey) {
   updateFlipbook();
   renderMobileReader();
 
-  if (isNewBook || !pageFlip) {
+  if (!pageFlip) return;
+
+  if (isNewBook || pageFlipBookKey !== activeBook.key) {
     initPageFlip();
     return;
   }
@@ -1048,6 +1256,7 @@ const resetPageFlipRoot = () => {
   }
 
   pageFlip = null;
+  pageFlipBookKey = "";
   flipbook.pageFlipShell.textContent = "";
   const root = document.createElement("div");
   root.className = "pageflip-book";
@@ -1061,6 +1270,7 @@ const resetPageFlipRoot = () => {
 
 const initPageFlip = () => {
   if (!window.St?.PageFlip) return;
+  if (pageFlip && pageFlipBookKey === activeBook.key) return;
 
   const root = resetPageFlipRoot();
   if (!root) return;
@@ -1074,6 +1284,8 @@ const initPageFlip = () => {
     image.src = page.src;
     image.alt = page.alt;
     image.draggable = false;
+    image.decoding = "async";
+    if (index > 1) image.loading = "lazy";
     item.append(image);
 
     return item;
@@ -1102,14 +1314,41 @@ const initPageFlip = () => {
   });
 
   pageFlip.loadFromHTML(pageElements);
+  pageFlipBookKey = activeBook.key;
   pageFlip.on("flip", (event) => syncViewFromPageFlip(Number(event.data) || 0));
   pageFlip.on("init", (event) => syncViewFromPageFlip(Number(event.data?.page) || 0));
+};
+
+const ensurePageFlipInitialized = () => {
+  isBookPreviewActive = true;
+  if (pageFlip && pageFlipBookKey === activeBook.key) return;
+  initPageFlip();
+};
+
+const scheduleLazyPageFlipInit = () => {
+  if (!flipbook.viewer) return;
+
+  if (!("IntersectionObserver" in window)) return;
+
+  const pageFlipObserver = new IntersectionObserver(
+    (entries) => {
+      if (!entries.some((entry) => entry.isIntersecting)) return;
+
+      ensurePageFlipInitialized();
+      pageFlipObserver.disconnect();
+    },
+    {
+      rootMargin: "220px 0px",
+      threshold: 0.01,
+    }
+  );
+
+  pageFlipObserver.observe(flipbook.viewer);
 };
 
 if (flipbook.viewer) {
   updateFlipbook();
   renderMobileReader();
-  initPageFlip();
   flipbook.pageFlipShell?.addEventListener("click", handleBookTap, true);
   flipbook.mobileReader?.addEventListener("click", handleMobileReaderClick);
   flipbook.mobileReader?.addEventListener("keydown", handleMobileReaderKeydown);
@@ -1120,6 +1359,11 @@ if (flipbook.viewer) {
 
   const initialBookKey = new URLSearchParams(window.location.search).get("book");
   if (initialBookKey) selectBook(initialBookKey);
+  if (window.location.hash === "#noah-flipbook" || window.location.hash === "#examples") {
+    ensurePageFlipInitialized();
+  } else {
+    scheduleLazyPageFlipInit();
+  }
 }
 
 form?.addEventListener("submit", async (event) => {
@@ -1171,6 +1415,7 @@ form?.addEventListener("submit", async (event) => {
 
     const orderData = new FormData(form);
     setFormDataPhoto(orderData, preparedPhoto);
+    appendMarketingAttribution(orderData);
 
     setFormStatus(statusElement, "Uploading your order details securely...", "neutral");
 

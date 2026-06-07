@@ -15,7 +15,7 @@
       href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;500;700;800&family=Cormorant+Garamond:ital,wght@1,700;1,800&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,700;1,9..144,800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=paid-intake-mvp-1" />
+    <link rel="stylesheet" href="styles.css?v=landing-polish-5" />
   </head>
   <body>
     <div class="sky-grain" aria-hidden="true"></div>
@@ -87,9 +87,15 @@
             <span class="brand-word brand-mirror">Mirror</span>
             <span class="brand-word brand-tale">Tale</span>
           </span>
-          <span class="brand-orbit" aria-hidden="true">
-            <span class="brand-crescent"></span>
-            <svg class="ui-icon brand-spark"><use href="#icon-sparkle"></use></svg>
+          <span class="brand-orbit brand-emblem" aria-hidden="true">
+            <svg class="brand-emblem-svg" viewBox="0 0 64 48" focusable="false">
+              <path class="brand-emblem-mirror" d="M12.5 25.4c0-11.1 8.4-19 19.5-19s19.5 7.9 19.5 19c0 6.9-3.1 12.2-8.7 15.4H21.2c-5.6-3.2-8.7-8.5-8.7-15.4Z" />
+              <path class="brand-emblem-glow" d="M20.2 22.8c2.3-4.8 6.3-7.4 11.8-7.4s9.5 2.6 11.8 7.4" />
+              <path class="brand-emblem-page brand-emblem-page-left" d="M31.7 27.8c-5.6-3.1-10.5-3.7-15.3-2.1v11.1c4.7-1.8 9.5-1.1 15.3 2.2V27.8Z" />
+              <path class="brand-emblem-page brand-emblem-page-right" d="M32.3 27.8c5.6-3.1 10.5-3.7 15.3-2.1v11.1c-4.7-1.8-9.5-1.1-15.3 2.2V27.8Z" />
+              <path class="brand-emblem-spine" d="M32 27.7v12" />
+              <path class="brand-emblem-shine" d="M23 13.8h4.7M20.7 16.2h2.5" />
+            </svg>
           </span>
         </a>
         <nav class="main-nav" aria-label="Primary navigation">
@@ -130,16 +136,30 @@
             aria-label="Child reading a magical personalized storybook"
             data-replace-with="provided-true-book-example"
           >
-            <img
-              src="assets/hero-aiden-morning-bell-real.webp"
+            <video
+              class="hero-video"
+              data-hero-video
+              poster="assets/hero-aiden-morning-bell-real.webp"
               width="1536"
               height="1024"
-              alt="A child reading a realistic Aiden Braves the Morning Bell personalized storybook under a starry night sky"
-            />
+              muted
+              loop
+              playsinline
+              preload="none"
+              aria-hidden="true"
+            >
+              <source data-src="assets/hero-animated.mp4" type="video/mp4" />
+              <img
+                src="assets/hero-aiden-morning-bell-real.webp"
+                width="1536"
+                height="1024"
+                alt=""
+              />
+            </video>
             <div class="delivery-badge">
-              <span>Digital + print</span>
+              <span>Print edition</span>
               <strong>available now</strong>
-              <small>print tracked by email</small>
+              <small>tracked delivery</small>
             </div>
           </div>
 
@@ -176,8 +196,8 @@
                 <svg class="ui-icon trust-icon"><use href="#icon-book"></use></svg>
               </span>
               <span class="trust-copy">
-                <strong>Printed book option</strong>
-                <em>shipping collected in checkout</em>
+                <strong>Gift-ready print edition</strong>
+                <em>a real book for their shelf</em>
               </span>
             </li>
           </ul>
@@ -198,7 +218,7 @@
             </div>
             <div class="proof-caption">
               <span>1</span>
-              <p>Upload photo<br />+ details</p>
+              <p>Upload photo + details</p>
             </div>
           </article>
           <span class="flow-arrow" aria-hidden="true">→</span>
@@ -208,7 +228,7 @@
             </div>
             <div class="proof-caption">
               <span>2</span>
-              <p>We create your child’s<br />animated likeness</p>
+              <p>Create animated likeness</p>
             </div>
           </article>
           <span class="flow-arrow" aria-hidden="true">→</span>
@@ -218,7 +238,7 @@
             </div>
             <div class="proof-caption">
               <span>3</span>
-              <p>We build their<br />personalized story</p>
+              <p>Build personalized story</p>
             </div>
           </article>
           <span class="flow-arrow" aria-hidden="true">→</span>
@@ -228,7 +248,7 @@
             </div>
             <div class="proof-caption">
               <span>4</span>
-              <p>You receive the final<br />book in 24–48h</p>
+              <p>Receive book in 24–48h</p>
             </div>
           </article>
         </div>
@@ -421,8 +441,8 @@
             <span class="trust-orb" aria-hidden="true">
               <svg class="ui-icon trust-icon"><use href="#icon-clock"></use></svg>
             </span>
-            <h3>Digital PDFs<br />in 24–48h</h3>
-            <p>The cover and interior PDFs arrive first, then print fulfillment can begin.</p>
+            <h3>Physical keepsake<br />after review</h3>
+            <p>Receive the PDFs first, then the printed book becomes a gift-ready treasure for their shelf.</p>
           </article>
           <article>
             <span class="trust-orb" aria-hidden="true">
@@ -445,7 +465,7 @@
                 <svg class="ui-icon"><use href="#icon-book"></use></svg>
               </span>
               <h3>Digital Only</h3>
-              <div class="price">49 EUR</div>
+              <div class="price">49€</div>
               <ul>
                 <li>
                   <svg class="ui-icon check-icon" aria-hidden="true"><use href="#icon-check"></use></svg>
@@ -464,40 +484,61 @@
                   <span>Photo likeness and story details manually checked</span>
                 </li>
               </ul>
+              <a class="button button-outline price-card-cta" href="#intake" data-package-target="digital">Choose Digital</a>
             </article>
             <article class="price-card premium-card print-card">
+              <span class="print-card-badge">Keepsake upgrade</span>
               <span class="card-medallion" aria-hidden="true">
                 <svg class="ui-icon"><use href="#icon-book"></use></svg>
               </span>
               <h3>Digital + Print</h3>
-              <div class="price">Checkout price</div>
+              <div class="price">99€ <small>+ VAT</small></div>
+              <p class="print-keepsake-note">For parents who want the story to become a bedtime book they can hold, gift, and keep.</p>
               <ul>
                 <li>
                   <svg class="ui-icon check-icon" aria-hidden="true"><use href="#icon-check"></use></svg>
-                  <span>Ready-to-print cover and interior PDFs</span>
+                  <span>Everything in Digital Only, plus a physical keepsake</span>
                 </li>
                 <li>
                   <svg class="ui-icon check-icon" aria-hidden="true"><use href="#icon-check"></use></svg>
-                  <span>Printed book fulfilled manually after PDF approval</span>
+                  <span>Square 22 x 22 cm premium color hardcover made for small hands</span>
                 </li>
                 <li>
                   <svg class="ui-icon check-icon" aria-hidden="true"><use href="#icon-check"></use></svg>
-                  <span>Shipping address collected securely in Stripe Checkout</span>
+                  <span>Perfect for bedtime, birthdays, grandparents, and memory boxes</span>
                 </li>
                 <li>
                   <svg class="ui-icon check-icon" aria-hidden="true"><use href="#icon-check"></use></svg>
-                  <span>Print ordered and shipped emails with tracking when available</span>
-                </li>
-                <li>
-                  <svg class="ui-icon check-icon" aria-hidden="true"><use href="#icon-check"></use></svg>
-                  <span>Square 8.5 x 8.5 in premium color book spec</span>
+                  <span>Tracked print updates by email after ordering</span>
                 </li>
               </ul>
+              <a class="button button-gold price-card-cta" href="#intake" data-package-target="print">Choose Hardcover Print</a>
             </article>
           </div>
         </div>
+        <aside class="hardcover-proof reveal" aria-label="Hardcover edition proof">
+          <div class="hardcover-proof-media">
+            <img
+              src="assets/hardcover-elena-proof.webp"
+              width="1180"
+              height="860"
+              loading="lazy"
+              decoding="async"
+              alt="Hardcover Elena Stirs Up a Friendship printed book mockup"
+            />
+          </div>
+          <div class="hardcover-proof-copy">
+            <span class="mini-kicker">Hardcover edition</span>
+            <h3>A story they can hold, gift, and keep.</h3>
+            <ul>
+              <li>Square 22 x 22 cm</li>
+              <li>Premium color hardcover</li>
+              <li>Ships in up to 15 business days in Europe</li>
+            </ul>
+          </div>
+        </aside>
         <p class="pricing-note reveal">
-          Every book is custom-made from your child’s photo and story details.
+          Every book is custom-made from your child’s photo and story details. Choose Digital + Print when you want a gift-ready keepsake your child can hold, reread, and keep on their shelf.
         </p>
       </section>
 
@@ -509,10 +550,38 @@
           <div class="faq-list reveal">
             <details open>
               <summary>
-                <span>How long does it take to receive my book?</span>
+                <span>How long does the digital book take?</span>
                 <svg class="ui-icon faq-chevron" aria-hidden="true"><use href="#icon-chevron"></use></svg>
               </summary>
-              <p>Your cover spread PDF and interior pages PDF are delivered within 24–48h after payment. If you choose Digital + Print, we place the physical print order manually after the PDFs pass review, then email print and tracking updates.</p>
+              <p>Your cover spread PDF and interior pages PDF are delivered within 24–48h after payment.</p>
+            </details>
+            <details>
+              <summary>
+                <span>Can I print my own book?</span>
+                <svg class="ui-icon faq-chevron" aria-hidden="true"><use href="#icon-chevron"></use></svg>
+              </summary>
+              <p>Yes. The PDF file you receive with the Digital Only version is optimized specifically for printing in a square 22 x 22 cm format.</p>
+            </details>
+            <details>
+              <summary>
+                <span>Where do you ship hardcover books?</span>
+                <svg class="ui-icon faq-chevron" aria-hidden="true"><use href="#icon-chevron"></use></svg>
+              </summary>
+              <p>We are focusing on Europe first for hardcover delivery. The shipping address is collected securely during checkout for print orders.</p>
+            </details>
+            <details>
+              <summary>
+                <span>How long does the hardcover book take?</span>
+                <svg class="ui-icon faq-chevron" aria-hidden="true"><use href="#icon-chevron"></use></svg>
+              </summary>
+              <p>Your digital PDFs are delivered within 24–48h. The physical hardcover book ships separately and can take up to 15 business days to arrive in Europe.</p>
+            </details>
+            <details>
+              <summary>
+                <span>How are my child’s photos used?</span>
+                <svg class="ui-icon faq-chevron" aria-hidden="true"><use href="#icon-chevron"></use></svg>
+              </summary>
+              <p>Your child’s photos and story details are used only to create and review the ordered book.</p>
             </details>
             <details>
               <summary>
@@ -563,6 +632,9 @@
               <span>Printed book option at checkout</span>
             </li>
           </ul>
+          <p class="form-detail-note">
+            Your child’s name, story details, and dedication guide the personalization, so please double-check spelling before checkout.
+          </p>
           <div class="form-columns">
             <fieldset>
               <legend>Parent details</legend>
@@ -664,15 +736,15 @@
                 <label>
                   <input type="radio" name="package" value="digital" checked />
                   <span>
-                    <strong>Digital Only - 49 EUR</strong>
+                    <strong>Digital Only - 49€</strong>
                     <em>Ready-to-print PDF</em>
                   </span>
                 </label>
                 <label>
                   <input type="radio" name="package" value="print" />
                   <span>
-                    <strong>Digital + Print</strong>
-                    <em>PDFs first, printed book tracked by email</em>
+                    <strong>Digital + Print - 99€ + VAT</strong>
+                    <em>PDFs first, then a keepsake print with tracking</em>
                   </span>
                 </label>
               </div>
@@ -686,8 +758,15 @@
                   <a href="terms.html" target="_blank" rel="noopener">Terms</a>.
                 </span>
               </label>
+              <label class="consent-check details-confirmation">
+                <input type="checkbox" name="details-confirmed" value="accepted" required />
+                <span>
+                  I have double-checked the child’s name, story details, dedication,
+                  and spelling, and confirm everything is correct before checkout.
+                </span>
+              </label>
               <button class="button button-gold form-submit" type="submit">
-                Continue to Secure Payment
+                Proceed to Checkout
               </button>
               <p class="secure-note">
                 <svg class="ui-icon secure-icon" aria-hidden="true"><use href="#icon-lock"></use></svg>
@@ -733,11 +812,11 @@
             </label>
             <label>
               Email Address
-              <input type="email" name="contact-email" placeholder="Enter your email" />
+              <input type="email" name="contact-email" placeholder="Enter your email" required />
             </label>
             <label class="contact-message-field">
               How can we help?
-              <textarea name="contact-message" placeholder="Ask us anything about creating your child’s book"></textarea>
+              <textarea name="contact-message" placeholder="Ask us anything about creating your child’s book" required></textarea>
             </label>
             <button class="button button-gold contact-submit" type="submit">Send Message</button>
             <p class="contact-note">We will only use your message to reply to your question.</p>
@@ -770,6 +849,6 @@
     </footer>
 
     <script src="assets/vendor/page-flip.browser.js"></script>
-    <script src="script.js?v=paid-intake-mvp-1"></script>
+    <script src="script.js?v=landing-polish-5"></script>
   </body>
 </html>

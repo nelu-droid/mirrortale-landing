@@ -12,6 +12,8 @@ Desktop.ini
 
 # Dependencies, caches, and generated build output
 node_modules/
+__pycache__/
+*.pyc
 .cache/
 .parcel-cache/
 dist/
@@ -26,3 +28,7 @@ yarn-error.log*
 
 # Local visual QA artifacts
 assets/test-render/
+
+# Generated organic social batches
+marketing-automation/output/
+marketing-automation/.cache/

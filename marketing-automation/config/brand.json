@@ -1,0 +1,92 @@
+{
+  "brandName": "MirrorTale",
+  "offer": "Premium personalized children's books",
+  "price": "49 EUR",
+  "delivery": "Digital delivery in 24-48h",
+  "primaryUrl": "https://mirrortale.com/#intake",
+  "bioUrlBase": "https://mirrortale.com/",
+  "cta": "Create your child's storybook",
+  "tone": [
+    "warm",
+    "parent-aware",
+    "gentle",
+    "specific",
+    "never shaming"
+  ],
+  "safeClaims": [
+    "Help your child practice a routine through story.",
+    "Turn an everyday lesson into a personalized adventure.",
+    "Make expectations feel familiar before the real-life moment.",
+    "Create a storybook starring your child, their interests, and your routine goal.",
+    "Every book is manually checked before delivery."
+  ],
+  "avoidClaims": [
+    "fix bad behavior",
+    "cure",
+    "guaranteed",
+    "therapy",
+    "treat",
+    "diagnose",
+    "stop tantrums forever",
+    "discipline problem",
+    "naughty child",
+    "unruly child"
+  ],
+  "hashtags": {
+    "core": [
+      "personalizedbook",
+      "kidsbooks",
+      "parentsoftiktok",
+      "momsoftiktok",
+      "dadsoftiktok",
+      "bedtimestory",
+      "childrensbook"
+    ],
+    "routine": [
+      "bedtimeroutine",
+      "pottytraining",
+      "toothbrushing",
+      "toddlerroutine",
+      "preschoolroutine",
+      "gentleparenting"
+    ],
+    "gift": [
+      "kidsgift",
+      "birthdaygift",
+      "meaningfulgift",
+      "customgift"
+    ]
+  },
+  "platforms": {
+    "tiktok": {
+      "utmSource": "tiktok",
+      "nativeFormats": [
+        "mp4_slideshow",
+        "photo_mode"
+      ],
+      "captionMax": 2200
+    },
+    "instagram": {
+      "utmSource": "instagram",
+      "nativeFormats": [
+        "reel",
+        "carousel"
+      ],
+      "captionMax": 2200
+    }
+  },
+  "schedule": {
+    "timezone": "Europe/Brussels",
+    "dailyTimes": [
+      "08:00",
+      "13:00",
+      "20:30"
+    ]
+  },
+  "visualDefaults": {
+    "width": 1080,
+    "height": 1920,
+    "slideSeconds": 2.6,
+    "syntheticBadge": "Synthetic demo"
+  }
+}

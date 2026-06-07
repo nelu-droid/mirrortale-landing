@@ -1,0 +1,92 @@
+[
+  {
+    "key": "bedtime",
+    "label": "bedtime routine",
+    "parentPain": "bedtime turns into one more negotiation",
+    "gentleGoal": "help the child practice the steps of winding down",
+    "storySkill": "choosing pajamas, brushing teeth, picking one book, and saying goodnight",
+    "bookNoun": "Sleepy Star Lantern",
+    "practiceSteps": ["pajamas", "teeth", "one book", "lights low"],
+    "safePhrase": "make bedtime feel familiar before it begins"
+  },
+  {
+    "key": "potty_training",
+    "label": "potty training",
+    "parentPain": "potty practice feels stressful for everyone",
+    "gentleGoal": "help the child rehearse listening to body signals",
+    "storySkill": "noticing the signal, walking to the potty, trying calmly, and celebrating effort",
+    "bookNoun": "Tiny Throne Quest",
+    "practiceSteps": ["notice", "walk", "try", "celebrate"],
+    "safePhrase": "turn potty practice into a calm little quest"
+  },
+  {
+    "key": "toothbrushing",
+    "label": "toothbrushing",
+    "parentPain": "toothbrushing turns into a nightly struggle",
+    "gentleGoal": "help the child practice the brushing sequence",
+    "storySkill": "wet brush, tiny toothpaste, brush top and bottom, rinse, smile",
+    "bookNoun": "Sparkle Smile Mission",
+    "practiceSteps": ["wet brush", "tiny toothpaste", "top and bottom", "rinse"],
+    "safePhrase": "make the brushing steps feel like a mission"
+  },
+  {
+    "key": "sharing",
+    "label": "sharing",
+    "parentPain": "playdates get tense around favorite toys",
+    "gentleGoal": "help the child practice taking turns",
+    "storySkill": "holding a favorite toy, naming a turn, waiting, and trading back kindly",
+    "bookNoun": "Turn-Taking Treasure",
+    "practiceSteps": ["name the toy", "take turns", "wait", "trade back"],
+    "safePhrase": "practice sharing language before the playdate"
+  },
+  {
+    "key": "tantrums",
+    "label": "big feelings",
+    "parentPain": "big feelings arrive faster than words",
+    "gentleGoal": "help the child rehearse a calm-down plan",
+    "storySkill": "naming the feeling, breathing slowly, asking for help, and trying again",
+    "bookNoun": "Brave Little Breath",
+    "practiceSteps": ["name it", "breathe", "ask for help", "try again"],
+    "safePhrase": "give big feelings a story-shaped plan"
+  },
+  {
+    "key": "morning_routine",
+    "label": "morning routine",
+    "parentPain": "getting out the door takes forever",
+    "gentleGoal": "help the child practice a predictable morning sequence",
+    "storySkill": "getting dressed, eating breakfast, shoes on, backpack ready",
+    "bookNoun": "Morning Bell Adventure",
+    "practiceSteps": ["get dressed", "breakfast", "shoes", "bag ready"],
+    "safePhrase": "make mornings feel like a sequence they know"
+  },
+  {
+    "key": "separation",
+    "label": "separation anxiety",
+    "parentPain": "goodbyes feel hard at daycare or school",
+    "gentleGoal": "help the child rehearse a loving goodbye routine",
+    "storySkill": "hug, hand squeeze, grown-up comes back, brave next step",
+    "bookNoun": "The Pocket Hug",
+    "practiceSteps": ["hug", "hand squeeze", "grown-up returns", "brave step"],
+    "safePhrase": "practice the goodbye before the real goodbye"
+  },
+  {
+    "key": "screen_transition",
+    "label": "screen-time transition",
+    "parentPain": "turning off the screen sparks resistance",
+    "gentleGoal": "help the child rehearse stopping and switching activities",
+    "storySkill": "one more minute, pause, say goodbye to the show, choose the next activity",
+    "bookNoun": "The Pause Button Parade",
+    "practiceSteps": ["one minute", "pause", "goodbye screen", "next activity"],
+    "safePhrase": "make the next step easier to picture"
+  },
+  {
+    "key": "listening",
+    "label": "listening",
+    "parentPain": "simple instructions need repeating again and again",
+    "gentleGoal": "help the child practice hearing one clear instruction",
+    "storySkill": "look, listen, repeat the step, and do one thing at a time",
+    "bookNoun": "The Listening Lantern",
+    "practiceSteps": ["look", "listen", "repeat", "one step"],
+    "safePhrase": "turn listening into a clear story cue"
+  }
+]

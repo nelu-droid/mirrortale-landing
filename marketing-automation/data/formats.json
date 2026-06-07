@@ -1,0 +1,242 @@
+[
+  {
+    "key": "bedtime_before_after",
+    "pillar": "routine_support",
+    "title": "Before/after routine story",
+    "recommendedRoutines": ["bedtime", "toothbrushing", "morning_routine", "screen_transition"],
+    "hookTemplate": "What if {routine_label} started inside a story first?",
+    "captionTemplate": "A personalized storybook can help your child rehearse {routine_label} in a warm, familiar way. Synthetic demo, real MirrorTale concept. {cta}",
+    "slides": [
+      {
+        "headline": "When {routine_label} feels hard...",
+        "body": "{parent_pain}. So the story starts there.",
+        "scene": "parent kneeling near child in a warm home routine moment"
+      },
+      {
+        "headline": "We make {child_name} the hero",
+        "body": "The book uses {possessive} name, interests, and a gentle routine goal.",
+        "scene": "open personalized storybook with child hero on the page"
+      },
+      {
+        "headline": "The adventure practices the steps",
+        "body": "{practice_steps}. Not a lecture. A story they can see.",
+        "scene": "storybook map with four glowing steps"
+      },
+      {
+        "headline": "{child_name} meets the challenge",
+        "body": "The lesson becomes part of a magical little mission.",
+        "scene": "child character holding a small lantern in a storybook world"
+      },
+      {
+        "headline": "Then real life feels more familiar",
+        "body": "A personalized story can help rehearse what comes next.",
+        "scene": "child and parent smiling during the same home routine"
+      },
+      {
+        "headline": "Create the book around your routine",
+        "body": "Bedtime, potty practice, brushing, sharing, mornings, and more.",
+        "scene": "stack of personalized books for different routines"
+      }
+    ]
+  },
+  {
+    "key": "pov_parent",
+    "pillar": "personalization_magic",
+    "title": "Parent POV storybook reveal",
+    "recommendedRoutines": ["potty_training", "bedtime", "separation", "tantrums"],
+    "hookTemplate": "POV: your child's routine practice becomes their own adventure",
+    "captionTemplate": "POV: instead of repeating the same reminder, you make {child_name} the hero of a story that practices {routine_label}. {cta}",
+    "slides": [
+      {
+        "headline": "POV: you are tired of repeating it",
+        "body": "{parent_pain}. You want something gentler.",
+        "scene": "parent holding a cup of tea beside a messy routine moment"
+      },
+      {
+        "headline": "So the reminder becomes a story",
+        "body": "{child_name} stars in a book about {routine_label}.",
+        "scene": "phone mockup showing order form and story idea"
+      },
+      {
+        "headline": "The hero looks like your child",
+        "body": "MirrorTale builds a child-inspired character from your upload.",
+        "scene": "storybook portrait beside a child-safe photo placeholder"
+      },
+      {
+        "headline": "The story uses what they love",
+        "body": "{favorite} becomes part of the adventure.",
+        "scene": "favorite object becoming a magical story clue"
+      },
+      {
+        "headline": "The routine gets practiced gently",
+        "body": "{story_skill}.",
+        "scene": "storybook spread with a calm practice sequence"
+      },
+      {
+        "headline": "A book made just for them",
+        "body": "Digital MirrorTale book delivered in 24-48h.",
+        "scene": "finished digital storybook cover on a tablet"
+      }
+    ]
+  },
+  {
+    "key": "instead_of_nagging",
+    "pillar": "routine_support",
+    "title": "Instead of repeating reminders",
+    "recommendedRoutines": ["toothbrushing", "listening", "screen_transition", "sharing"],
+    "hookTemplate": "Instead of repeating the same reminder, try a story",
+    "captionTemplate": "A story does not replace parenting. It gives your child a warm way to picture the next step. This one is built around {routine_label}. {cta}",
+    "slides": [
+      {
+        "headline": "Instead of one more reminder...",
+        "body": "Turn the lesson into a story they actually want to open.",
+        "scene": "parent pointing gently toward a book instead of a chore chart"
+      },
+      {
+        "headline": "The hero is {child_name}",
+        "body": "Not a generic character. A personalized storybook hero.",
+        "scene": "storybook hero waving from a colorful page"
+      },
+      {
+        "headline": "The lesson is {routine_label}",
+        "body": "{safe_phrase}.",
+        "scene": "storybook scene centered on the routine moment"
+      },
+      {
+        "headline": "The steps are simple",
+        "body": "{practice_steps}.",
+        "scene": "four illustrated step cards in a storybook spread"
+      },
+      {
+        "headline": "The tone stays warm",
+        "body": "No shame. No scary lesson. Just practice, confidence, and story.",
+        "scene": "parent and child reading together under warm light"
+      },
+      {
+        "headline": "What routine would you choose?",
+        "body": "Create a MirrorTale book for your child.",
+        "scene": "multiple routine-themed book covers fanned out"
+      }
+    ]
+  },
+  {
+    "key": "three_routines",
+    "pillar": "education",
+    "title": "Three routine ideas",
+    "recommendedRoutines": ["bedtime", "potty_training", "toothbrushing", "morning_routine", "separation"],
+    "hookTemplate": "3 routines you can turn into a personalized storybook",
+    "captionTemplate": "Personalized children's books are not only gifts. They can help your child rehearse everyday routines through story. {cta}",
+    "slides": [
+      {
+        "headline": "3 routines that work beautifully as stories",
+        "body": "Because children often understand practice better when they can picture it.",
+        "scene": "three storybook covers on a table"
+      },
+      {
+        "headline": "1. Bedtime",
+        "body": "A hero journey from pajamas to lights low.",
+        "scene": "storybook bedtime adventure with stars"
+      },
+      {
+        "headline": "2. Potty practice",
+        "body": "A calm quest about noticing, trying, and celebrating effort.",
+        "scene": "storybook bathroom quest with gentle colors"
+      },
+      {
+        "headline": "3. Toothbrushing",
+        "body": "A sparkle mission with simple steps.",
+        "scene": "storybook toothbrush mission with tiny sparkles"
+      },
+      {
+        "headline": "The difference?",
+        "body": "The character can look like your child and use their real interests.",
+        "scene": "custom hero portrait beside interests icons"
+      },
+      {
+        "headline": "Choose your routine",
+        "body": "MirrorTale turns it into a personalized digital book.",
+        "scene": "parent selecting routine ideas on a phone"
+      }
+    ]
+  },
+  {
+    "key": "gift_with_purpose",
+    "pillar": "emotional_gift",
+    "title": "Gift with a purpose",
+    "recommendedRoutines": ["bedtime", "separation", "sharing", "tantrums"],
+    "hookTemplate": "A personalized book can be more than a keepsake",
+    "captionTemplate": "A keepsake they can see themselves in, built around a real moment your family is practicing. {cta}",
+    "slides": [
+      {
+        "headline": "A gift they can see themselves in",
+        "body": "Name, likeness, interests, and a story made around your child.",
+        "scene": "wrapped storybook gift opening on a table"
+      },
+      {
+        "headline": "But also: a gentle practice tool",
+        "body": "This one helps rehearse {routine_label}.",
+        "scene": "storybook page transitioning into a home routine"
+      },
+      {
+        "headline": "The story starts with what they love",
+        "body": "{favorite} becomes the magical hook.",
+        "scene": "favorite object glowing on a storybook page"
+      },
+      {
+        "headline": "Then the routine becomes the quest",
+        "body": "{story_skill}.",
+        "scene": "child hero completing a gentle quest"
+      },
+      {
+        "headline": "It feels personal",
+        "body": "Because the child is not watching someone else learn. They are the hero.",
+        "scene": "child pointing at their personalized character"
+      },
+      {
+        "headline": "Make one for your child",
+        "body": "Digital book, manually checked, delivered in 24-48h.",
+        "scene": "final personalized book cover with MirrorTale logo"
+      }
+    ]
+  },
+  {
+    "key": "trust_privacy",
+    "pillar": "privacy_trust",
+    "title": "How the custom book works",
+    "recommendedRoutines": ["bedtime", "potty_training", "toothbrushing", "morning_routine"],
+    "hookTemplate": "How a MirrorTale book is made from your child's routine",
+    "captionTemplate": "Upload a clear photo, choose the routine or story goal, and we create a personalized digital book with a human quality check. {cta}",
+    "slides": [
+      {
+        "headline": "Step 1: choose the routine",
+        "body": "Example: {routine_label}.",
+        "scene": "routine choices shown as warm storybook tiles"
+      },
+      {
+        "headline": "Step 2: add what your child loves",
+        "body": "{favorite}, family notes, dedication, and story theme.",
+        "scene": "parent entering interests into a simple form"
+      },
+      {
+        "headline": "Step 3: upload a clear photo",
+        "body": "Photos are used only to create the book.",
+        "scene": "secure photo upload card with lock icon"
+      },
+      {
+        "headline": "Step 4: we create the storybook",
+        "body": "A personalized hero, routine-focused adventure, and finished pages.",
+        "scene": "storybook pages being assembled"
+      },
+      {
+        "headline": "Step 5: human quality check",
+        "body": "Every book is reviewed before delivery.",
+        "scene": "checkmark over a finished storybook spread"
+      },
+      {
+        "headline": "Digital book in 24-48h",
+        "body": "Create your MirrorTale book today.",
+        "scene": "tablet showing a finished digital book"
+      }
+    ]
+  }
+]
