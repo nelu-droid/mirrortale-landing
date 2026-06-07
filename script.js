@@ -374,9 +374,6 @@ const convertPhotoToJpeg = async (file) => {
   return smallestBlob;
 };
 
-const isBackendReadyPhoto = (file, mimeType) =>
-  (mimeType === "image/jpeg" || mimeType === "image/png") && file.size <= maxPhotoUploadBytes;
-
 const getPhotoValidation = () => {
   const files = orderPhotoInput?.files;
   const fileCount = files?.length || 0;
@@ -431,10 +428,8 @@ const getPhotoValidation = () => {
     file,
     fileName,
     mimeType,
-    uploadFile: isBackendReadyPhoto(file, mimeType)
-      ? createPhotoUploadFile(file, mimeType, fileName)
-      : null,
-    message: "Photo selected. We will prepare it securely when you proceed to checkout.",
+    uploadFile: null,
+    message: "Photo selected. We will prepare a fresh upload copy when you proceed to checkout.",
   };
 };
 
@@ -442,20 +437,8 @@ const preparePhotoUpload = async (validation) => {
   if (!validation?.isValid || !validation.file) return validation;
 
   const { file } = validation;
-  const mimeType = getPhotoMimeType(file);
 
-  if (isBackendReadyPhoto(file, mimeType)) {
-    const fileName = getPhotoUploadFileName(file, mimeType);
-    return {
-      ...validation,
-      fileName,
-      mimeType,
-      uploadFile: createPhotoUploadFile(file, mimeType, fileName),
-      message: "Photo ready for secure upload.",
-    };
-  }
-
-  setUploadStatus("Preparing your photo for secure upload...", "neutral");
+  setUploadStatus("Preparing a fresh photo copy for secure upload...", "neutral");
 
   try {
     const jpegBlob = await convertPhotoToJpeg(file);
@@ -481,7 +464,7 @@ const preparePhotoUpload = async (validation) => {
       fileName,
       mimeType: "image/jpeg",
       uploadFile: createPhotoUploadFile(jpegBlob, "image/jpeg", fileName),
-      message: "Photo prepared successfully. It will upload as a JPG for checkout.",
+      message: "Photo prepared successfully. It will upload as a fresh JPG for checkout.",
     };
   } catch {
     return {
@@ -489,7 +472,7 @@ const preparePhotoUpload = async (validation) => {
       isValid: false,
       uploadFile: null,
       message:
-        "This photo format could not be prepared in Instagram. Please open the page in your phone browser or choose another photo.",
+        "Instagram could not prepare this photo. Please open the page in your phone browser or choose another photo.",
     };
   }
 };
