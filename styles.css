@@ -1874,6 +1874,58 @@ p {
   line-height: 1;
 }
 
+.moments {
+  padding-top: 1.15rem;
+  padding-bottom: 0.7rem;
+}
+
+.moments .section-title {
+  margin-bottom: 1.25rem;
+}
+
+.moments-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.moments-grid article {
+  display: grid;
+  align-content: start;
+  justify-items: center;
+  min-height: 205px;
+  padding: 1.2rem 1.1rem;
+  border: 1px solid rgba(230, 177, 79, 0.2);
+  border-radius: 8px;
+  background: linear-gradient(180deg, rgba(12, 35, 42, 0.72), rgba(4, 10, 24, 0.52));
+  text-align: center;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 18px 38px rgba(0, 0, 0, 0.2);
+}
+
+.moments-grid .trust-orb {
+  margin-bottom: 0.8rem;
+}
+
+.moments-grid h3 {
+  margin: 0 0 0.5rem;
+  color: #fff6d6;
+  font-family: var(--serif);
+  font-size: clamp(1.1rem, 1.6vw, 1.35rem);
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 1.08;
+}
+
+.moments-grid p {
+  max-width: 18rem;
+  margin: 0;
+  color: rgba(255, 241, 208, 0.76);
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
 .trust {
   padding-top: 0;
 }
@@ -1949,6 +2001,20 @@ p {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 2.6rem;
+}
+
+.pricing-reassurance {
+  max-width: 780px;
+  margin: 1.2rem auto 0;
+  padding: 0.78rem 1rem;
+  border: 1px solid rgba(245, 217, 144, 0.26);
+  border-radius: 8px;
+  color: #fff0bf;
+  background: rgba(10, 31, 35, 0.46);
+  font-size: 0.84rem;
+  font-weight: 700;
+  line-height: 1.45;
+  text-align: center;
 }
 
 .price-card {
@@ -2662,6 +2728,19 @@ textarea:focus {
   background:
     radial-gradient(circle at 12% 0%, rgba(255, 230, 168, 0.08), transparent 6rem),
     rgba(14, 39, 42, 0.54);
+}
+
+.checkout-reassurance {
+  margin: 0 0 0.65rem;
+  padding: 0.68rem 0.78rem;
+  border: 1px solid rgba(245, 217, 144, 0.28);
+  border-radius: 8px;
+  color: #fff0bf;
+  background: rgba(10, 31, 35, 0.46);
+  font-size: 0.74rem;
+  font-weight: 800;
+  line-height: 1.4;
+  text-align: center;
 }
 
 .form-submit {
@@ -4759,6 +4838,14 @@ textarea:focus {
   .section-shell {
     width: min(1180px, calc(100vw - 28px));
     max-width: calc(100vw - 28px);
+  }
+
+  .moments-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .moments-grid article {
+    min-height: 0;
   }
 
   .site-header {
