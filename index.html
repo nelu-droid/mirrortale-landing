@@ -713,6 +713,21 @@
                   <option>8+</option>
                 </select>
               </label>
+              <label>
+                Book language
+                <select name="book-language" required>
+                  <option value="en" selected>English</option>
+                  <option value="nl">Dutch</option>
+                  <option value="fr">French</option>
+                  <option value="de">German</option>
+                  <option value="es">Spanish</option>
+                  <option value="it">Italian</option>
+                  <option value="pt">Portuguese</option>
+                </select>
+                <small class="form-hint">
+                  The story text will be written in this language.
+                </small>
+              </label>
             </fieldset>
 
             <fieldset>
@@ -747,7 +762,7 @@
                   required
                 ></textarea>
                 <small class="form-hint">
-                  This appears on the first page of the book, so make it warm, personal, and special.
+                  This appears on the first page exactly as typed, so write it in the selected book language.
                 </small>
               </label>
             </fieldset>

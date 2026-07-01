@@ -28,6 +28,11 @@ Request:
 
 - Content type: `multipart/form-data`
 - Fields: `parent-name`, `email`, `child-name`, `gender`, `age`, `theme`, `interests`, `dedication`, `package=digital|print`, `photo-consent=accepted`
+- Optional field: `book-language=en|nl|fr|de|es|it|pt`
+  - Missing or blank defaults to `en` for backwards compatibility.
+  - Invalid values should return `400`.
+  - All engine instructions and image prompts stay English; only customer-visible generated book text uses the selected language.
+  - The dedication is preserved exactly as typed.
 - File: `child-photo`
   - Accept normal camera-roll photo uploads, including JPG, PNG, HEIC/HEIF,
     WebP, and other safe raster image formats when decodable.
