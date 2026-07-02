@@ -8,6 +8,8 @@
       "README.md",
       "docs/**",
       "marketing-automation/**",
+      "marketing-output/**",
+      "pomelli-upload-pack/**",
       "snapshots/**",
       "*.log"
     ],
