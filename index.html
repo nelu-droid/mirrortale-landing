@@ -15,7 +15,7 @@
       href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;500;700;800&family=Cormorant+Garamond:ital,wght@1,700;1,800&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,700;1,9..144,800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=landing-polish-7" />
+    <link rel="stylesheet" href="styles.css?v=site-language-1" />
   </head>
   <body>
     <div class="sky-grain" aria-hidden="true"></div>
@@ -104,7 +104,18 @@
           <a href="#pricing"><span class="nav-full">Pricing</span><span class="nav-short">Pricing</span></a>
           <a href="#faq"><span class="nav-full">FAQ</span><span class="nav-short">FAQ</span></a>
         </nav>
-        <a class="button button-gold header-cta" href="#intake">Create My Book</a>
+        <div class="header-actions">
+          <label class="site-language" for="site-language">
+            <span class="visually-hidden">Site language</span>
+            <select id="site-language" name="site-language" aria-label="Site language">
+              <option value="en">EN</option>
+              <option value="nl">NL</option>
+              <option value="fr">FR</option>
+              <option value="de">DE</option>
+            </select>
+          </label>
+          <a class="button button-gold header-cta" href="#intake">Create My Book</a>
+        </div>
       </div>
     </header>
 
@@ -879,6 +890,6 @@
     </footer>
 
     <script src="assets/vendor/page-flip.browser.js"></script>
-    <script src="script.js?v=photo-upload-accepted-1"></script>
+    <script src="script.js?v=site-language-1"></script>
   </body>
 </html>

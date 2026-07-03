@@ -6572,6 +6572,94 @@ main section[id],
   }
 }
 
+/* Site language selector */
+.header-actions {
+  display: inline-flex;
+  justify-self: end;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.header-actions .header-cta {
+  justify-self: auto;
+}
+
+.site-language {
+  display: inline-grid;
+  min-width: 0;
+  margin: 0;
+}
+
+.site-language select {
+  width: auto;
+  min-width: 58px;
+  min-height: 42px;
+  padding: 0 0.58rem;
+  border: 1px solid rgba(245, 217, 144, 0.46);
+  border-radius: 999px;
+  color: #fff2cd;
+  background:
+    radial-gradient(circle at 50% 0, rgba(120, 228, 184, 0.2), transparent 3rem),
+    linear-gradient(180deg, rgba(255, 241, 208, 0.08), rgba(255, 241, 208, 0.018)),
+    rgba(7, 31, 35, 0.78);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 10px 22px rgba(3, 13, 16, 0.18);
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 900;
+  line-height: 1;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.site-language select:hover,
+.site-language select:focus-visible {
+  border-color: rgba(255, 235, 177, 0.82);
+  background:
+    radial-gradient(circle at 50% 0, rgba(120, 228, 184, 0.3), transparent 3.3rem),
+    linear-gradient(180deg, rgba(255, 241, 208, 0.12), rgba(255, 241, 208, 0.028)),
+    rgba(13, 48, 48, 0.84);
+}
+
+.site-language select:focus-visible {
+  outline: 2px solid rgba(245, 217, 144, 0.86);
+  outline-offset: 3px;
+}
+
+@media (max-width: 760px) {
+  .header-actions {
+    gap: 0.42rem;
+  }
+
+  .site-language select {
+    min-width: 54px;
+    min-height: 42px;
+    padding-inline: 0.5rem;
+    font-size: 0.76rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .header-actions {
+    gap: 0.32rem;
+  }
+
+  .site-language select {
+    min-width: 50px;
+    min-height: 40px;
+    padding-inline: 0.42rem;
+    font-size: 0.72rem;
+  }
+
+  .header-actions .header-cta {
+    min-height: 40px;
+    padding-inline: 0.62rem;
+    font-size: clamp(0.68rem, 2.55vw, 0.78rem);
+    white-space: normal;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
