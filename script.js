@@ -43,7 +43,9 @@ const maxOriginalPhotoUploadBytes = 35 * 1024 * 1024;
 const photoUploadCanvasMaxEdges = [2400, 2000, 1600];
 const photoUploadJpegQualities = [0.9, 0.82, 0.74, 0.66];
 const defaultUploadTitle = uploadTitle?.textContent?.trim() || "Click to upload";
-const defaultUploadDetail = uploadDetail?.textContent?.trim() || "Camera-roll photos accepted";
+const defaultUploadDetail =
+  uploadDetail?.textContent?.trim() ||
+  "A clear, front-facing extreme close-up photo of the child with good lighting works best.";
 const photoMimeAliases = new Map([
   ["image/jpeg", "image/jpeg"],
   ["image/jpg", "image/jpeg"],
@@ -429,7 +431,7 @@ const getPhotoValidation = () => {
     fileName,
     mimeType,
     uploadFile: null,
-    message: "Photo selected. We will prepare a fresh upload copy when you proceed to checkout.",
+    message: "Photo accepted. We will prepare a secure upload copy when you proceed to checkout.",
   };
 };
 
@@ -464,7 +466,7 @@ const preparePhotoUpload = async (validation) => {
       fileName,
       mimeType: "image/jpeg",
       uploadFile: createPhotoUploadFile(jpegBlob, "image/jpeg", fileName),
-      message: "Photo prepared successfully. It will upload as a fresh JPG for checkout.",
+      message: "Photo accepted and prepared. It will upload securely as a fresh JPG for checkout.",
     };
   } catch {
     return {
@@ -502,13 +504,13 @@ const updatePhotoUploadState = ({ showMissingError = false } = {}) => {
   uploadCard?.classList.toggle("has-error", !validation.isValid);
 
   if (uploadTitle) {
-    uploadTitle.textContent = validation.isValid ? "Photo ready" : "Photo not ready";
+    uploadTitle.textContent = validation.isValid ? "Photo accepted" : "Photo not ready";
   }
 
   if (uploadDetail) {
     const fileSize = formatPhotoFileSize(validation.file?.size);
     uploadDetail.textContent = validation.isValid
-      ? [validation.file?.name || "Selected photo", fileSize].filter(Boolean).join(" - ")
+      ? ["Accepted for your book", validation.file?.name || "Selected photo", fileSize].filter(Boolean).join(" - ")
       : validation.message;
   }
 
@@ -523,13 +525,13 @@ const showPhotoUploadResult = (validation) => {
   uploadCard?.classList.toggle("has-error", !validation.isValid);
 
   if (uploadTitle) {
-    uploadTitle.textContent = validation.isValid ? "Photo ready" : "Photo not ready";
+    uploadTitle.textContent = validation.isValid ? "Photo accepted" : "Photo not ready";
   }
 
   if (uploadDetail) {
     const fileSize = formatPhotoFileSize(validation.file?.size);
     uploadDetail.textContent = validation.isValid
-      ? [validation.file?.name || "Selected photo", fileSize].filter(Boolean).join(" - ")
+      ? ["Accepted for your book", validation.file?.name || "Selected photo", fileSize].filter(Boolean).join(" - ")
       : validation.message;
   }
 
