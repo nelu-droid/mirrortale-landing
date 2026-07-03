@@ -6391,6 +6391,282 @@ main section[id],
   }
 }
 
+/* Form readability pass: lift mobile legibility while preserving the existing storybook theme. */
+.intake-form {
+  padding: clamp(1.05rem, 2.4vw, 1.45rem);
+  border-radius: 16px;
+}
+
+.intake-form h2 {
+  margin-bottom: 0.68rem;
+}
+
+.form-reassurance {
+  max-width: 42rem;
+  font-size: clamp(0.92rem, 1.35vw, 1.02rem);
+  line-height: 1.55;
+}
+
+.form-detail-note {
+  padding: 0.9rem 1rem;
+  border-radius: 12px;
+  font-size: clamp(0.88rem, 1.25vw, 0.98rem);
+  line-height: 1.48;
+}
+
+.form-assurance-list {
+  gap: 0.72rem;
+}
+
+.form-assurance-list li {
+  min-height: 42px;
+  padding: 0.56rem 0.86rem;
+  border-radius: 18px;
+  font-size: 0.9rem;
+  line-height: 1.25;
+}
+
+.intake-form legend {
+  margin-bottom: 1.05rem;
+  font-size: clamp(1.42rem, 2.45vw, 1.8rem);
+  line-height: 1.02;
+}
+
+.intake-form label {
+  gap: 0.48rem;
+  margin-bottom: 1rem;
+  font-size: clamp(0.88rem, 1.18vw, 0.98rem);
+  line-height: 1.28;
+}
+
+.intake-form input:not([type="radio"]):not([type="checkbox"]):not([type="file"]),
+.intake-form select {
+  min-height: 44px;
+  padding-inline: 0.95rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  line-height: 1.2;
+}
+
+.intake-form textarea {
+  min-height: 88px;
+  padding: 0.78rem 0.95rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  line-height: 1.38;
+}
+
+.intake-form input::placeholder,
+.intake-form textarea::placeholder {
+  color: rgba(255, 241, 208, 0.68);
+}
+
+.form-hint {
+  margin-top: -0.05rem;
+  font-size: 0.82rem;
+  line-height: 1.42;
+}
+
+.upload-card {
+  min-height: 158px;
+  padding: 1.15rem;
+  border-radius: 14px;
+}
+
+.upload-card strong {
+  font-size: 1rem;
+  line-height: 1.2;
+}
+
+.upload-card em,
+.upload-status,
+.upload-note,
+.secure-note {
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
+.upload-cloud {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 0.65rem;
+}
+
+.package-selector {
+  gap: 0.72rem;
+}
+
+.package-selector label {
+  min-height: 68px;
+  gap: 0.72rem;
+  padding: 0.9rem 0.95rem;
+  border-radius: 13px;
+}
+
+.package-selector input {
+  width: 22px;
+  min-height: 22px;
+  height: 22px;
+}
+
+.package-selector input::before {
+  width: 10px;
+  height: 10px;
+}
+
+.package-selector strong {
+  font-size: 0.98rem;
+  line-height: 1.25;
+}
+
+.package-selector em {
+  margin-top: 0.25rem;
+  font-size: 0.86rem;
+  line-height: 1.32;
+}
+
+.consent-check {
+  grid-template-columns: 24px minmax(0, 1fr);
+  gap: 0.72rem;
+  padding: 0.95rem;
+  border-radius: 13px;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.consent-check input {
+  width: 22px;
+  min-height: 22px;
+  height: 22px;
+  margin-top: 0.05rem;
+}
+
+.checkout-reassurance {
+  padding: 0.82rem 0.95rem;
+  border-radius: 11px;
+  font-size: 0.92rem;
+  line-height: 1.38;
+}
+
+.form-status,
+.contact-status {
+  font-size: 0.84rem;
+}
+
+@media (max-width: 760px) {
+  .intake {
+    padding-block: 1.35rem 1.6rem;
+  }
+
+  .intake-form {
+    padding: clamp(1rem, 4vw, 1.18rem);
+    border-radius: 18px;
+  }
+
+  .intake-form h2 {
+    font-size: clamp(1.92rem, 8.5vw, 2.35rem);
+    line-height: 0.98;
+  }
+
+  .form-reassurance {
+    margin-bottom: 1.05rem;
+    font-size: clamp(0.95rem, 3.85vw, 1.06rem);
+    line-height: 1.52;
+  }
+
+  .form-assurance-list {
+    gap: 0.55rem;
+    margin-bottom: 1.05rem;
+  }
+
+  .form-assurance-list li {
+    min-height: 44px;
+    padding: 0.62rem 0.8rem;
+    font-size: clamp(0.88rem, 3.45vw, 0.96rem);
+  }
+
+  .form-detail-note {
+    margin-bottom: 1.45rem;
+    font-size: clamp(0.9rem, 3.45vw, 1rem);
+  }
+
+  .form-columns {
+    gap: 1.6rem;
+  }
+
+  .intake-form fieldset {
+    padding: 0;
+  }
+
+  .intake-form legend {
+    margin-bottom: 0.95rem;
+    font-size: clamp(1.62rem, 7vw, 2rem);
+  }
+
+  .intake-form label {
+    margin-bottom: 1.05rem;
+    font-size: clamp(0.95rem, 3.75vw, 1.05rem);
+  }
+
+  .intake-form input:not([type="radio"]):not([type="checkbox"]):not([type="file"]),
+  .intake-form select {
+    min-height: 50px;
+    padding-inline: 1rem;
+    border-radius: 11px;
+  }
+
+  .intake-form textarea {
+    min-height: 98px;
+    padding: 0.86rem 1rem;
+    border-radius: 11px;
+  }
+
+  .form-hint {
+    font-size: clamp(0.82rem, 3.25vw, 0.92rem);
+    line-height: 1.42;
+  }
+
+  .upload-card {
+    min-height: 176px;
+    margin-bottom: 0.72rem;
+    border-radius: 16px;
+  }
+
+  .package-selector label {
+    min-height: 76px;
+    padding: 1rem;
+  }
+
+  .consent-check {
+    margin-bottom: 0.85rem;
+    padding: 1rem;
+    font-size: clamp(0.9rem, 3.4vw, 0.98rem);
+  }
+
+  .checkout-reassurance {
+    font-size: clamp(0.9rem, 3.35vw, 0.98rem);
+  }
+}
+
+@media (max-width: 420px) {
+  .intake-form {
+    padding-inline: 0.92rem;
+  }
+
+  .form-assurance-list li {
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  .package-selector strong {
+    font-size: 0.96rem;
+  }
+
+  .package-selector em {
+    font-size: 0.84rem;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
