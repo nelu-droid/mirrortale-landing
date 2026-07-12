@@ -8,6 +8,7 @@
       content="MirrorTale creates premium personalized children's books where your child becomes the hero of a magical storybook."
     />
     <meta name="mirrortale-api-base-url" content="https://api.mirrortale.com" />
+    <meta name="ga4-measurement-id" content="G-BNKDF9J9E5" />
     <title>MirrorTale | Personalized Children's Books</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -15,9 +16,14 @@
       href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;500;700;800&family=Cormorant+Garamond:ital,wght@1,700;1,800&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,700;1,9..144,800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=header-balance-1" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css?v=analytics-consent-1" />
+    <link rel="stylesheet" href="styles/v3-home.css?v=1" />
   </head>
-  <body>
+  <body class="v3-home">
     <div class="sky-grain" aria-hidden="true"></div>
     <svg class="icon-sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
       <symbol id="icon-face" viewBox="0 0 24 24">
@@ -80,138 +86,111 @@
       </symbol>
     </svg>
 
-    <header class="site-header">
-      <div class="header-inner">
-        <a class="brand" href="#top" aria-label="MirrorTale home">
-          <span class="brand-lockup">
-            <span class="brand-word brand-mirror">Mirror</span>
-            <span class="brand-word brand-tale">Tale</span>
-          </span>
-          <span class="brand-orbit brand-emblem" aria-hidden="true">
-            <svg class="brand-emblem-svg" viewBox="0 0 64 48" focusable="false">
-              <path class="brand-emblem-mirror" d="M12.5 25.4c0-11.1 8.4-19 19.5-19s19.5 7.9 19.5 19c0 6.9-3.1 12.2-8.7 15.4H21.2c-5.6-3.2-8.7-8.5-8.7-15.4Z" />
-              <path class="brand-emblem-glow" d="M20.2 22.8c2.3-4.8 6.3-7.4 11.8-7.4s9.5 2.6 11.8 7.4" />
-              <path class="brand-emblem-page brand-emblem-page-left" d="M31.7 27.8c-5.6-3.1-10.5-3.7-15.3-2.1v11.1c4.7-1.8 9.5-1.1 15.3 2.2V27.8Z" />
-              <path class="brand-emblem-page brand-emblem-page-right" d="M32.3 27.8c5.6-3.1 10.5-3.7 15.3-2.1v11.1c-4.7-1.8-9.5-1.1-15.3 2.2V27.8Z" />
-              <path class="brand-emblem-spine" d="M32 27.7v12" />
-              <path class="brand-emblem-shine" d="M23 13.8h4.7M20.7 16.2h2.5" />
-            </svg>
-          </span>
+    <header class="v3-site-header">
+      <div class="v3-header-inner">
+        <a class="v3-brand" href="#top" aria-label="MirrorTale home">
+          <span class="v3-brand-mirror">Mirror</span><span class="v3-brand-tale">Tale</span>
         </a>
-        <nav class="main-nav" aria-label="Primary navigation">
+        <nav class="v3-nav v3-desktop-nav" aria-label="Primary navigation">
           <a href="#how-it-works"><span class="nav-full">How It Works</span><span class="nav-short">How</span></a>
           <a href="#examples"><span class="nav-full">Example Books</span><span class="nav-short">Books</span></a>
           <a href="#pricing"><span class="nav-full">Pricing</span><span class="nav-short">Pricing</span></a>
           <a href="#faq"><span class="nav-full">FAQ</span><span class="nav-short">FAQ</span></a>
         </nav>
-        <div class="header-actions">
-          <label class="site-language" for="site-language">
+        <div class="v3-header-actions">
+          <label class="v3-language" for="site-language">
             <span class="visually-hidden">Site language</span>
-            <select id="site-language" name="site-language" aria-label="Site language">
+            <select id="site-language" name="site-language" data-site-language aria-label="Site language">
               <option value="en">EN</option>
               <option value="nl">NL</option>
               <option value="fr">FR</option>
               <option value="de">DE</option>
             </select>
           </label>
-          <a class="button button-gold header-cta" href="#intake">Create My Book</a>
+          <a class="v3-button v3-header-cta" href="#intake">Create Their Book</a>
+        </div>
+        <button
+          class="v3-menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="v3-mobile-menu"
+          aria-label="Open menu"
+        >
+          <span class="material-symbols-outlined" aria-hidden="true">menu</span>
+        </button>
+      </div>
+      <div class="v3-mobile-menu" id="v3-mobile-menu" hidden>
+        <nav class="v3-nav v3-mobile-nav" aria-label="Mobile navigation">
+          <a href="#how-it-works"><span class="nav-full">How It Works</span><span class="nav-short">How</span></a>
+          <a href="#examples"><span class="nav-full">Example Books</span><span class="nav-short">Books</span></a>
+          <a href="#pricing"><span class="nav-full">Pricing</span><span class="nav-short">Pricing</span></a>
+          <a href="#faq"><span class="nav-full">FAQ</span><span class="nav-short">FAQ</span></a>
+        </nav>
+        <div class="v3-mobile-utilities">
+          <label class="v3-language v3-language-mobile" for="site-language-mobile">
+            <span>Site language</span>
+            <select id="site-language-mobile" name="site-language-mobile" data-site-language aria-label="Site language">
+              <option value="en">EN</option>
+              <option value="nl">NL</option>
+              <option value="fr">FR</option>
+              <option value="de">DE</option>
+            </select>
+          </label>
+          <div class="v3-mobile-legal">
+            <a href="privacy.html">Privacy</a>
+            <a href="terms.html">Terms</a>
+            <a href="#contact">Support</a>
+          </div>
         </div>
       </div>
     </header>
 
     <main id="top">
-      <section class="hero">
-        <div class="hero-inner section-shell">
-          <div class="hero-copy reveal">
+      <section class="v3-hero">
+        <div class="v3-hero-inner">
+          <div class="v3-hero-copy">
             <h1>
               <span>Not just their name</span>
               <span>in a story.</span>
-              <span class="headline-accent">
+              <span class="v3-headline-accent">
                 <span class="headline-piece">Their face</span>
                 <span class="headline-piece">in it.</span>
               </span>
             </h1>
-            <p class="hero-lede">
-              We take <strong>your child’s photo</strong> and illustrate a
-              <strong>storybook character who looks unmistakably like them</strong>,
-              then build a <strong>personalized adventure around their world</strong>.
+            <p class="v3-hero-lede">
+              Created from their photo, favorite things, and world—then checked by a real person before delivery.
             </p>
-            <div class="hero-actions" aria-label="Hero actions">
-              <a class="button button-gold" href="#intake">Create My Book</a>
-              <a class="button button-outline" href="#examples">See Example Books</a>
+            <div class="v3-hero-actions" aria-label="Hero actions">
+              <a class="v3-button v3-hero-primary" href="#intake">Create Their Book</a>
+              <a class="v3-text-link" href="#examples">See a real book →</a>
             </div>
+            <p class="v3-price-line">From €49 · Digital book in 24–48h</p>
+            <ul class="v3-proof-row" aria-label="Key trust points">
+              <li>
+                <svg class="v3-proof-icon" aria-hidden="true"><use href="#icon-face"></use></svg>
+                <span>Recognizable likeness</span>
+              </li>
+              <li>
+                <svg class="v3-proof-icon" aria-hidden="true"><use href="#icon-shield-check"></use></svg>
+                <span>Human-reviewed</span>
+              </li>
+              <li>
+                <svg class="v3-proof-icon" aria-hidden="true"><use href="#icon-book"></use></svg>
+                <span>Optional hardcover</span>
+              </li>
+            </ul>
           </div>
 
-          <div
-            class="hero-art reveal"
-            aria-label="Child reading a magical personalized storybook"
-            data-replace-with="provided-true-book-example"
-          >
-            <video
-              class="hero-video"
-              data-hero-video
-              poster="assets/hero-aiden-morning-bell-real.webp"
+          <figure class="v3-hero-art">
+            <img
+              class="v3-hero-image"
+              src="assets/hero-child-book.webp"
               width="1536"
               height="1024"
-              muted
-              loop
-              playsinline
-              preload="none"
-              aria-hidden="true"
-            >
-              <source data-src="assets/hero-animated.mp4" type="video/mp4" />
-              <img
-                src="assets/hero-aiden-morning-bell-real.webp"
-                width="1536"
-                height="1024"
-                alt=""
-              />
-            </video>
-            <div class="delivery-badge">
-              <span>Print edition</span>
-              <strong>available now</strong>
-              <small>tracked delivery</small>
-            </div>
-          </div>
-
-          <ul class="hero-trust reveal" aria-label="Key trust points">
-            <li>
-              <span class="trust-orb" aria-hidden="true">
-                <svg class="ui-icon trust-icon"><use href="#icon-face"></use></svg>
-              </span>
-              <span class="trust-copy">
-                <strong>Maximum likeness</strong>
-                <em>crafted from their photo</em>
-              </span>
-            </li>
-            <li>
-              <span class="trust-orb" aria-hidden="true">
-                <svg class="ui-icon trust-icon"><use href="#icon-shield-check"></use></svg>
-              </span>
-              <span class="trust-copy">
-                <strong>Human quality check</strong>
-                <em>reviewed before delivery</em>
-              </span>
-            </li>
-            <li>
-              <span class="trust-orb" aria-hidden="true">
-                <svg class="ui-icon trust-icon"><use href="#icon-clock"></use></svg>
-              </span>
-              <span class="trust-copy">
-                <strong>Digital book</strong>
-                <em>ready in 24–48h</em>
-              </span>
-            </li>
-            <li>
-              <span class="trust-orb" aria-hidden="true">
-                <svg class="ui-icon trust-icon"><use href="#icon-book"></use></svg>
-              </span>
-              <span class="trust-copy">
-                <strong>Gift-ready print edition</strong>
-                <em>a real book for their shelf</em>
-              </span>
-            </li>
-          </ul>
+              fetchpriority="high"
+              alt="Child reading a glowing storybook"
+            />
+          </figure>
         </div>
       </section>
 
@@ -232,7 +211,7 @@
               <p>Upload photo + details</p>
             </div>
           </article>
-          <span class="flow-arrow" aria-hidden="true">→</span>
+          <span class="flow-arrow material-symbols-outlined" aria-hidden="true">arrow_forward</span>
           <article class="proof-step">
             <div class="proof-image">
               <img src="assets/proof-aiden-anchor.webp" width="705" height="705" alt="Illustrated likeness of Aiden" />
@@ -242,7 +221,7 @@
               <p>Create illustrated likeness</p>
             </div>
           </article>
-          <span class="flow-arrow" aria-hidden="true">→</span>
+          <span class="flow-arrow material-symbols-outlined" aria-hidden="true">arrow_forward</span>
           <article class="proof-step">
             <div class="proof-image cover-proof real-cover-proof">
               <img src="assets/books/aiden/cover-front.webp" width="1024" height="1024" alt="Aiden Braves the Morning Bell book cover" />
@@ -252,7 +231,7 @@
               <p>Build personalized story</p>
             </div>
           </article>
-          <span class="flow-arrow" aria-hidden="true">→</span>
+          <span class="flow-arrow material-symbols-outlined" aria-hidden="true">arrow_forward</span>
           <article class="proof-step">
             <div class="proof-image">
               <img src="assets/books/aiden/page-14.webp" width="1024" height="1024" alt="Aiden soccer story scene" />
@@ -358,10 +337,9 @@
           <div class="flipbook-preview-header" aria-live="polite">
             <span class="mini-kicker">Book preview</span>
             <h3 id="active-preview-title">
-              <span class="preview-title-prefix">Now previewing</span>
               <span class="preview-title-book">Elena Stirs Up a Friendship</span>
             </h3>
-            <p id="active-preview-helper">Tap the page or swipe to turn.</p>
+            <p id="active-preview-helper">Tap or swipe to turn.</p>
           </div>
           <div class="flipbook-stage" aria-live="polite">
             <div class="pageflip-shell" id="noah-pageflip-shell">
@@ -402,7 +380,7 @@
         </div>
       </section>
 
-      <section class="moments section-shell" aria-labelledby="moments-title">
+      <section class="moments section-shell" id="moments" aria-labelledby="moments-title">
         <div class="section-title centered reveal">
           <span class="sparkline" aria-hidden="true"></span>
           <h2 id="moments-title">Made for moments parents remember</h2>
@@ -411,21 +389,21 @@
         <div class="moments-grid reveal">
           <article>
             <span class="trust-orb" aria-hidden="true">
-              <svg class="ui-icon trust-icon"><use href="#icon-clock"></use></svg>
+              <span class="material-symbols-outlined section-icon">bedtime</span>
             </span>
             <h3>Bedtime feels familiar</h3>
             <p>A custom bedtime-routine story can turn pajamas, brushing teeth, and lights-out into a gentle adventure your child recognizes.</p>
           </article>
           <article>
             <span class="trust-orb" aria-hidden="true">
-              <svg class="ui-icon trust-icon"><use href="#icon-book"></use></svg>
+              <span class="material-symbols-outlined section-icon">auto_stories</span>
             </span>
             <h3>A grandparent gift with heart</h3>
             <p>Choose the hardcover when you want a keepsake grandparents can give, read aloud, and keep in the family memory box.</p>
           </article>
           <article>
             <span class="trust-orb" aria-hidden="true">
-              <svg class="ui-icon trust-icon"><use href="#icon-face"></use></svg>
+              <span class="material-symbols-outlined section-icon">face</span>
             </span>
             <h3>A hero they recognize</h3>
             <p>The illustrated character is crafted from your child’s photo, so the story feels like theirs instead of a simple name-swap book.</p>
@@ -438,7 +416,7 @@
         <a class="button button-gold" href="#intake">Start Your Book</a>
       </section>
 
-      <section class="trust section-shell">
+      <section class="trust section-shell" id="trust">
         <div class="section-title centered reveal">
           <h2>
             Why parents choose
@@ -453,42 +431,42 @@
         <div class="trust-grid reveal">
           <article>
             <span class="trust-orb" aria-hidden="true">
-              <svg class="ui-icon trust-icon"><use href="#icon-face"></use></svg>
+              <span class="material-symbols-outlined section-icon">face</span>
             </span>
             <h3>Looks like<br />your child</h3>
             <p>Created from their real photo, not a generic avatar.</p>
           </article>
           <article>
             <span class="trust-orb" aria-hidden="true">
-              <svg class="ui-icon trust-icon"><use href="#icon-heart"></use></svg>
+              <span class="material-symbols-outlined section-icon">favorite</span>
             </span>
             <h3>Real details<br />woven in</h3>
             <p>Names, interests, and family notes shape the story.</p>
           </article>
           <article>
             <span class="trust-orb" aria-hidden="true">
-              <svg class="ui-icon trust-icon"><use href="#icon-star"></use></svg>
+              <span class="material-symbols-outlined section-icon">star</span>
             </span>
             <h3>The same child,<br />every page</h3>
             <p>Your child’s character stays recognizable throughout the book.</p>
           </article>
           <article>
             <span class="trust-orb" aria-hidden="true">
-              <svg class="ui-icon trust-icon"><use href="#icon-shield-check"></use></svg>
+              <span class="material-symbols-outlined section-icon">verified_user</span>
             </span>
             <h3>Human checked<br />before delivery</h3>
             <p>Every finished book gets a final quality review.</p>
           </article>
           <article>
             <span class="trust-orb" aria-hidden="true">
-              <svg class="ui-icon trust-icon"><use href="#icon-clock"></use></svg>
+              <span class="material-symbols-outlined section-icon">menu_book</span>
             </span>
             <h3>Premium hardcover,<br />made to keep</h3>
             <p>Choose print when you want a gift-ready treasure for their shelf.</p>
           </article>
           <article>
             <span class="trust-orb" aria-hidden="true">
-              <svg class="ui-icon trust-icon"><use href="#icon-lock"></use></svg>
+              <span class="material-symbols-outlined section-icon">lock</span>
             </span>
             <h3>Secure photo<br />handling</h3>
             <p>Your photos are used only to create the book.</p>
@@ -867,10 +845,10 @@
       </section>
     </main>
 
-    <a class="mobile-sticky-cta" href="#intake" aria-label="Create my MirrorTale book">
+    <a class="v3-mobile-sticky-cta" href="#intake" aria-label="Create my MirrorTale book">
       <span>
-        <strong>Create My Book</strong>
-        <em>Takes about 2 minutes</em>
+        <strong>Create Their Book</strong>
+        <em>From €49</em>
       </span>
       <svg class="ui-icon" aria-hidden="true"><use href="#icon-arrow"></use></svg>
     </a>
@@ -889,7 +867,8 @@
       <p>© 2026 MirrorTale. All rights reserved.</p>
     </footer>
 
+    <script src="analytics.js?v=ga4-consent-1"></script>
     <script src="assets/vendor/page-flip.browser.js"></script>
-    <script src="script.js?v=site-language-1"></script>
+    <script src="script.js?v=site-language-analytics-1"></script>
   </body>
 </html>

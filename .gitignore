@@ -16,6 +16,7 @@ __pycache__/
 *.pyc
 .cache/
 .parcel-cache/
+.firebase/
 dist/
 build/
 
@@ -29,6 +30,12 @@ yarn-error.log*
 # Local visual QA artifacts
 assets/test-render/
 
-# Generated organic social batches
+# Generated organic social batches. Defaults live outside this repo at
+# ../marketing-output/, but keep these ignored if a script is overridden locally.
 marketing-automation/output/
 marketing-automation/.cache/
+marketing-output/
+marketing-automation/intake/
+marketing-automation/plans/*.md
+!marketing-automation/plans/README.md
+!marketing-automation/plans/.gitkeep

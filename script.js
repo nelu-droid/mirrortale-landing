@@ -1,11 +1,15 @@
 const reveals = document.querySelectorAll(".reveal");
-const header = document.querySelector(".site-header");
+const header = document.querySelector(".v3-site-header");
 const form = document.querySelector(".intake-form");
 const intakeSection = document.querySelector("#intake");
 const contactForm = document.querySelector(".contact-form");
 const contactSection = document.querySelector("#contact");
 const pricingSection = document.querySelector("#pricing");
-const mobileStickyCta = document.querySelector(".mobile-sticky-cta");
+const finalCtaSection = document.querySelector(".cta-strip");
+const heroPrimaryCta = document.querySelector(".v3-hero-primary");
+const mobileStickyCta = document.querySelector(".v3-mobile-sticky-cta");
+const mobileMenuToggle = document.querySelector(".v3-menu-toggle");
+const mobileMenu = document.querySelector("#v3-mobile-menu");
 const packageOptions = document.querySelectorAll(".package-selector label");
 const packageTargetButtons = document.querySelectorAll("[data-package-target]");
 const exampleBooks = document.querySelectorAll(".example-book[data-book-slot]");
@@ -15,7 +19,7 @@ const uploadCard = orderPhotoInput?.closest(".upload-card");
 const uploadTitle = uploadCard?.querySelector("[data-upload-title]");
 const uploadDetail = uploadCard?.querySelector("[data-upload-detail]");
 const uploadStatus = form?.querySelector("[data-upload-status]");
-const siteLanguageSelect = document.querySelector("#site-language");
+const siteLanguageSelects = Array.from(document.querySelectorAll("[data-site-language]"));
 const mobileStickyCtaMedia = window.matchMedia("(max-width: 760px)");
 const normalizeApiBaseUrl = (value) => String(value || "").trim().replace(/\/+$/, "");
 const siteConfig = {
@@ -24,6 +28,13 @@ const siteConfig = {
       document.querySelector('meta[name="mirrortale-api-base-url"]')?.content
   ),
 };
+const trackAnalyticsEvent = (eventName, params = {}) => {
+  window.mirrortaleAnalytics?.track?.(eventName, params);
+};
+const getSelectedPackageValue = () =>
+  form?.querySelector('input[name="package"]:checked')?.value || "";
+const getSelectedBookLanguage = () =>
+  form?.querySelector('select[name="book-language"]')?.value || "";
 const apiEndpoints = {
   orders: "/orders",
   contact: "/contact",
@@ -40,23 +51,28 @@ const siteLanguageCopy = {
     "nav.examples.short": "Books",
     "nav.pricing": "Pricing",
     "nav.faq": "FAQ",
-    "cta.create": "Create My Book",
-    "cta.examples": "See Example Books",
+    "nav.menu.open": "Open menu",
+    "nav.menu.close": "Close menu",
+    "nav.support": "Support",
+    "cta.create": "Create Their Book",
+    "cta.examples": "See a real book →",
     "hero.title.1": "Not just their name",
     "hero.title.2": "in a story.",
     "hero.title.3a": "Their face",
     "hero.title.3b": "in it.",
-    "hero.lede": "We take <strong>your child's photo</strong> and illustrate a <strong>storybook character who looks unmistakably like them</strong>, then build a <strong>personalized adventure around their world</strong>.",
+    "hero.lede": "Created from their photo, favorite things, and world—then checked by a real person before delivery.",
+    "hero.price": "From €49 · Digital book in 24–48h",
+    "hero.art.alt": "Child reading a glowing storybook",
     "hero.badge.print": "Print edition",
     "hero.badge.available": "available now",
     "hero.badge.tracked": "tracked delivery",
-    "hero.trust.1.title": "Maximum likeness",
+    "hero.trust.1.title": "Recognizable likeness",
     "hero.trust.1.detail": "crafted from their photo",
-    "hero.trust.2.title": "Human quality check",
+    "hero.trust.2.title": "Human-reviewed",
     "hero.trust.2.detail": "reviewed before delivery",
     "hero.trust.3.title": "Digital book",
     "hero.trust.3.detail": "ready in 24-48h",
-    "hero.trust.4.title": "Gift-ready print edition",
+    "hero.trust.4.title": "Optional hardcover",
     "hero.trust.4.detail": "a real book for their shelf",
     "process.title": "From photo to finished <span class=\"title-accent title-accent-storybook\">storybook</span>",
     "process.step.1": "Upload photo + details",
@@ -69,8 +85,8 @@ const siteLanguageCopy = {
     "examples.instruction": "Click or tap any cover to open the interactive book preview below.",
     "preview.kicker": "Book preview",
     "preview.prefix": "Now previewing",
-    "preview.helper": "Tap the page or swipe to turn.",
-    "preview.coverHelper": "Tap the cover to open, then swipe or tap to turn.",
+    "preview.helper": "Tap or swipe to turn.",
+    "preview.coverHelper": "Tap or swipe to open.",
     "preview.badge.active": "Previewing",
     "preview.badge.inactive": "Tap to preview",
     "preview.mobile.cover": "Cover",
@@ -218,8 +234,8 @@ const siteLanguageCopy = {
     "status.contact.sending.message": "Sending your message securely...",
     "status.contact.sent.button": "Message sent",
     "status.contact.sent.message": "Thanks. We will reply by email soon.",
-    "sticky.aria": "Create my MirrorTale book",
-    "sticky.detail": "Takes about 2 minutes",
+    "sticky.aria": "Create their MirrorTale book",
+    "sticky.detail": "From €49",
     "footer.secure": "Secure & Private",
     "footer.care": "Made with Care",
     "footer.fast": "Fast Digital Delivery",
@@ -237,23 +253,28 @@ const siteLanguageCopy = {
     "nav.examples.short": "Boeken",
     "nav.pricing": "Prijzen",
     "nav.faq": "FAQ",
-    "cta.create": "Maak mijn boek",
-    "cta.examples": "Bekijk voorbeelden",
+    "nav.menu.open": "Menu openen",
+    "nav.menu.close": "Menu sluiten",
+    "nav.support": "Hulp",
+    "cta.create": "Maak hun boek",
+    "cta.examples": "Bekijk een echt boek →",
     "hero.title.1": "Niet alleen hun naam",
     "hero.title.2": "in een verhaal.",
     "hero.title.3a": "Hun gezicht",
     "hero.title.3b": "erin.",
-    "hero.lede": "We gebruiken <strong>de foto van je kind</strong> en maken een <strong>verhalenboekpersonage dat duidelijk op hen lijkt</strong>, daarna bouwen we een <strong>persoonlijk avontuur rond hun wereld</strong>.",
+    "hero.lede": "Gemaakt vanuit hun foto, favoriete dingen en wereld—en vóór levering nagekeken door een echte persoon.",
+    "hero.price": "Vanaf €49 · Digitaal boek in 24–48u",
+    "hero.art.alt": "Kind dat een stralend verhalenboek leest",
     "hero.badge.print": "Printed editie",
     "hero.badge.available": "nu beschikbaar",
     "hero.badge.tracked": "verzending met tracking",
-    "hero.trust.1.title": "Maximale gelijkenis",
+    "hero.trust.1.title": "Herkenbare gelijkenis",
     "hero.trust.1.detail": "gemaakt vanuit hun foto",
-    "hero.trust.2.title": "Menselijke kwaliteitscheck",
+    "hero.trust.2.title": "Menselijk nagekeken",
     "hero.trust.2.detail": "nagekeken voor levering",
     "hero.trust.3.title": "Digitaal boek",
     "hero.trust.3.detail": "klaar in 24-48u",
-    "hero.trust.4.title": "Cadeauklare printed editie",
+    "hero.trust.4.title": "Optionele hardcover",
     "hero.trust.4.detail": "een echt boek voor de boekenplank",
     "process.title": "Van foto tot afgewerkt <span class=\"title-accent title-accent-storybook\">verhalenboek</span>",
     "process.step.1": "Upload foto + details",
@@ -266,8 +287,8 @@ const siteLanguageCopy = {
     "examples.instruction": "Klik of tik op een cover om het interactieve boekvoorbeeld hieronder te openen.",
     "preview.kicker": "Boekvoorbeeld",
     "preview.prefix": "Je bekijkt nu",
-    "preview.helper": "Tik op de pagina of swipe om te bladeren.",
-    "preview.coverHelper": "Tik op de cover om te openen, daarna swipe of tik je verder.",
+    "preview.helper": "Tik of swipe om te bladeren.",
+    "preview.coverHelper": "Tik of swipe om te openen.",
     "preview.badge.active": "Wordt bekeken",
     "preview.badge.inactive": "Tik voor preview",
     "preview.mobile.cover": "Cover",
@@ -415,8 +436,8 @@ const siteLanguageCopy = {
     "status.contact.sending.message": "Je bericht wordt veilig verstuurd...",
     "status.contact.sent.button": "Bericht verstuurd",
     "status.contact.sent.message": "Dank je. We antwoorden binnenkort per e-mail.",
-    "sticky.aria": "Maak mijn MirrorTale-boek",
-    "sticky.detail": "Duurt ongeveer 2 minuten",
+    "sticky.aria": "Maak hun MirrorTale-boek",
+    "sticky.detail": "Vanaf €49",
     "footer.secure": "Veilig & privé",
     "footer.care": "Met zorg gemaakt",
     "footer.fast": "Snelle digitale levering",
@@ -434,23 +455,28 @@ const siteLanguageCopy = {
     "nav.examples.short": "Livres",
     "nav.pricing": "Prix",
     "nav.faq": "FAQ",
-    "cta.create": "Créer mon livre",
-    "cta.examples": "Voir des exemples",
+    "nav.menu.open": "Ouvrir le menu",
+    "nav.menu.close": "Fermer le menu",
+    "nav.support": "Assistance",
+    "cta.create": "Créer leur livre",
+    "cta.examples": "Voir un vrai livre →",
     "hero.title.1": "Pas seulement leur nom",
     "hero.title.2": "dans une histoire.",
     "hero.title.3a": "Leur visage",
     "hero.title.3b": "dedans.",
-    "hero.lede": "Nous utilisons <strong>la photo de votre enfant</strong> pour illustrer un <strong>personnage de livre qui lui ressemble vraiment</strong>, puis nous créons une <strong>aventure personnalisée autour de son univers</strong>.",
+    "hero.lede": "Créé à partir de leur photo, de leurs passions et de leur univers—puis vérifié par une vraie personne avant livraison.",
+    "hero.price": "À partir de 49 € · Livre numérique en 24–48 h",
+    "hero.art.alt": "Enfant lisant un livre lumineux",
     "hero.badge.print": "Édition imprimée",
     "hero.badge.available": "disponible maintenant",
     "hero.badge.tracked": "livraison suivie",
-    "hero.trust.1.title": "Ressemblance maximale",
+    "hero.trust.1.title": "Ressemblance reconnaissable",
     "hero.trust.1.detail": "créée à partir de sa photo",
-    "hero.trust.2.title": "Contrôle qualité humain",
+    "hero.trust.2.title": "Vérifié par une personne",
     "hero.trust.2.detail": "vérifié avant livraison",
     "hero.trust.3.title": "Livre numérique",
     "hero.trust.3.detail": "prêt en 24-48h",
-    "hero.trust.4.title": "Édition imprimée prête à offrir",
+    "hero.trust.4.title": "Couverture rigide en option",
     "hero.trust.4.detail": "un vrai livre pour sa bibliothèque",
     "process.title": "De la photo au <span class=\"title-accent title-accent-storybook\">livre illustré</span> fini",
     "process.step.1": "Ajoutez photo + détails",
@@ -463,8 +489,8 @@ const siteLanguageCopy = {
     "examples.instruction": "Cliquez ou touchez une couverture pour ouvrir l'aperçu interactif ci-dessous.",
     "preview.kicker": "Aperçu du livre",
     "preview.prefix": "Aperçu en cours",
-    "preview.helper": "Touchez la page ou balayez pour tourner.",
-    "preview.coverHelper": "Touchez la couverture pour ouvrir, puis balayez ou touchez pour tourner.",
+    "preview.helper": "Touchez ou balayez pour tourner.",
+    "preview.coverHelper": "Touchez ou balayez pour ouvrir.",
     "preview.badge.active": "En aperçu",
     "preview.badge.inactive": "Voir l'aperçu",
     "preview.mobile.cover": "Couverture",
@@ -612,8 +638,8 @@ const siteLanguageCopy = {
     "status.contact.sending.message": "Envoi sécurisé de votre message...",
     "status.contact.sent.button": "Message envoyé",
     "status.contact.sent.message": "Merci. Nous répondrons bientôt par e-mail.",
-    "sticky.aria": "Créer mon livre MirrorTale",
-    "sticky.detail": "Environ 2 minutes",
+    "sticky.aria": "Créer leur livre MirrorTale",
+    "sticky.detail": "À partir de 49 €",
     "footer.secure": "Sécurisé & privé",
     "footer.care": "Créé avec soin",
     "footer.fast": "Livraison numérique rapide",
@@ -631,23 +657,28 @@ const siteLanguageCopy = {
     "nav.examples.short": "Bücher",
     "nav.pricing": "Preise",
     "nav.faq": "FAQ",
-    "cta.create": "Mein Buch erstellen",
-    "cta.examples": "Beispiele ansehen",
+    "nav.menu.open": "Menü öffnen",
+    "nav.menu.close": "Menü schließen",
+    "nav.support": "Hilfe",
+    "cta.create": "Ihr Buch erstellen",
+    "cta.examples": "Ein echtes Buch ansehen →",
     "hero.title.1": "Nicht nur ihr Name",
     "hero.title.2": "in einer Geschichte.",
     "hero.title.3a": "Ihr Gesicht",
     "hero.title.3b": "darin.",
-    "hero.lede": "Wir nehmen <strong>das Foto Ihres Kindes</strong> und gestalten eine <strong>Bilderbuchfigur, die ihm unverkennbar ähnelt</strong>. Daraus entsteht ein <strong>personalisiertes Abenteuer rund um seine Welt</strong>.",
+    "hero.lede": "Erstellt aus ihrem Foto, ihren Lieblingsdingen und ihrer Welt—und vor der Lieferung von einem Menschen geprüft.",
+    "hero.price": "Ab 49 € · Digitales Buch in 24–48 Std.",
+    "hero.art.alt": "Kind liest ein leuchtendes Bilderbuch",
     "hero.badge.print": "Druckausgabe",
     "hero.badge.available": "jetzt verfügbar",
     "hero.badge.tracked": "Sendungsverfolgung",
-    "hero.trust.1.title": "Maximale Ähnlichkeit",
+    "hero.trust.1.title": "Wiedererkennbare Ähnlichkeit",
     "hero.trust.1.detail": "aus dem Foto erstellt",
-    "hero.trust.2.title": "Menschliche Qualitätsprüfung",
+    "hero.trust.2.title": "Von Menschen geprüft",
     "hero.trust.2.detail": "vor Lieferung geprüft",
     "hero.trust.3.title": "Digitales Buch",
     "hero.trust.3.detail": "bereit in 24-48h",
-    "hero.trust.4.title": "Geschenkfertige Druckausgabe",
+    "hero.trust.4.title": "Optionales Hardcover",
     "hero.trust.4.detail": "ein echtes Buch fürs Regal",
     "process.title": "Vom Foto zum fertigen <span class=\"title-accent title-accent-storybook\">Bilderbuch</span>",
     "process.step.1": "Foto + Details hochladen",
@@ -660,8 +691,8 @@ const siteLanguageCopy = {
     "examples.instruction": "Klicken oder tippen Sie auf ein Cover, um die interaktive Buchvorschau unten zu öffnen.",
     "preview.kicker": "Buchvorschau",
     "preview.prefix": "Aktuelle Vorschau",
-    "preview.helper": "Tippen oder wischen Sie, um umzublättern.",
-    "preview.coverHelper": "Tippen Sie auf das Cover, danach wischen oder tippen Sie weiter.",
+    "preview.helper": "Tippen oder wischen zum Blättern.",
+    "preview.coverHelper": "Tippen oder wischen zum Öffnen.",
     "preview.badge.active": "Vorschau aktiv",
     "preview.badge.inactive": "Vorschau öffnen",
     "preview.mobile.cover": "Cover",
@@ -809,8 +840,8 @@ const siteLanguageCopy = {
     "status.contact.sending.message": "Ihre Nachricht wird sicher gesendet...",
     "status.contact.sent.button": "Nachricht gesendet",
     "status.contact.sent.message": "Danke. Wir antworten bald per E-Mail.",
-    "sticky.aria": "Mein MirrorTale-Buch erstellen",
-    "sticky.detail": "Dauert etwa 2 Minuten",
+    "sticky.aria": "Ihr MirrorTale-Buch erstellen",
+    "sticky.detail": "Ab 49 €",
     "footer.secure": "Sicher & privat",
     "footer.care": "Mit Sorgfalt erstellt",
     "footer.fast": "Schnelle digitale Lieferung",
@@ -822,32 +853,26 @@ const siteLanguageCopy = {
 };
 
 const siteLanguageBindings = [
-  { key: "site.language.aria", selector: ".site-language .visually-hidden" },
-  { key: "site.language.aria", selector: "#site-language", attr: "aria-label" },
-  { key: "nav.how.full", selector: '.main-nav a[href="#how-it-works"] .nav-full' },
-  { key: "nav.how.short", selector: '.main-nav a[href="#how-it-works"] .nav-short' },
-  { key: "nav.examples.full", selector: '.main-nav a[href="#examples"] .nav-full' },
-  { key: "nav.examples.short", selector: '.main-nav a[href="#examples"] .nav-short' },
-  { key: "nav.pricing", selector: '.main-nav a[href="#pricing"] .nav-full, .main-nav a[href="#pricing"] .nav-short' },
-  { key: "nav.faq", selector: '.main-nav a[href="#faq"] .nav-full, .main-nav a[href="#faq"] .nav-short' },
-  { key: "cta.create", selector: ".header-cta, .hero-actions .button-gold, .mobile-sticky-cta strong" },
-  { key: "cta.examples", selector: '.hero-actions .button-outline[href="#examples"]' },
-  { key: "hero.title.1", selector: ".hero-copy h1 > span:nth-child(1)" },
-  { key: "hero.title.2", selector: ".hero-copy h1 > span:nth-child(2)" },
+  { key: "site.language.aria", selector: ".v3-language .visually-hidden, .v3-language-mobile > span" },
+  { key: "site.language.aria", selector: "[data-site-language]", attr: "aria-label" },
+  { key: "nav.how.full", selector: '.v3-nav a[href="#how-it-works"] .nav-full' },
+  { key: "nav.how.short", selector: '.v3-nav a[href="#how-it-works"] .nav-short' },
+  { key: "nav.examples.full", selector: '.v3-nav a[href="#examples"] .nav-full' },
+  { key: "nav.examples.short", selector: '.v3-nav a[href="#examples"] .nav-short' },
+  { key: "nav.pricing", selector: '.v3-nav a[href="#pricing"] .nav-full, .v3-nav a[href="#pricing"] .nav-short' },
+  { key: "nav.faq", selector: '.v3-nav a[href="#faq"] .nav-full, .v3-nav a[href="#faq"] .nav-short' },
+  { key: "cta.create", selector: ".v3-header-cta, .v3-hero-primary, .v3-mobile-sticky-cta strong" },
+  { key: "cta.examples", selector: '.v3-text-link[href="#examples"]' },
+  { key: "hero.title.1", selector: ".v3-hero-copy h1 > span:nth-child(1)" },
+  { key: "hero.title.2", selector: ".v3-hero-copy h1 > span:nth-child(2)" },
   { key: "hero.title.3a", selector: ".headline-piece:nth-child(1)" },
   { key: "hero.title.3b", selector: ".headline-piece:nth-child(2)" },
-  { key: "hero.lede", selector: ".hero-lede", html: true },
-  { key: "hero.badge.print", selector: ".delivery-badge span" },
-  { key: "hero.badge.available", selector: ".delivery-badge strong" },
-  { key: "hero.badge.tracked", selector: ".delivery-badge small" },
-  { key: "hero.trust.1.title", selector: ".hero-trust li:nth-child(1) .trust-copy strong" },
-  { key: "hero.trust.1.detail", selector: ".hero-trust li:nth-child(1) .trust-copy em" },
-  { key: "hero.trust.2.title", selector: ".hero-trust li:nth-child(2) .trust-copy strong" },
-  { key: "hero.trust.2.detail", selector: ".hero-trust li:nth-child(2) .trust-copy em" },
-  { key: "hero.trust.3.title", selector: ".hero-trust li:nth-child(3) .trust-copy strong" },
-  { key: "hero.trust.3.detail", selector: ".hero-trust li:nth-child(3) .trust-copy em" },
-  { key: "hero.trust.4.title", selector: ".hero-trust li:nth-child(4) .trust-copy strong" },
-  { key: "hero.trust.4.detail", selector: ".hero-trust li:nth-child(4) .trust-copy em" },
+  { key: "hero.lede", selector: ".v3-hero-lede" },
+  { key: "hero.price", selector: ".v3-price-line" },
+  { key: "hero.art.alt", selector: ".v3-hero-image", attr: "alt" },
+  { key: "hero.trust.1.title", selector: ".v3-proof-row li:nth-child(1) span" },
+  { key: "hero.trust.2.title", selector: ".v3-proof-row li:nth-child(2) span" },
+  { key: "hero.trust.4.title", selector: ".v3-proof-row li:nth-child(3) span" },
   { key: "process.title", selector: "#how-it-works .section-title h2", html: true },
   { key: "process.step.1", selector: ".proof-step:nth-of-type(1) .proof-caption p" },
   { key: "process.step.2", selector: ".proof-step:nth-of-type(2) .proof-caption p" },
@@ -972,8 +997,11 @@ const siteLanguageBindings = [
   { key: "contact.message.placeholder", selector: 'textarea[name="contact-message"]', attr: "placeholder" },
   { key: "contact.submit", selector: ".contact-submit" },
   { key: "contact.note", selector: ".contact-note" },
-  { key: "sticky.aria", selector: ".mobile-sticky-cta", attr: "aria-label" },
-  { key: "sticky.detail", selector: ".mobile-sticky-cta em" },
+  { key: "sticky.aria", selector: ".v3-mobile-sticky-cta", attr: "aria-label" },
+  { key: "sticky.detail", selector: ".v3-mobile-sticky-cta em" },
+  { key: "nav.support", selector: '.v3-mobile-legal a[href="#contact"]' },
+  { key: "footer.privacy", selector: '.v3-mobile-legal a[href="privacy.html"]' },
+  { key: "footer.terms", selector: '.v3-mobile-legal a[href="terms.html"]' },
   { key: "footer.secure", selector: ".footer-inner span:nth-child(1)", trailingText: true },
   { key: "footer.care", selector: ".footer-inner span:nth-child(2)", trailingText: true },
   { key: "footer.fast", selector: ".footer-inner span:nth-child(3)", trailingText: true },
@@ -1003,6 +1031,28 @@ let currentSiteLanguage = getInitialSiteLanguage();
 
 const getSiteCopy = (key, language = currentSiteLanguage) =>
   siteLanguageCopy[language]?.[key] || siteLanguageCopy.en[key] || "";
+
+const syncMobileMenuLabel = () => {
+  if (!mobileMenuToggle) return;
+
+  const isOpen = Boolean(mobileMenu && !mobileMenu.hidden);
+  const label = getSiteCopy(isOpen ? "nav.menu.close" : "nav.menu.open");
+  mobileMenuToggle.setAttribute("aria-label", label);
+  mobileMenuToggle.setAttribute("aria-expanded", String(isOpen));
+
+  const icon = mobileMenuToggle.querySelector(".material-symbols-outlined");
+  if (icon) icon.textContent = isOpen ? "close" : "menu";
+};
+
+const setMobileMenuOpen = (isOpen, { restoreFocus = false } = {}) => {
+  if (!mobileMenu || !mobileMenuToggle) return;
+
+  mobileMenu.hidden = !isOpen;
+  document.body.classList.toggle("v3-menu-open", isOpen);
+  syncMobileMenuLabel();
+
+  if (restoreFocus) mobileMenuToggle.focus();
+};
 
 const setLabelPrefix = (controlSelector, value) => {
   const label = document.querySelector(controlSelector)?.closest("label");
@@ -1083,7 +1133,11 @@ const applySiteLanguageBindings = () => {
 
 const setSiteLanguage = (language, { persist = true } = {}) => {
   currentSiteLanguage = normalizeSiteLanguage(language);
-  if (siteLanguageSelect) siteLanguageSelect.value = currentSiteLanguage;
+  siteLanguageSelects.forEach((select) => {
+    select.value = currentSiteLanguage;
+  });
+
+  syncMobileMenuLabel();
 
   if (persist) {
     try {
@@ -1852,9 +1906,21 @@ const updateMobileStickyCta = () => {
       pricingRect.top < window.innerHeight * 0.82 &&
       pricingRect.bottom > window.innerHeight * 0.18
   );
+  const finalCtaRect = finalCtaSection?.getBoundingClientRect();
+  const finalCtaIsVisible = Boolean(
+    finalCtaRect &&
+      finalCtaRect.top < window.innerHeight * 0.82 &&
+      finalCtaRect.bottom > window.innerHeight * 0.18
+  );
+  const heroCtaRect = heroPrimaryCta?.getBoundingClientRect();
+  const heroCtaHasLeftViewport = Boolean(
+    heroCtaRect && heroCtaRect.bottom < (header?.offsetHeight || 64)
+  );
   const shouldShow =
     mobileStickyCtaMedia.matches &&
-    window.scrollY > 280 &&
+    heroCtaHasLeftViewport &&
+    !document.body.classList.contains("v3-menu-open") &&
+    !finalCtaIsVisible &&
     !pricingIsVisible &&
     !intakeIsVisible &&
     !contactIsVisible;
@@ -1862,7 +1928,7 @@ const updateMobileStickyCta = () => {
   mobileStickyCta.classList.toggle("is-visible", shouldShow);
   mobileStickyCta.classList.toggle(
     "is-near-intake",
-    pricingIsVisible || intakeIsVisible || contactIsVisible
+    finalCtaIsVisible || pricingIsVisible || intakeIsVisible || contactIsVisible
   );
   document.body.classList.toggle("has-mobile-sticky-cta", shouldShow);
 };
@@ -1881,6 +1947,30 @@ if (mobileStickyCtaMedia.addEventListener) {
 } else {
   mobileStickyCtaMedia.addListener(scheduleMobileStickyCtaUpdate);
 }
+
+mobileMenuToggle?.addEventListener("click", () => {
+  setMobileMenuOpen(Boolean(mobileMenu?.hidden));
+  scheduleMobileStickyCtaUpdate();
+});
+
+mobileMenu?.querySelectorAll("a").forEach((link) => {
+  link.addEventListener("click", () => {
+    setMobileMenuOpen(false);
+    scheduleMobileStickyCtaUpdate();
+  });
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key !== "Escape" || mobileMenu?.hidden) return;
+  setMobileMenuOpen(false, { restoreFocus: true });
+  scheduleMobileStickyCtaUpdate();
+});
+
+window.addEventListener("resize", () => {
+  if (window.innerWidth > 900 && mobileMenu && !mobileMenu.hidden) {
+    setMobileMenuOpen(false);
+  }
+});
 
 document.querySelectorAll(".faq-list details").forEach((detail) => {
   detail.addEventListener("toggle", () => {
@@ -1915,13 +2005,32 @@ const selectPackage = (packageValue) => {
 };
 
 packageOptions.forEach((option) => {
-  option.addEventListener("change", updateSelectedPackage);
+  option.addEventListener("change", (event) => {
+    updateSelectedPackage();
+
+    const input = event.target?.matches?.('input[name="package"]')
+      ? event.target
+      : option.querySelector('input[name="package"]');
+
+    if (input?.checked) {
+      trackAnalyticsEvent("package_selected", {
+        package: input.value,
+        site_language: currentSiteLanguage,
+      });
+    }
+  });
 });
 
 updateSelectedPackage();
 
 orderPhotoInput?.addEventListener("change", () => {
-  updatePhotoUploadState();
+  const validation = updatePhotoUploadState();
+  if (validation.isValid) {
+    trackAnalyticsEvent("photo_selected", {
+      photo_type: getPhotoMimeType(validation.file) || "unknown",
+      photo_size_mb: Number((validation.file.size / (1024 * 1024)).toFixed(2)),
+    });
+  }
 });
 
 orderPhotoInput?.addEventListener("cancel", () => {
@@ -1938,6 +2047,11 @@ window.addEventListener("pageshow", () => {
 
 packageTargetButtons.forEach((button) => {
   button.addEventListener("click", () => {
+    trackAnalyticsEvent("package_cta_click", {
+      package: button.dataset.packageTarget,
+      location: button.closest("section[id]")?.id || "pricing",
+      site_language: currentSiteLanguage,
+    });
     selectPackage(button.dataset.packageTarget);
   });
 });
@@ -2138,6 +2252,12 @@ const goToMobilePage = (nextIndex) => {
   const direction = boundedIndex > activeMobilePageIndex ? 1 : -1;
   activeMobilePageIndex = boundedIndex;
   renderMobileReader(direction);
+  trackAnalyticsEvent("book_preview_page_turned", {
+    book: activeBook.key,
+    direction: direction > 0 ? "next" : "previous",
+    page_index: activeMobilePageIndex,
+    preview_mode: "mobile",
+  });
 };
 
 const handleMobileReaderClick = (event) => {
@@ -2244,6 +2364,12 @@ const goToBookView = (nextIndex, options = {}) => {
   const direction = nextIndex > activeViewIndex ? 1 : -1;
   activeViewIndex = nextIndex;
   updateFlipbook();
+  trackAnalyticsEvent("book_preview_page_turned", {
+    book: activeBook.key,
+    direction: direction > 0 ? "next" : "previous",
+    view_index: activeViewIndex,
+    preview_mode: "desktop",
+  });
 
   if (syncPageFlip) syncPageFlipToView(nextIndex, direction, previousIndex);
 };
@@ -2255,6 +2381,11 @@ document.querySelectorAll("[data-preview-target]").forEach((trigger) => {
 
     event.preventDefault();
     const selectedBookKey = trigger.dataset.bookKey || "noah";
+    trackAnalyticsEvent("book_preview_opened", {
+      book: selectedBookKey,
+      location: trigger.closest("section[id]")?.id || "examples",
+      site_language: currentSiteLanguage,
+    });
     const nextUrl = new URL(window.location.href);
     nextUrl.searchParams.set("book", selectedBookKey);
     nextUrl.hash = target.id;
@@ -2437,8 +2568,13 @@ if (flipbook.viewer) {
   }
 }
 
-siteLanguageSelect?.addEventListener("change", () => {
-  setSiteLanguage(siteLanguageSelect.value);
+siteLanguageSelects.forEach((select) => {
+  select.addEventListener("change", () => {
+    setSiteLanguage(select.value);
+    trackAnalyticsEvent("language_changed", {
+      site_language: currentSiteLanguage,
+    });
+  });
 });
 
 setSiteLanguage(currentSiteLanguage, { persist: false });
@@ -2455,12 +2591,25 @@ form?.addEventListener("submit", async (event) => {
   const photoValidation = updatePhotoUploadState({ showMissingError: true });
 
   if (!photoValidation.isValid) {
+    trackAnalyticsEvent("checkout_validation_error", {
+      reason: "photo_invalid",
+      package: getSelectedPackageValue(),
+      site_language: currentSiteLanguage,
+    });
     setFormStatus(statusElement, photoValidation.message, "error");
     orderPhotoInput?.focus();
     return;
   }
 
+  const checkoutAnalyticsParams = {
+    package: getSelectedPackageValue(),
+    book_language: getSelectedBookLanguage(),
+    site_language: currentSiteLanguage,
+  };
+  trackAnalyticsEvent("checkout_started", checkoutAnalyticsParams);
+
   if (!ordersUrl) {
+    trackAnalyticsEvent("checkout_mocked", checkoutAnalyticsParams);
     setSubmitState(button, getSiteCopy("status.checkout.mock.button"));
     setFormStatus(
       statusElement,
@@ -2507,11 +2656,13 @@ form?.addEventListener("submit", async (event) => {
     setSubmitState(button, getSiteCopy("status.checkout.ready.button"));
 
     if (payload.checkoutUrl) {
+      trackAnalyticsEvent("checkout_redirected", checkoutAnalyticsParams);
       setFormStatus(statusElement, getSiteCopy("status.checkout.opening"), "success");
       window.location.assign(payload.checkoutUrl);
       return;
     }
 
+    trackAnalyticsEvent("checkout_request_saved", checkoutAnalyticsParams);
     setFormStatus(statusElement, getSiteCopy("status.checkout.saved"), "success");
 
     window.setTimeout(() => {
@@ -2519,6 +2670,10 @@ form?.addEventListener("submit", async (event) => {
       button.classList.remove("is-complete");
     }, 3200);
   } catch (error) {
+    trackAnalyticsEvent("checkout_error", {
+      ...checkoutAnalyticsParams,
+      error_type: error.name || "Error",
+    });
     setSubmitState(button, getSiteCopy("status.tryAgain"));
     setFormStatus(statusElement, error.message, "error");
 
@@ -2537,8 +2692,14 @@ contactForm?.addEventListener("submit", async (event) => {
   const statusElement = contactForm.querySelector(".contact-status");
   const originalText = getButtonText(button);
   const contactUrl = buildApiUrl(apiEndpoints.contact);
+  trackAnalyticsEvent("contact_form_submitted", {
+    site_language: currentSiteLanguage,
+  });
 
   if (!contactUrl) {
+    trackAnalyticsEvent("contact_form_mocked", {
+      site_language: currentSiteLanguage,
+    });
     setSubmitState(button, getSiteCopy("status.contact.mock.button"));
     setFormStatus(
       statusElement,
@@ -2574,6 +2735,9 @@ contactForm?.addEventListener("submit", async (event) => {
 
     setSubmitState(button, getSiteCopy("status.contact.sent.button"));
     setFormStatus(statusElement, getSiteCopy("status.contact.sent.message"), "success");
+    trackAnalyticsEvent("contact_form_sent", {
+      site_language: currentSiteLanguage,
+    });
     button.classList.add("is-complete");
 
     window.setTimeout(() => {
@@ -2583,6 +2747,10 @@ contactForm?.addEventListener("submit", async (event) => {
       clearFormStatusSoon(statusElement);
     }, 2600);
   } catch (error) {
+    trackAnalyticsEvent("contact_form_error", {
+      error_type: error.name || "Error",
+      site_language: currentSiteLanguage,
+    });
     setSubmitState(button, getSiteCopy("status.tryAgain"));
     setFormStatus(statusElement, error.message, "error");
 
