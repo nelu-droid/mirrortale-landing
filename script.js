@@ -39,7 +39,7 @@ const apiEndpoints = {
   orders: "/orders",
   contact: "/contact",
 };
-const supportedSiteLanguages = ["en", "nl", "fr", "de"];
+const supportedSiteLanguages = ["en"];
 const siteLanguageStorageKey = "mirrortale-site-language-v1";
 const siteLanguageCopy = {
   en: {
@@ -56,11 +56,11 @@ const siteLanguageCopy = {
     "nav.support": "Support",
     "cta.create": "Create Their Book",
     "cta.examples": "See a real book →",
-    "hero.title.1": "Not just their name",
-    "hero.title.2": "in a story.",
-    "hero.title.3a": "Their face",
-    "hero.title.3b": "in it.",
-    "hero.lede": "Created from their photo, favorite things, and world—then checked by a real person before delivery.",
+    "hero.title.1": "More than their name.",
+    "hero.title.2": "",
+    "hero.title.3a": "They become",
+    "hero.title.3b": "the hero.",
+    "hero.lede": "Crafted from their photo, favorite things, and world—then personally checked before delivery.",
     "hero.price": "From €49 · Digital book in 24–48h",
     "hero.art.alt": "Child reading a glowing storybook",
     "hero.badge.print": "Print edition",
@@ -864,9 +864,9 @@ const siteLanguageBindings = [
   { key: "cta.create", selector: ".v3-header-cta, .v3-hero-primary, .v3-mobile-sticky-cta strong" },
   { key: "cta.examples", selector: '.v3-text-link[href="#examples"]' },
   { key: "hero.title.1", selector: ".v3-hero-copy h1 > span:nth-child(1)" },
-  { key: "hero.title.2", selector: ".v3-hero-copy h1 > span:nth-child(2)" },
-  { key: "hero.title.3a", selector: ".headline-piece:nth-child(1)" },
-  { key: "hero.title.3b", selector: ".headline-piece:nth-child(2)" },
+  { key: "hero.title.2", selector: ".v3-hero-copy h1 > span:nth-child(3)" },
+  { key: "hero.title.3a", selector: ".v3-hero-copy .headline-piece:nth-child(1)" },
+  { key: "hero.title.3b", selector: ".v3-hero-copy .headline-piece:nth-child(2)" },
   { key: "hero.lede", selector: ".v3-hero-lede" },
   { key: "hero.price", selector: ".v3-price-line" },
   { key: "hero.art.alt", selector: ".v3-hero-image", attr: "alt" },
@@ -1016,16 +1016,7 @@ const normalizeSiteLanguage = (language) => {
   return supportedSiteLanguages.includes(base) ? base : "en";
 };
 
-const getInitialSiteLanguage = () => {
-  try {
-    const savedLanguage = window.localStorage?.getItem(siteLanguageStorageKey);
-    if (savedLanguage) return normalizeSiteLanguage(savedLanguage);
-  } catch (_error) {
-    // Storage may be unavailable in private browsing contexts.
-  }
-
-  return normalizeSiteLanguage(window.navigator?.language);
-};
+const getInitialSiteLanguage = () => "en";
 
 let currentSiteLanguage = getInitialSiteLanguage();
 

@@ -22,6 +22,7 @@
     />
     <link rel="stylesheet" href="styles.css?v=analytics-consent-1" />
     <link rel="stylesheet" href="styles/v3-home.css?v=1" />
+    <link rel="stylesheet" href="styles/v4-home.css?v=2" />
   </head>
   <body class="v3-home">
     <div class="sky-grain" aria-hidden="true"></div>
@@ -98,15 +99,6 @@
           <a href="#faq"><span class="nav-full">FAQ</span><span class="nav-short">FAQ</span></a>
         </nav>
         <div class="v3-header-actions">
-          <label class="v3-language" for="site-language">
-            <span class="visually-hidden">Site language</span>
-            <select id="site-language" name="site-language" data-site-language aria-label="Site language">
-              <option value="en">EN</option>
-              <option value="nl">NL</option>
-              <option value="fr">FR</option>
-              <option value="de">DE</option>
-            </select>
-          </label>
           <a class="v3-button v3-header-cta" href="#intake">Create Their Book</a>
         </div>
         <button
@@ -127,15 +119,7 @@
           <a href="#faq"><span class="nav-full">FAQ</span><span class="nav-short">FAQ</span></a>
         </nav>
         <div class="v3-mobile-utilities">
-          <label class="v3-language v3-language-mobile" for="site-language-mobile">
-            <span>Site language</span>
-            <select id="site-language-mobile" name="site-language-mobile" data-site-language aria-label="Site language">
-              <option value="en">EN</option>
-              <option value="nl">NL</option>
-              <option value="fr">FR</option>
-              <option value="de">DE</option>
-            </select>
-          </label>
+          <p class="v4-language-note">English site · More languages are coming soon</p>
           <div class="v3-mobile-legal">
             <a href="privacy.html">Privacy</a>
             <a href="terms.html">Terms</a>
@@ -146,15 +130,15 @@
     </header>
 
     <main id="top">
-      <section class="v3-hero">
+      <section class="v3-hero" aria-labelledby="hero-title">
         <div class="v3-hero-inner">
           <div class="v3-hero-copy">
-            <h1>
-              <span>Not just their name</span>
-              <span>in a story.</span>
+            <p class="v4-eyebrow">A one-of-one story for your child</p>
+            <h1 id="hero-title">
+              <span>More than their name.</span>
               <span class="v3-headline-accent">
-                <span class="headline-piece">Their face</span>
-                <span class="headline-piece">in it.</span>
+                <span class="headline-piece">They become</span>
+                <span class="headline-piece">the hero.</span>
               </span>
             </h1>
             <p class="v3-hero-lede">
@@ -190,6 +174,7 @@
               fetchpriority="high"
               alt="Child reading a glowing storybook"
             />
+            <figcaption class="v4-hero-caption">A keepsake made from their world</figcaption>
           </figure>
         </div>
       </section>
@@ -869,6 +854,7 @@
 
     <script src="analytics.js?v=ga4-consent-1"></script>
     <script src="assets/vendor/page-flip.browser.js"></script>
-    <script src="script.js?v=site-language-analytics-1"></script>
+    <script src="script.js?v=site-language-analytics-2"></script>
+    <script src="landing-v4.js?v=2"></script>
   </body>
 </html>
