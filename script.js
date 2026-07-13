@@ -39,11 +39,11 @@ const apiEndpoints = {
   orders: "/orders",
   contact: "/contact",
 };
-const supportedSiteLanguages = ["en"];
+const configuredSiteLanguages = ["en", "nl", "fr", "de"];
 const siteLanguageStorageKey = "mirrortale-site-language-v1";
 const siteLanguageCopy = {
   en: {
-    "document.title": "MirrorTale | Personalized Children's Books",
+    "document.title": "MirrorTale | A Story Only They Could Star In",
     "site.language.aria": "Site language",
     "nav.how.full": "How It Works",
     "nav.how.short": "How",
@@ -852,6 +852,171 @@ const siteLanguageCopy = {
   },
 };
 
+const v5SiteLanguageCopy = {
+  en: {
+    "v5.skip": "Skip to content",
+    "v5.nav.primary": "Primary navigation",
+    "v5.nav.mobile": "Mobile navigation",
+    "v5.nav.legal": "Legal links",
+    "v5.menu.note": "Secure photo handling · Human reviewed",
+    "v5.hero.accent": "Their face in it.",
+    "v5.hero.secure": "Secure photo handling",
+    "v5.hero.assurances": "Key assurances",
+    "v5.process.kicker": "Made around who they are",
+    "v5.process.title": "From photo to finished <em>storybook</em>",
+    "v5.process.body": "One clear photo becomes a character, a world, and a book made just for them.",
+    "v5.examples.kicker": "Real books, real pages",
+    "v5.examples.title": "See what their story could feel like",
+    "v5.examples.body": "Choose a cover, then tap or swipe through a finished MirrorTale book.",
+    "v5.examples.aiden": "Preview Aiden",
+    "v5.examples.elena": "Preview Elena",
+    "v5.examples.noah": "Preview Noah",
+    "v5.keepsake.kicker": "A gift they will not outgrow",
+    "v5.keepsake.cta": "See packages",
+    "v5.trust.kicker": "Thoughtful from upload to delivery",
+    "v5.trust.title": "Personal feels better when it also feels safe",
+    "v5.pricing.kicker": "Simple, transparent pricing",
+    "v5.pricing.body": "Every option includes the same personalized story and human quality check.",
+    "v5.pricing.digital": "Digital storybook",
+    "v5.pricing.print": "Digital + hardcover",
+    "v5.faq.kicker": "Questions, answered",
+    "v5.faq.title": "Before you begin",
+    "v5.intake.kicker": "About two minutes",
+    "v5.intake.progress.1": "Their details",
+    "v5.intake.progress.2": "Story",
+    "v5.intake.progress.3": "Photo",
+    "v5.intake.progress.4": "Package",
+    "v5.intake.steps": "Order steps",
+    "v5.intake.assurance": "Private by design",
+    "v5.intake.fieldset.1": "Parent and child",
+    "v5.footer.tagline": "One-of-one stories, made with care.",
+    "v5.footer.contact": "Contact",
+  },
+  nl: {
+    "v5.skip": "Ga naar de inhoud",
+    "v5.nav.primary": "Hoofdnavigatie",
+    "v5.nav.mobile": "Mobiele navigatie",
+    "v5.nav.legal": "Juridische links",
+    "v5.menu.note": "Veilige fotoverwerking · Menselijk nagekeken",
+    "v5.hero.accent": "Hun gezicht erin.",
+    "v5.hero.secure": "Veilige fotoverwerking",
+    "v5.hero.assurances": "Belangrijkste garanties",
+    "v5.process.kicker": "Gemaakt rond wie ze zijn",
+    "v5.process.title": "Van foto tot afgewerkt <em>verhalenboek</em>",
+    "v5.process.body": "Eén duidelijke foto wordt een personage, een wereld en een boek dat speciaal voor hen is gemaakt.",
+    "v5.examples.kicker": "Echte boeken, echte pagina’s",
+    "v5.examples.title": "Ontdek hoe hun verhaal kan aanvoelen",
+    "v5.examples.body": "Kies een omslag en tik of veeg door een afgewerkt MirrorTale-boek.",
+    "v5.examples.aiden": "Bekijk Aiden",
+    "v5.examples.elena": "Bekijk Elena",
+    "v5.examples.noah": "Bekijk Noah",
+    "v5.keepsake.kicker": "Een cadeau waar ze niet uit groeien",
+    "v5.keepsake.cta": "Bekijk pakketten",
+    "v5.trust.kicker": "Zorgvuldig van upload tot levering",
+    "v5.trust.title": "Persoonlijk voelt beter als het ook veilig voelt",
+    "v5.pricing.kicker": "Eenvoudige, transparante prijzen",
+    "v5.pricing.body": "Elke optie bevat hetzelfde gepersonaliseerde verhaal en een menselijke kwaliteitscontrole.",
+    "v5.pricing.digital": "Digitaal verhalenboek",
+    "v5.pricing.print": "Digitaal + hardcover",
+    "v5.faq.kicker": "Vragen, beantwoord",
+    "v5.faq.title": "Voor je begint",
+    "v5.intake.kicker": "Ongeveer twee minuten",
+    "v5.intake.progress.1": "Hun gegevens",
+    "v5.intake.progress.2": "Verhaal",
+    "v5.intake.progress.3": "Foto",
+    "v5.intake.progress.4": "Pakket",
+    "v5.intake.steps": "Bestelstappen",
+    "v5.intake.assurance": "Privacy in het ontwerp",
+    "v5.intake.fieldset.1": "Ouder en kind",
+    "v5.footer.tagline": "Unieke verhalen, met zorg gemaakt.",
+    "v5.footer.contact": "Contact",
+  },
+  fr: {
+    "v5.skip": "Aller au contenu",
+    "v5.nav.primary": "Navigation principale",
+    "v5.nav.mobile": "Navigation mobile",
+    "v5.nav.legal": "Liens juridiques",
+    "v5.menu.note": "Photos traitées en sécurité · Vérifié par un humain",
+    "v5.hero.accent": "Leur visage dedans.",
+    "v5.hero.secure": "Photos traitées en sécurité",
+    "v5.hero.assurances": "Garanties essentielles",
+    "v5.process.kicker": "Créé autour de leur personnalité",
+    "v5.process.title": "De la photo au <em>livre illustré</em> fini",
+    "v5.process.body": "Une photo nette devient un personnage, un univers et un livre créé spécialement pour votre enfant.",
+    "v5.examples.kicker": "De vrais livres, de vraies pages",
+    "v5.examples.title": "Imaginez ce que leur histoire pourrait faire ressentir",
+    "v5.examples.body": "Choisissez une couverture, puis touchez ou balayez un livre MirrorTale terminé.",
+    "v5.examples.aiden": "Voir Aiden",
+    "v5.examples.elena": "Voir Elena",
+    "v5.examples.noah": "Voir Noah",
+    "v5.keepsake.kicker": "Un cadeau qu’ils garderont longtemps",
+    "v5.keepsake.cta": "Voir les formules",
+    "v5.trust.kicker": "Soigné du téléchargement à la livraison",
+    "v5.trust.title": "Le personnalisé est encore mieux lorsqu’il est aussi sécurisé",
+    "v5.pricing.kicker": "Des prix simples et transparents",
+    "v5.pricing.body": "Chaque formule comprend la même histoire personnalisée et un contrôle qualité humain.",
+    "v5.pricing.digital": "Livre numérique",
+    "v5.pricing.print": "Numérique + couverture rigide",
+    "v5.faq.kicker": "Vos questions, nos réponses",
+    "v5.faq.title": "Avant de commencer",
+    "v5.intake.kicker": "Environ deux minutes",
+    "v5.intake.progress.1": "Ses informations",
+    "v5.intake.progress.2": "Histoire",
+    "v5.intake.progress.3": "Photo",
+    "v5.intake.progress.4": "Formule",
+    "v5.intake.steps": "Étapes de commande",
+    "v5.intake.assurance": "Confidentiel par conception",
+    "v5.intake.fieldset.1": "Parent et enfant",
+    "v5.footer.tagline": "Des histoires uniques, créées avec soin.",
+    "v5.footer.contact": "Contact",
+  },
+  de: {
+    "v5.skip": "Zum Inhalt springen",
+    "v5.nav.primary": "Hauptnavigation",
+    "v5.nav.mobile": "Mobile Navigation",
+    "v5.nav.legal": "Rechtliche Links",
+    "v5.menu.note": "Sichere Fotoverarbeitung · Von Menschen geprüft",
+    "v5.hero.accent": "Ihr Gesicht darin.",
+    "v5.hero.secure": "Sichere Fotoverarbeitung",
+    "v5.hero.assurances": "Wichtige Zusagen",
+    "v5.process.kicker": "Rund um ihre Persönlichkeit gestaltet",
+    "v5.process.title": "Vom Foto zum fertigen <em>Bilderbuch</em>",
+    "v5.process.body": "Ein klares Foto wird zu einer Figur, einer Welt und einem Buch, das nur für Ihr Kind gemacht ist.",
+    "v5.examples.kicker": "Echte Bücher, echte Seiten",
+    "v5.examples.title": "So könnte sich ihre Geschichte anfühlen",
+    "v5.examples.body": "Wählen Sie ein Cover und tippen oder wischen Sie durch ein fertiges MirrorTale-Buch.",
+    "v5.examples.aiden": "Aiden ansehen",
+    "v5.examples.elena": "Elena ansehen",
+    "v5.examples.noah": "Noah ansehen",
+    "v5.keepsake.kicker": "Ein Geschenk, aus dem sie nicht herauswachsen",
+    "v5.keepsake.cta": "Pakete ansehen",
+    "v5.trust.kicker": "Sorgfältig vom Upload bis zur Lieferung",
+    "v5.trust.title": "Persönlich fühlt sich besser an, wenn es auch sicher ist",
+    "v5.pricing.kicker": "Einfache, transparente Preise",
+    "v5.pricing.body": "Jede Option enthält dieselbe personalisierte Geschichte und eine menschliche Qualitätsprüfung.",
+    "v5.pricing.digital": "Digitales Bilderbuch",
+    "v5.pricing.print": "Digital + Hardcover",
+    "v5.faq.kicker": "Fragen und Antworten",
+    "v5.faq.title": "Bevor Sie beginnen",
+    "v5.intake.kicker": "Etwa zwei Minuten",
+    "v5.intake.progress.1": "Angaben zum Kind",
+    "v5.intake.progress.2": "Geschichte",
+    "v5.intake.progress.3": "Foto",
+    "v5.intake.progress.4": "Paket",
+    "v5.intake.steps": "Bestellschritte",
+    "v5.intake.assurance": "Datenschutz von Anfang an",
+    "v5.intake.fieldset.1": "Elternteil und Kind",
+    "v5.footer.tagline": "Einzigartige Geschichten, mit Sorgfalt gemacht.",
+    "v5.footer.contact": "Kontakt",
+  },
+};
+
+const siteLanguageKeys = Object.keys({ ...siteLanguageCopy.en, ...v5SiteLanguageCopy.en });
+const supportedSiteLanguages = configuredSiteLanguages.filter((language) => {
+  const copy = { ...siteLanguageCopy[language], ...v5SiteLanguageCopy[language] };
+  return siteLanguageKeys.every((key) => Object.prototype.hasOwnProperty.call(copy, key));
+});
+
 const siteLanguageBindings = [
   { key: "site.language.aria", selector: ".v3-language .visually-hidden, .v3-language-mobile > span" },
   { key: "site.language.aria", selector: "[data-site-language]", attr: "aria-label" },
@@ -1011,17 +1176,177 @@ const siteLanguageBindings = [
   { key: "footer.rights", selector: ".site-footer > p" },
 ];
 
+const v5SiteLanguageBindings = [
+  { key: "v5.skip", selector: ".skip-link" },
+  { key: "site.language.aria", selector: ".v5-site-language .visually-hidden" },
+  { key: "site.language.aria", selector: "[data-site-language]", attr: "aria-label" },
+  { key: "v5.nav.primary", selector: ".v5-desktop-nav", attr: "aria-label" },
+  { key: "v5.nav.mobile", selector: "#site-mobile-menu nav", attr: "aria-label" },
+  { key: "nav.how.full", selector: '.v5-desktop-nav a[href="#how-it-works"], #site-mobile-menu a[href="#how-it-works"]' },
+  { key: "nav.examples.full", selector: '.v5-desktop-nav a[href="#examples"], #site-mobile-menu a[href="#examples"]' },
+  { key: "nav.pricing", selector: '.v5-desktop-nav a[href="#pricing"], #site-mobile-menu a[href="#pricing"]' },
+  { key: "nav.faq", selector: '.v5-desktop-nav a[href="#faq"], #site-mobile-menu a[href="#faq"]' },
+  { key: "cta.create", selector: '.v5-header-cta, #site-mobile-menu a[href="#intake"], .v5-hero-primary, .v5-sticky-cta strong' },
+  { key: "v5.menu.note", selector: "#site-mobile-menu > p" },
+  { key: "hero.title.1", selector: ".v5-hero h1 > span:nth-child(1)" },
+  { key: "hero.title.2", selector: ".v5-hero h1 > span:nth-child(2)" },
+  { key: "v5.hero.accent", selector: ".v5-hero h1 > em" },
+  { key: "hero.lede", selector: ".v5-hero-copy" },
+  { key: "cta.examples", selector: ".v5-text-link", leadingText: true },
+  { key: "hero.price", selector: ".v5-price-note" },
+  { key: "v5.hero.assurances", selector: ".v5-trust-line", attr: "aria-label" },
+  { key: "hero.trust.2.title", selector: ".v5-trust-line li:nth-child(1)", trailingText: true },
+  { key: "v5.hero.secure", selector: ".v5-trust-line li:nth-child(2)", trailingText: true },
+  { key: "hero.trust.4.title", selector: ".v5-trust-line li:nth-child(3)", trailingText: true },
+  { key: "v5.process.kicker", selector: ".v5-process .v5-kicker" },
+  { key: "v5.process.title", selector: "#process-title", html: true },
+  { key: "v5.process.body", selector: ".v5-process .v5-section-heading > p:last-child" },
+  { key: "process.step.1", selector: ".v5-process-step:nth-child(1) h3" },
+  { key: "process.step.2", selector: ".v5-process-step:nth-child(2) h3" },
+  { key: "process.step.3", selector: ".v5-process-step:nth-child(3) h3" },
+  { key: "process.step.4", selector: ".v5-process-step:nth-child(4) h3" },
+  { key: "v5.examples.kicker", selector: ".v5-examples .v5-section-heading .v5-kicker" },
+  { key: "v5.examples.title", selector: "#examples-title" },
+  { key: "v5.examples.body", selector: ".v5-examples .v5-section-heading > p:last-child" },
+  { key: "v5.examples.aiden", selector: '[data-book-key="aiden"] > span' },
+  { key: "v5.examples.elena", selector: '[data-book-key="elena"] > span' },
+  { key: "v5.examples.noah", selector: '[data-book-key="noah"] > span' },
+  { key: "preview.kicker", selector: ".flipbook-preview-header .v5-kicker" },
+  { key: "preview.helper", selector: "#active-preview-helper" },
+  { key: "preview.mobile.tap", selector: ".mobile-tap-hint" },
+  { key: "v5.keepsake.kicker", selector: ".v5-keepsake-copy .v5-kicker" },
+  { key: "moments.2.title", selector: "#keepsake-title" },
+  { key: "moments.2.body", selector: ".v5-keepsake-copy > p:nth-of-type(2)" },
+  { key: "trust.5.title", selector: ".v5-keepsake-copy li:nth-child(1) strong" },
+  { key: "trust.5.body", selector: ".v5-keepsake-copy li:nth-child(1) span", trailingText: true },
+  { key: "trust.4.title", selector: ".v5-keepsake-copy li:nth-child(2) strong" },
+  { key: "trust.4.body", selector: ".v5-keepsake-copy li:nth-child(2) span", trailingText: true },
+  { key: "trust.3.title", selector: ".v5-keepsake-copy li:nth-child(3) strong" },
+  { key: "trust.3.body", selector: ".v5-keepsake-copy li:nth-child(3) span", trailingText: true },
+  { key: "v5.keepsake.cta", selector: '.v5-keepsake-copy a[href="#pricing"]' },
+  { key: "v5.trust.kicker", selector: ".v5-trust .v5-kicker" },
+  { key: "v5.trust.title", selector: "#trust-title" },
+  { key: "trust.6.title", selector: ".v5-trust-grid article:nth-child(1) h3" },
+  { key: "trust.6.body", selector: ".v5-trust-grid article:nth-child(1) p" },
+  { key: "trust.4.title", selector: ".v5-trust-grid article:nth-child(2) h3" },
+  { key: "trust.4.body", selector: ".v5-trust-grid article:nth-child(2) p" },
+  { key: "hero.trust.3.title", selector: ".v5-trust-grid article:nth-child(3) h3" },
+  { key: "hero.trust.3.body", selector: ".v5-trust-grid article:nth-child(3) p" },
+  { key: "trust.5.title", selector: ".v5-trust-grid article:nth-child(4) h3" },
+  { key: "trust.5.body", selector: ".v5-trust-grid article:nth-child(4) p" },
+  { key: "v5.pricing.kicker", selector: ".v5-pricing .v5-kicker" },
+  { key: "pricing.title", selector: "#pricing-title", html: true },
+  { key: "v5.pricing.body", selector: ".v5-pricing .v5-section-heading > p:last-child" },
+  { key: "v5.pricing.digital", selector: ".v5-price-card:nth-child(1) .v5-price-label" },
+  { key: "v5.pricing.print", selector: ".v5-price-card:nth-child(2) .v5-price-label" },
+  { key: "pricing.digital.1", selector: ".v5-price-card:nth-child(1) li:nth-child(1)" },
+  { key: "pricing.digital.2", selector: ".v5-price-card:nth-child(1) li:nth-child(2)" },
+  { key: "pricing.digital.3", selector: ".v5-price-card:nth-child(1) li:nth-child(3)" },
+  { key: "trust.4.body", selector: ".v5-price-card:nth-child(1) li:nth-child(4)" },
+  { key: "pricing.digital.cta", selector: '[data-package-target="digital"]' },
+  { key: "pricing.print.1", selector: ".v5-price-card:nth-child(2) li:nth-child(1)" },
+  { key: "pricing.print.2", selector: ".v5-price-card:nth-child(2) li:nth-child(2)" },
+  { key: "pricing.print.3", selector: ".v5-price-card:nth-child(2) li:nth-child(3)" },
+  { key: "pricing.print.4", selector: ".v5-price-card:nth-child(2) li:nth-child(4)" },
+  { key: "pricing.print.cta", selector: '[data-package-target="print"]' },
+  { key: "pricing.reassurance", selector: ".v5-pricing-reassurance" },
+  { key: "v5.faq.kicker", selector: ".v5-faq .v5-kicker" },
+  { key: "v5.faq.title", selector: "#faq-title" },
+  { key: "faq.8.q", selector: ".v5-faq-list details:nth-child(1) summary", leadingText: true },
+  { key: "faq.8.a", selector: ".v5-faq-list details:nth-child(1) p" },
+  { key: "faq.5.q", selector: ".v5-faq-list details:nth-child(2) summary", leadingText: true },
+  { key: "faq.5.a", selector: ".v5-faq-list details:nth-child(2) p" },
+  { key: "faq.4.q", selector: ".v5-faq-list details:nth-child(3) summary", leadingText: true },
+  { key: "faq.4.a", selector: ".v5-faq-list details:nth-child(3) p" },
+  { key: "faq.7.q", selector: ".v5-faq-list details:nth-child(4) summary", leadingText: true },
+  { key: "faq.7.a", selector: ".v5-faq-list details:nth-child(4) p" },
+  { key: "v5.intake.kicker", selector: ".v5-intake-intro .v5-kicker" },
+  { key: "form.title", selector: "#intake-title" },
+  { key: "form.reassurance", selector: ".v5-intake-intro > p:nth-of-type(2)" },
+  { key: "v5.intake.steps", selector: ".v5-form-progress", attr: "aria-label" },
+  { key: "v5.intake.progress.1", selector: ".v5-form-progress li:nth-child(1)" },
+  { key: "v5.intake.progress.2", selector: ".v5-form-progress li:nth-child(2)" },
+  { key: "v5.intake.progress.3", selector: ".v5-form-progress li:nth-child(3)" },
+  { key: "v5.intake.progress.4", selector: ".v5-form-progress li:nth-child(4)" },
+  { key: "v5.intake.assurance", selector: ".v5-intake-assurance strong" },
+  { key: "form.assurance.1", selector: ".v5-intake-assurance p", trailingText: true },
+  { key: "v5.intake.fieldset.1", selector: ".form-columns fieldset:nth-child(1) legend", preserveFirst: true },
+  { key: "form.story", selector: ".form-columns fieldset:nth-child(2) legend", preserveFirst: true },
+  { key: "upload.legend", selector: ".form-columns fieldset:nth-child(3) legend", preserveFirst: true },
+  { key: "package.legend", selector: ".form-columns fieldset:nth-child(4) legend", preserveFirst: true },
+  { key: "form.parent.name", labelFor: 'input[name="parent-name"]' },
+  { key: "form.parent.name.placeholder", selector: 'input[name="parent-name"]', attr: "placeholder" },
+  { key: "form.email", labelFor: 'input[name="email"]' },
+  { key: "form.email.placeholder", selector: 'input[name="email"]', attr: "placeholder" },
+  { key: "form.child.name", labelFor: 'input[name="child-name"]' },
+  { key: "form.child.name.placeholder", selector: 'input[name="child-name"]', attr: "placeholder" },
+  { key: "form.age", labelFor: 'select[name="age"]' },
+  { key: "form.age.placeholder", selector: 'select[name="age"] option[value=""]' },
+  { key: "form.gender", labelFor: 'select[name="gender"]' },
+  { key: "form.gender.placeholder", selector: 'select[name="gender"] option[value=""]' },
+  { key: "form.gender.boy", selector: 'select[name="gender"] option[value="Boy"]' },
+  { key: "form.gender.girl", selector: 'select[name="gender"] option[value="Girl"]' },
+  { key: "form.bookLanguage", labelFor: 'select[name="book-language"]' },
+  { key: "form.story.about", labelFor: 'textarea[name="theme"]' },
+  { key: "form.story.about.placeholder", selector: 'textarea[name="theme"]', attr: "placeholder" },
+  { key: "form.story.loves", labelFor: 'input[name="interests"]' },
+  { key: "form.story.loves.placeholder", selector: 'input[name="interests"]', attr: "placeholder" },
+  { key: "form.dedication", labelFor: 'textarea[name="dedication"]' },
+  { key: "form.dedication.placeholder", selector: 'textarea[name="dedication"]', attr: "placeholder" },
+  { key: "upload.title.default", selector: "[data-upload-title]" },
+  { key: "upload.detail.default", selector: "[data-upload-detail]" },
+  { key: "package.legend", selector: ".package-selector", attr: "aria-label" },
+  { key: "package.digital.title", selector: '.package-selector input[value="digital"] + span strong' },
+  { key: "package.digital.detail", selector: '.package-selector input[value="digital"] + span em' },
+  { key: "package.print.title", selector: '.package-selector input[value="print"] + span strong' },
+  { key: "package.print.detail", selector: '.package-selector input[value="print"] + span em' },
+  { key: "package.consent", selector: ".consent-check:nth-of-type(1) span", html: true },
+  { key: "package.confirm", selector: ".consent-check:nth-of-type(2) span" },
+  { key: "form.submit", selector: ".form-submit" },
+  { key: "form.secure", selector: ".secure-note", trailingText: true },
+  { key: "contact.kicker", selector: ".v5-contact .v5-kicker" },
+  { key: "contact.title", selector: "#contact-title" },
+  { key: "contact.body", selector: ".v5-contact > div > p:last-child" },
+  { key: "contact.name", labelFor: 'input[name="contact-name"]' },
+  { key: "form.parent.name.placeholder", selector: 'input[name="contact-name"]', attr: "placeholder" },
+  { key: "form.email", labelFor: 'input[name="contact-email"]' },
+  { key: "form.email.placeholder", selector: 'input[name="contact-email"]', attr: "placeholder" },
+  { key: "contact.help", labelFor: 'textarea[name="contact-message"]' },
+  { key: "contact.message.placeholder", selector: 'textarea[name="contact-message"]', attr: "placeholder" },
+  { key: "contact.submit", selector: ".contact-submit" },
+  { key: "contact.note", selector: ".contact-note" },
+  { key: "sticky.aria", selector: ".v5-sticky-cta", attr: "aria-label" },
+  { key: "sticky.detail", selector: ".v5-sticky-cta em" },
+  { key: "v5.footer.tagline", selector: ".v5-footer > p" },
+  { key: "v5.nav.legal", selector: ".v5-footer nav", attr: "aria-label" },
+  { key: "footer.privacy", selector: '.v5-footer a[href="privacy.html"]' },
+  { key: "footer.terms", selector: '.v5-footer a[href="terms.html"]' },
+  { key: "v5.footer.contact", selector: '.v5-footer a[href="#contact"]' },
+  { key: "footer.rights", selector: ".v5-footer small" },
+];
+
 const normalizeSiteLanguage = (language) => {
   const base = String(language || "").trim().toLowerCase().slice(0, 2);
   return supportedSiteLanguages.includes(base) ? base : "en";
 };
 
-const getInitialSiteLanguage = () => "en";
+const getInitialSiteLanguage = () => {
+  try {
+    const stored = String(window.localStorage?.getItem(siteLanguageStorageKey) || "")
+      .trim()
+      .toLowerCase()
+      .slice(0, 2);
+    if (supportedSiteLanguages.includes(stored)) return stored;
+  } catch (_error) {
+    // The site still works when browser storage is unavailable.
+  }
+  return "en";
+};
 
 let currentSiteLanguage = getInitialSiteLanguage();
 
 const getSiteCopy = (key, language = currentSiteLanguage) =>
-  siteLanguageCopy[language]?.[key] || siteLanguageCopy.en[key] || "";
+  v5SiteLanguageCopy[language]?.[key] ?? siteLanguageCopy[language]?.[key] ?? "";
 
 const syncMobileMenuLabel = () => {
   if (!mobileMenuToggle) return;
@@ -1093,9 +1418,78 @@ const updateBookLanguageOptions = () => {
   });
 };
 
+const originalLocalizedValues = new WeakMap();
+
+const getOriginalLocalizedValue = (element, id, read) => {
+  let values = originalLocalizedValues.get(element);
+  if (!values) {
+    values = new Map();
+    originalLocalizedValues.set(element, values);
+  }
+  if (!values.has(id)) values.set(id, read());
+  return values.get(id);
+};
+
+const findTextNode = (element, fromEnd = false) => {
+  const nodes = Array.from(element.childNodes);
+  if (fromEnd) nodes.reverse();
+  return nodes.find((node) => node.nodeType === Node.TEXT_NODE && node.textContent.trim());
+};
+
+const applyV5Binding = (binding) => {
+  const value = getSiteCopy(binding.key);
+  if (!value) return;
+
+  if (binding.labelFor) {
+    const label = document.querySelector(binding.labelFor)?.closest("label");
+    if (!label) return;
+    const textNode = findTextNode(label);
+    if (!textNode) return;
+    const original = getOriginalLocalizedValue(label, `label:${binding.key}`, () => textNode.textContent);
+    textNode.textContent = currentSiteLanguage === "en" ? original : `${value} `;
+    return;
+  }
+
+  document.querySelectorAll(binding.selector).forEach((element) => {
+    const id = `${binding.key}:${binding.attr || (binding.html ? "html" : binding.trailingText ? "trailing" : binding.leadingText ? "leading" : binding.preserveFirst ? "preserveFirst" : "text")}`;
+    if (binding.attr) {
+      const original = getOriginalLocalizedValue(element, id, () => element.getAttribute(binding.attr) || "");
+      element.setAttribute(binding.attr, currentSiteLanguage === "en" ? original : value);
+      return;
+    }
+    if (binding.html) {
+      const original = getOriginalLocalizedValue(element, id, () => element.innerHTML);
+      element.innerHTML = currentSiteLanguage === "en" ? original : value;
+      return;
+    }
+    if (binding.trailingText || binding.leadingText) {
+      const textNode = findTextNode(element, binding.trailingText);
+      if (!textNode) return;
+      const original = getOriginalLocalizedValue(element, id, () => textNode.textContent);
+      textNode.textContent = currentSiteLanguage === "en" ? original : binding.trailingText ? value : `${value} `;
+      return;
+    }
+    if (binding.preserveFirst) {
+      const textNode = findTextNode(element, true);
+      if (!textNode) return;
+      const original = getOriginalLocalizedValue(element, id, () => textNode.textContent);
+      textNode.textContent = currentSiteLanguage === "en" ? original : ` ${value}`;
+      return;
+    }
+    const original = getOriginalLocalizedValue(element, id, () => element.textContent);
+    element.textContent = currentSiteLanguage === "en" ? original : value;
+  });
+};
+
 const applySiteLanguageBindings = () => {
   document.documentElement.lang = currentSiteLanguage;
   document.title = getSiteCopy("document.title");
+
+  if (document.body.classList.contains("v5-home")) {
+    v5SiteLanguageBindings.forEach(applyV5Binding);
+    updateBookLanguageOptions();
+    return;
+  }
 
   siteLanguageBindings.forEach((binding) => {
     const value = getSiteCopy(binding.key);
@@ -1139,6 +1533,10 @@ const setSiteLanguage = (language, { persist = true } = {}) => {
   }
 
   applySiteLanguageBindings();
+  window.mirrortaleSiteLanguage = {
+    current: currentSiteLanguage,
+    t: (key) => getSiteCopy(key),
+  };
 
   if (orderPhotoInput?.files?.length) {
     updatePhotoUploadState();

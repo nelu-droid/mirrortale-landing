@@ -1,860 +1,294 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="MirrorTale creates premium personalized children's books where your child becomes the hero of a magical storybook."
-    />
+    <meta name="description" content="MirrorTale creates premium personalized children's books, illustrated from your child's photo and reviewed by a real person." />
     <meta name="mirrortale-api-base-url" content="https://api.mirrortale.com" />
     <meta name="ga4-measurement-id" content="G-BNKDF9J9E5" />
-    <title>MirrorTale | Personalized Children's Books</title>
+    <title>MirrorTale | A Story Only They Could Star In</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;500;700;800&family=Cormorant+Garamond:ital,wght@1,700;1,800&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,700;1,9..144,800&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles.css?v=analytics-consent-1" />
-    <link rel="stylesheet" href="styles/v3-home.css?v=1" />
-    <link rel="stylesheet" href="styles/v4-home.css?v=2" />
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/v5-home.css?v=4" />
   </head>
-  <body class="v3-home">
-    <div class="sky-grain" aria-hidden="true"></div>
-    <svg class="icon-sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
-      <symbol id="icon-face" viewBox="0 0 24 24">
-        <path d="M7.5 8.4c1.1-1.1 2.6-1.7 4.5-1.7s3.4.6 4.5 1.7" />
-        <path d="M6.8 11.8c.6 4 2.5 6 5.2 6s4.6-2 5.2-6" />
-        <path d="M9 11.2h.1M15 11.2h.1" />
-        <path d="M9.8 14.8c1.3 1 3.1 1 4.4 0" />
-        <path d="M4.5 12.4c0-4.8 3-8 7.5-8s7.5 3.2 7.5 8c0 4.7-3 7.4-7.5 7.4s-7.5-2.7-7.5-7.4Z" />
-      </symbol>
-      <symbol id="icon-shield-check" viewBox="0 0 24 24">
-        <path d="M12 3.2 19 6v5.7c0 4.4-2.7 7.4-7 9.1-4.3-1.7-7-4.7-7-9.1V6l7-2.8Z" />
-        <path d="m8.5 12 2.3 2.3 4.8-5.2" />
-      </symbol>
-      <symbol id="icon-clock" viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="8.4" />
-        <path d="M12 7.5V12l3.2 2.1" />
-      </symbol>
-      <symbol id="icon-book" viewBox="0 0 24 24">
-        <path d="M5.4 4.4h5.1c1 0 1.5.5 1.5 1.5v13.4c0-.9-.7-1.4-1.7-1.4H5.4V4.4Z" />
-        <path d="M18.6 4.4h-5.1c-1 0-1.5.5-1.5 1.5v13.4c0-.9.7-1.4 1.7-1.4h4.9V4.4Z" />
-        <path d="M12 5.9v13.4" />
-      </symbol>
-      <symbol id="icon-heart" viewBox="0 0 24 24">
-        <path d="M12 19.2S5 15.3 5 9.8c0-2.1 1.5-3.7 3.5-3.7 1.4 0 2.6.8 3.5 2 .9-1.2 2.1-2 3.5-2 2 0 3.5 1.6 3.5 3.7 0 5.5-7 9.4-7 9.4Z" />
-      </symbol>
-      <symbol id="icon-star" viewBox="0 0 24 24">
-        <path d="m12 3.8 2.3 5 5.4.6-4 3.7 1.1 5.4L12 15.8l-4.8 2.7 1.1-5.4-4-3.7 5.4-.6L12 3.8Z" />
-      </symbol>
-      <symbol id="icon-lock" viewBox="0 0 24 24">
-        <rect x="5.2" y="10.3" width="13.6" height="9.2" rx="2" />
-        <path d="M8.2 10.3V8.2a3.8 3.8 0 0 1 7.6 0v2.1" />
-        <path d="M12 14v2.2" />
-      </symbol>
-      <symbol id="icon-mail" viewBox="0 0 24 24">
-        <rect x="4.2" y="6.2" width="15.6" height="11.6" rx="2.1" />
-        <path d="m5.2 8 6.8 5.2L18.8 8" />
-      </symbol>
-      <symbol id="icon-message" viewBox="0 0 24 24">
-        <path d="M5.4 5.3h13.2c1 0 1.8.8 1.8 1.8v7.4c0 1-.8 1.8-1.8 1.8h-7.1l-4.7 3v-3H5.4c-1 0-1.8-.8-1.8-1.8V7.1c0-1 .8-1.8 1.8-1.8Z" />
-        <path d="M8 9.2h8" />
-        <path d="M8 12.2h5.5" />
-      </symbol>
-      <symbol id="icon-upload" viewBox="0 0 24 24">
-        <path d="M7.5 17.8H7a4.2 4.2 0 0 1 .1-8.4 5.1 5.1 0 0 1 9.7 1.2 3.6 3.6 0 0 1 .2 7.2h-.5" />
-        <path d="M12 17.8V9.5" />
-        <path d="m8.9 12.4 3.1-3.1 3.1 3.1" />
-      </symbol>
-      <symbol id="icon-chevron" viewBox="0 0 24 24">
-        <path d="m7 9 5 5 5-5" />
-      </symbol>
-      <symbol id="icon-check" viewBox="0 0 24 24">
-        <path d="m5.5 12.5 4.1 4.1 8.9-9.2" />
-      </symbol>
-      <symbol id="icon-arrow" viewBox="0 0 24 24">
-        <path d="M5 12h13" />
-        <path d="m13 7 5 5-5 5" />
-      </symbol>
-      <symbol id="icon-sparkle" viewBox="0 0 24 24">
-        <path d="M12 3.5 14.1 9l5.4 2.1-5.4 2.1L12 18.5l-2.1-5.3-5.4-2.1L9.9 9 12 3.5Z" />
-      </symbol>
-    </svg>
+  <body class="v5-home">
+    <a class="skip-link" href="#main">Skip to content</a>
 
-    <header class="v3-site-header">
-      <div class="v3-header-inner">
-        <a class="v3-brand" href="#top" aria-label="MirrorTale home">
-          <span class="v3-brand-mirror">Mirror</span><span class="v3-brand-tale">Tale</span>
-        </a>
-        <nav class="v3-nav v3-desktop-nav" aria-label="Primary navigation">
-          <a href="#how-it-works"><span class="nav-full">How It Works</span><span class="nav-short">How</span></a>
-          <a href="#examples"><span class="nav-full">Example Books</span><span class="nav-short">Books</span></a>
-          <a href="#pricing"><span class="nav-full">Pricing</span><span class="nav-short">Pricing</span></a>
-          <a href="#faq"><span class="nav-full">FAQ</span><span class="nav-short">FAQ</span></a>
+    <header class="v3-site-header v5-header">
+      <div class="v5-header-inner">
+        <a class="v5-wordmark" href="#top" aria-label="MirrorTale home"><span>Mirror</span><em>Tale</em></a>
+        <nav class="v5-desktop-nav" aria-label="Primary navigation">
+          <a href="#how-it-works">How it works</a>
+          <a href="#examples">Example books</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#faq">FAQ</a>
         </nav>
-        <div class="v3-header-actions">
-          <a class="v3-button v3-header-cta" href="#intake">Create Their Book</a>
+        <div class="v5-header-controls">
+          <label class="v5-site-language">
+            <span class="visually-hidden">Site language</span>
+            <select name="site-language" data-site-language aria-label="Site language">
+              <option value="en">EN</option>
+              <option value="nl">NL</option>
+              <option value="fr">FR</option>
+              <option value="de">DE</option>
+            </select>
+          </label>
+          <a class="v5-button v5-button-small v5-header-cta" href="#intake">Create Their Book</a>
+          <button class="site-menu-toggle" type="button" aria-expanded="false" aria-controls="site-mobile-menu" aria-label="Open menu">
+            <span class="material-symbols-outlined" aria-hidden="true">menu</span>
+          </button>
         </div>
-        <button
-          class="v3-menu-toggle"
-          type="button"
-          aria-expanded="false"
-          aria-controls="v3-mobile-menu"
-          aria-label="Open menu"
-        >
-          <span class="material-symbols-outlined" aria-hidden="true">menu</span>
-        </button>
       </div>
-      <div class="v3-mobile-menu" id="v3-mobile-menu" hidden>
-        <nav class="v3-nav v3-mobile-nav" aria-label="Mobile navigation">
-          <a href="#how-it-works"><span class="nav-full">How It Works</span><span class="nav-short">How</span></a>
-          <a href="#examples"><span class="nav-full">Example Books</span><span class="nav-short">Books</span></a>
-          <a href="#pricing"><span class="nav-full">Pricing</span><span class="nav-short">Pricing</span></a>
-          <a href="#faq"><span class="nav-full">FAQ</span><span class="nav-short">FAQ</span></a>
+      <div class="site-mobile-menu" id="site-mobile-menu" hidden>
+        <nav aria-label="Mobile navigation">
+          <a href="#how-it-works">How it works</a>
+          <a href="#examples">Example books</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#faq">FAQ</a>
+          <a href="#intake">Create Their Book</a>
         </nav>
-        <div class="v3-mobile-utilities">
-          <p class="v4-language-note">English site · More languages are coming soon</p>
-          <div class="v3-mobile-legal">
-            <a href="privacy.html">Privacy</a>
-            <a href="terms.html">Terms</a>
-            <a href="#contact">Support</a>
-          </div>
-        </div>
+        <p>Secure photo handling · Human reviewed · English website</p>
       </div>
     </header>
 
-    <main id="top">
-      <section class="v3-hero" aria-labelledby="hero-title">
-        <div class="v3-hero-inner">
-          <div class="v3-hero-copy">
-            <p class="v4-eyebrow">A one-of-one story for your child</p>
-            <h1 id="hero-title">
-              <span>More than their name.</span>
-              <span class="v3-headline-accent">
-                <span class="headline-piece">They become</span>
-                <span class="headline-piece">the hero.</span>
-              </span>
-            </h1>
-            <p class="v3-hero-lede">
-              Created from their photo, favorite things, and world—then checked by a real person before delivery.
-            </p>
-            <div class="v3-hero-actions" aria-label="Hero actions">
-              <a class="v3-button v3-hero-primary" href="#intake">Create Their Book</a>
-              <a class="v3-text-link" href="#examples">See a real book →</a>
-            </div>
-            <p class="v3-price-line">From €49 · Digital book in 24–48h</p>
-            <ul class="v3-proof-row" aria-label="Key trust points">
-              <li>
-                <svg class="v3-proof-icon" aria-hidden="true"><use href="#icon-face"></use></svg>
-                <span>Recognizable likeness</span>
-              </li>
-              <li>
-                <svg class="v3-proof-icon" aria-hidden="true"><use href="#icon-shield-check"></use></svg>
-                <span>Human-reviewed</span>
-              </li>
-              <li>
-                <svg class="v3-proof-icon" aria-hidden="true"><use href="#icon-book"></use></svg>
-                <span>Optional hardcover</span>
-              </li>
-            </ul>
+    <main id="main">
+      <section class="v5-hero" id="top" aria-labelledby="hero-title">
+        <div class="v5-hero-shade" aria-hidden="true"></div>
+        <div class="v5-hero-content">
+          <h1 id="hero-title"><span>Not just their name</span><span>in a story.</span><em>Their face in it.</em></h1>
+          <p class="v5-hero-copy">Created from their photo, favorite things, and world—then checked by a real person before delivery.</p>
+          <div class="v5-hero-actions">
+            <a class="v5-button v5-hero-primary" href="#intake">Create Their Book</a>
+            <a class="v5-text-link" href="#examples">See a real book <span aria-hidden="true">→</span></a>
           </div>
+          <p class="v5-price-note">From €49 · Digital book in 24–48h</p>
+          <ul class="v5-trust-line" aria-label="Key assurances">
+            <li><span class="material-symbols-outlined" aria-hidden="true">verified_user</span>Human reviewed</li>
+            <li><span class="material-symbols-outlined" aria-hidden="true">lock</span>Secure photo handling</li>
+            <li><span class="material-symbols-outlined" aria-hidden="true">auto_stories</span>Optional hardcover</li>
+          </ul>
+        </div>
+        <img class="v5-hero-image" src="assets/hero-child-book.webp" width="1536" height="1024" fetchpriority="high" alt="Child reading a glowing storybook beneath a starry sky" />
+      </section>
 
-          <figure class="v3-hero-art">
-            <img
-              class="v3-hero-image"
-              src="assets/hero-child-book.webp"
-              width="1536"
-              height="1024"
-              fetchpriority="high"
-              alt="Child reading a glowing storybook"
-            />
-            <figcaption class="v4-hero-caption">A keepsake made from their world</figcaption>
+      <section class="v5-process" id="how-it-works" aria-labelledby="process-title">
+        <header class="v5-section-heading v5-section-heading-dark">
+          <p class="v5-kicker">Made around who they are</p>
+          <h2 id="process-title">From photo to finished <em>storybook</em></h2>
+          <p>One clear photo becomes a character, a world, and a book made just for them.</p>
+        </header>
+        <div class="v5-process-grid">
+          <figure class="v5-process-step">
+            <img src="assets/proof-photo.webp" width="620" height="620" alt="Clear portrait uploaded for a personalized book" />
+            <figcaption><span>01</span><h3>Upload photo + details</h3></figcaption>
+          </figure>
+          <figure class="v5-process-step">
+            <img src="assets/proof-aiden-anchor.webp" width="705" height="705" alt="Illustrated character created from the child portrait" />
+            <figcaption><span>02</span><h3>Create their likeness</h3></figcaption>
+          </figure>
+          <figure class="v5-process-step">
+            <img src="assets/books/aiden/cover-front.webp" width="1024" height="1024" alt="Aiden Braves the Morning Bell personalized book cover" />
+            <figcaption><span>03</span><h3>Build their story</h3></figcaption>
+          </figure>
+          <figure class="v5-process-step">
+            <img src="assets/books/aiden/page-14.webp" width="1024" height="1024" alt="Finished personalized story page featuring Aiden" />
+            <figcaption><span>04</span><h3>Receive it in 24–48h</h3></figcaption>
           </figure>
         </div>
       </section>
 
-      <section class="proof-section section-shell" id="how-it-works">
-        <div class="section-title centered reveal">
-          <span class="sparkline" aria-hidden="true"></span>
-          <h2>From photo to finished <span class="title-accent title-accent-storybook">storybook</span></h2>
-          <span class="sparkline" aria-hidden="true"></span>
-        </div>
-
-        <div class="proof-flow reveal">
-          <article class="proof-step">
-            <div class="proof-image">
-              <img src="assets/proof-photo.webp" width="620" height="620" alt="Uploaded child portrait" />
-            </div>
-            <div class="proof-caption">
-              <span>1</span>
-              <p>Upload photo + details</p>
-            </div>
-          </article>
-          <span class="flow-arrow material-symbols-outlined" aria-hidden="true">arrow_forward</span>
-          <article class="proof-step">
-            <div class="proof-image">
-              <img src="assets/proof-aiden-anchor.webp" width="705" height="705" alt="Illustrated likeness of Aiden" />
-            </div>
-            <div class="proof-caption">
-              <span>2</span>
-              <p>Create illustrated likeness</p>
-            </div>
-          </article>
-          <span class="flow-arrow material-symbols-outlined" aria-hidden="true">arrow_forward</span>
-          <article class="proof-step">
-            <div class="proof-image cover-proof real-cover-proof">
-              <img src="assets/books/aiden/cover-front.webp" width="1024" height="1024" alt="Aiden Braves the Morning Bell book cover" />
-            </div>
-            <div class="proof-caption">
-              <span>3</span>
-              <p>Build personalized story</p>
-            </div>
-          </article>
-          <span class="flow-arrow material-symbols-outlined" aria-hidden="true">arrow_forward</span>
-          <article class="proof-step">
-            <div class="proof-image">
-              <img src="assets/books/aiden/page-14.webp" width="1024" height="1024" alt="Aiden soccer story scene" />
-            </div>
-            <div class="proof-caption">
-              <span>4</span>
-              <p>Receive book in 24–48h</p>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="examples section-shell" id="examples">
-        <div class="example-intro reveal">
-          <h2>Example books</h2>
-          <span class="gold-rule" aria-hidden="true"></span>
-          <p>Flip through a real MirrorTale book below to see the story quality, personalization, and finished pages your child receives.</p>
-          <a
-            class="button button-outline"
-            href="#noah-flipbook"
-            data-preview-target="noah-flipbook"
-            data-book-key="elena"
-          >
-            View Book Preview
-          </a>
-        </div>
-
-        <div class="example-gallery reveal">
-          <p class="example-instruction">
-            Click or tap any cover to open the interactive book preview below.
-          </p>
-
+      <section class="v5-examples" id="examples" aria-labelledby="examples-title">
+        <div class="v5-examples-inner">
+          <header class="v5-section-heading v5-section-heading-light">
+            <p class="v5-kicker">Real books, real pages</p>
+            <h2 id="examples-title">See what their story could feel like</h2>
+            <p>Choose a cover, then tap or swipe through a finished MirrorTale book.</p>
+          </header>
           <div class="book-rack" data-pdf-flipbook-section="pending-provided-pdfs">
-            <article
-              class="example-book real-book"
-              data-book-slot="aiden"
-              aria-controls="noah-flipbook"
-            >
-              <a
-                class="example-book-link"
-                href="#noah-flipbook"
-                data-preview-target="noah-flipbook"
-                data-book-key="aiden"
-                aria-label="Open Aiden Braves the Morning Bell book preview"
-              >
-                <img
-                  src="assets/books/aiden/cover-front.webp"
-                  width="1024"
-                  height="1024"
-                  alt="Aiden Braves the Morning Bell book cover"
-                />
-                <span class="example-book-badge">Tap to preview</span>
+            <article class="example-book real-book" data-book-slot="aiden" aria-controls="noah-flipbook">
+              <a class="example-book-link" href="#noah-flipbook" data-preview-target="noah-flipbook" data-book-key="aiden" aria-label="Preview Aiden Braves the Morning Bell">
+                <img src="assets/books/aiden/cover-front.webp" width="1024" height="1024" alt="Aiden Braves the Morning Bell book cover" />
+                <span>Preview Aiden</span>
               </a>
             </article>
-            <article
-              class="example-book featured-book real-book"
-              data-book-slot="elena"
-              aria-controls="noah-flipbook"
-            >
-              <a
-                class="example-book-link"
-                href="#noah-flipbook"
-                data-preview-target="noah-flipbook"
-                data-book-key="elena"
-                aria-label="Open Elena Stirs Up a Friendship book preview"
-              >
-                <img
-                  src="assets/books/elena/cover-front.webp"
-                  width="1024"
-                  height="1024"
-                  alt="Elena Stirs Up a Friendship book cover"
-                />
-                <span class="example-book-badge">Previewing</span>
+            <article class="example-book featured-book real-book" data-book-slot="elena" aria-controls="noah-flipbook">
+              <a class="example-book-link" href="#noah-flipbook" data-preview-target="noah-flipbook" data-book-key="elena" aria-label="Preview Elena Stirs Up a Friendship">
+                <img src="assets/books/elena/cover-front.webp" width="1024" height="1024" alt="Elena Stirs Up a Friendship book cover" />
+                <span>Preview Elena</span>
               </a>
             </article>
-            <article
-              class="example-book real-book"
-              data-book-slot="noah"
-              data-pdf-cover="Noah_Cover_Spread.pdf"
-              data-pdf-interior="Noah_Interior_Pages.pdf"
-              aria-controls="noah-flipbook"
-            >
-              <a
-                class="example-book-link"
-                href="#noah-flipbook"
-                data-preview-target="noah-flipbook"
-                data-book-key="noah"
-                aria-label="Open Noah Rides the Silver Wind book preview"
-              >
-                <img
-                  src="assets/books/noah/cover-front.webp"
-                  width="1061"
-                  height="1144"
-                  alt="Noah Rides the Silver Wind book cover"
-                />
-                <span class="example-book-badge">Tap to preview</span>
+            <article class="example-book real-book" data-book-slot="noah" aria-controls="noah-flipbook">
+              <a class="example-book-link" href="#noah-flipbook" data-preview-target="noah-flipbook" data-book-key="noah" aria-label="Preview Noah Rides the Silver Wind">
+                <img src="assets/books/noah/cover-front.webp" width="1061" height="1144" alt="Noah Rides the Silver Wind book cover" />
+                <span>Preview Noah</span>
               </a>
             </article>
           </div>
-        </div>
-
-        <div class="flipbook-viewer reveal" id="noah-flipbook" data-book="elena">
-          <div class="flipbook-preview-header" aria-live="polite">
-            <span class="mini-kicker">Book preview</span>
-            <h3 id="active-preview-title">
-              <span class="preview-title-book">Elena Stirs Up a Friendship</span>
-            </h3>
-            <p id="active-preview-helper">Tap or swipe to turn.</p>
-          </div>
-          <div class="flipbook-stage" aria-live="polite">
-            <div class="pageflip-shell" id="noah-pageflip-shell">
-              <div class="pageflip-book" id="noah-pageflip" aria-label="Interactive Elena Stirs Up a Friendship flipbook">
-                <div class="pageflip-loading">Loading book preview...</div>
+          <div class="flipbook-viewer" id="noah-flipbook" data-book="elena">
+            <div class="flipbook-preview-header" aria-live="polite">
+              <p class="v5-kicker">Now previewing</p>
+              <h3 id="active-preview-title"><span class="preview-title-book">Elena Stirs Up a Friendship</span></h3>
+              <p id="active-preview-helper">Tap or swipe to turn.</p>
+            </div>
+            <div class="flipbook-stage">
+              <div class="pageflip-shell" id="noah-pageflip-shell">
+                <div class="pageflip-book" id="noah-pageflip" aria-label="Interactive Elena book preview"><div class="pageflip-loading">Loading book preview…</div></div>
               </div>
             </div>
-          </div>
-          <div
-            class="mobile-book-reader"
-            id="mobile-book-reader"
-            tabindex="0"
-            role="group"
-            aria-label="Mobile Elena Stirs Up a Friendship book preview"
-            aria-describedby="mobile-book-help"
-          >
-            <div class="mobile-book-frame">
-              <span class="mobile-book-spine" aria-hidden="true"></span>
-              <span class="mobile-page-depth mobile-page-depth-right" aria-hidden="true"></span>
-              <span class="mobile-page-depth mobile-page-depth-bottom" aria-hidden="true"></span>
-              <img
-                class="mobile-book-image"
-                src="assets/books/elena/cover-front.webp"
-                width="1024"
-                height="1024"
-                alt="Elena Stirs Up a Friendship front cover"
-                draggable="false"
-              />
-              <span class="mobile-page-turn-sheet" aria-hidden="true"></span>
-              <span class="mobile-tap-hint" aria-hidden="true">Tap to open</span>
+            <div class="mobile-book-reader" id="mobile-book-reader" tabindex="0" role="group" aria-label="Mobile Elena book preview" aria-describedby="mobile-book-help">
+              <div class="mobile-book-frame">
+                <img class="mobile-book-image" src="assets/books/elena/cover-front.webp" width="1024" height="1024" alt="Elena Stirs Up a Friendship front cover" draggable="false" />
+                <span class="mobile-page-turn-sheet" aria-hidden="true"></span>
+                <span class="mobile-tap-hint" aria-hidden="true">Tap to open</span>
+              </div>
+              <p class="mobile-book-progress" id="mobile-book-progress">Cover</p>
+              <p class="visually-hidden" id="mobile-book-help">Tap the right side or swipe left to turn forward. Tap the left side or swipe right to go back.</p>
             </div>
-            <p class="mobile-book-progress" id="mobile-book-progress">Cover</p>
-            <p class="visually-hidden" id="mobile-book-help">
-              Tap the right side or swipe left to turn forward. Tap the left side or swipe right to go back.
-            </p>
-          </div>
-          <span class="visually-hidden" id="noah-page-count" aria-live="polite">Cover</span>
-        </div>
-      </section>
-
-      <section class="moments section-shell" id="moments" aria-labelledby="moments-title">
-        <div class="section-title centered reveal">
-          <span class="sparkline" aria-hidden="true"></span>
-          <h2 id="moments-title">Made for moments parents remember</h2>
-          <span class="sparkline" aria-hidden="true"></span>
-        </div>
-        <div class="moments-grid reveal">
-          <article>
-            <span class="trust-orb" aria-hidden="true">
-              <span class="material-symbols-outlined section-icon">bedtime</span>
-            </span>
-            <h3>Bedtime feels familiar</h3>
-            <p>A custom bedtime-routine story can turn pajamas, brushing teeth, and lights-out into a gentle adventure your child recognizes.</p>
-          </article>
-          <article>
-            <span class="trust-orb" aria-hidden="true">
-              <span class="material-symbols-outlined section-icon">auto_stories</span>
-            </span>
-            <h3>A grandparent gift with heart</h3>
-            <p>Choose the hardcover when you want a keepsake grandparents can give, read aloud, and keep in the family memory box.</p>
-          </article>
-          <article>
-            <span class="trust-orb" aria-hidden="true">
-              <span class="material-symbols-outlined section-icon">face</span>
-            </span>
-            <h3>A hero they recognize</h3>
-            <p>The illustrated character is crafted from your child’s photo, so the story feels like theirs instead of a simple name-swap book.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="cta-strip section-shell reveal">
-        <p>Ready to create a book for your child?</p>
-        <a class="button button-gold" href="#intake">Start Your Book</a>
-      </section>
-
-      <section class="trust section-shell" id="trust">
-        <div class="section-title centered reveal">
-          <h2>
-            Why parents choose
-            <span class="brand-heading" aria-label="MirrorTale">
-              <span class="brand-lockup">
-                <span class="brand-word brand-mirror">Mirror</span>
-                <span class="brand-word brand-tale">Tale</span>
-              </span>
-            </span>
-          </h2>
-        </div>
-        <div class="trust-grid reveal">
-          <article>
-            <span class="trust-orb" aria-hidden="true">
-              <span class="material-symbols-outlined section-icon">face</span>
-            </span>
-            <h3>Looks like<br />your child</h3>
-            <p>Created from their real photo, not a generic avatar.</p>
-          </article>
-          <article>
-            <span class="trust-orb" aria-hidden="true">
-              <span class="material-symbols-outlined section-icon">favorite</span>
-            </span>
-            <h3>Real details<br />woven in</h3>
-            <p>Names, interests, and family notes shape the story.</p>
-          </article>
-          <article>
-            <span class="trust-orb" aria-hidden="true">
-              <span class="material-symbols-outlined section-icon">star</span>
-            </span>
-            <h3>The same child,<br />every page</h3>
-            <p>Your child’s character stays recognizable throughout the book.</p>
-          </article>
-          <article>
-            <span class="trust-orb" aria-hidden="true">
-              <span class="material-symbols-outlined section-icon">verified_user</span>
-            </span>
-            <h3>Human checked<br />before delivery</h3>
-            <p>Every finished book gets a final quality review.</p>
-          </article>
-          <article>
-            <span class="trust-orb" aria-hidden="true">
-              <span class="material-symbols-outlined section-icon">menu_book</span>
-            </span>
-            <h3>Premium hardcover,<br />made to keep</h3>
-            <p>Choose print when you want a gift-ready treasure for their shelf.</p>
-          </article>
-          <article>
-            <span class="trust-orb" aria-hidden="true">
-              <span class="material-symbols-outlined section-icon">lock</span>
-            </span>
-            <h3>Secure photo<br />handling</h3>
-            <p>Your photos are used only to create the book.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="pricing section-shell" id="pricing">
-        <div class="pricing-layout reveal">
-          <div class="pricing-heading">
-            <h2>Start with digital.<br />Upgrade to a keepsake.</h2>
-          </div>
-          <div class="pricing-cards">
-            <article class="price-card">
-              <span class="card-medallion" aria-hidden="true">
-                <svg class="ui-icon"><use href="#icon-book"></use></svg>
-              </span>
-              <h3>Digital Only</h3>
-              <div class="price">49€</div>
-              <ul>
-                <li>
-                  <svg class="ui-icon check-icon" aria-hidden="true"><use href="#icon-check"></use></svg>
-                  <span>Ready-to-print PDF</span>
-                </li>
-                <li>
-                  <svg class="ui-icon check-icon" aria-hidden="true"><use href="#icon-check"></use></svg>
-                  <span>Delivered in 24–48h</span>
-                </li>
-                <li>
-                  <svg class="ui-icon check-icon" aria-hidden="true"><use href="#icon-check"></use></svg>
-                  <span>Premium personalized story tailored for your child</span>
-                </li>
-              </ul>
-              <a class="button button-outline price-card-cta" href="#intake" data-package-target="digital">Choose Digital</a>
-            </article>
-            <article class="price-card premium-card print-card">
-              <span class="print-card-badge">Keepsake upgrade</span>
-              <span class="card-medallion" aria-hidden="true">
-                <svg class="ui-icon"><use href="#icon-book"></use></svg>
-              </span>
-              <h3>Digital + Print</h3>
-              <div class="price">99€ <small>+ VAT</small></div>
-              <p class="print-keepsake-note">For parents who want the story to become a bedtime book they can hold, gift, and keep.</p>
-              <ul>
-                <li>
-                  <svg class="ui-icon check-icon" aria-hidden="true"><use href="#icon-check"></use></svg>
-                  <span>Everything in Digital Only, plus a physical keepsake</span>
-                </li>
-                <li>
-                  <svg class="ui-icon check-icon" aria-hidden="true"><use href="#icon-check"></use></svg>
-                  <span>Square 22 x 22 cm premium color hardcover made for small hands</span>
-                </li>
-                <li>
-                  <svg class="ui-icon check-icon" aria-hidden="true"><use href="#icon-check"></use></svg>
-                  <span>Perfect for bedtime, birthdays, grandparents, and memory boxes</span>
-                </li>
-                <li>
-                  <svg class="ui-icon check-icon" aria-hidden="true"><use href="#icon-check"></use></svg>
-                  <span>Tracked print updates by email after ordering</span>
-                </li>
-              </ul>
-              <a class="button button-gold price-card-cta" href="#intake" data-package-target="print">Choose Hardcover Print</a>
-            </article>
-          </div>
-        </div>
-        <p class="pricing-reassurance reveal">
-          Before delivery, every book is manually reviewed for character likeness. If it clearly misses the mark, we correct it.
-        </p>
-        <p class="pricing-note reveal">
-          Every book is custom-made from your child’s photo and story details. Choose Digital + Print when you want a gift-ready keepsake your child can hold, reread, and keep on their shelf.
-        </p>
-      </section>
-
-      <section class="faq section-shell" id="faq">
-        <div class="faq-layout">
-          <div class="faq-heading reveal">
-            <h2>Frequently<br />asked questions</h2>
-          </div>
-          <div class="faq-list reveal">
-            <details open>
-              <summary>
-                <span>How long does the digital book take?</span>
-                <svg class="ui-icon faq-chevron" aria-hidden="true"><use href="#icon-chevron"></use></svg>
-              </summary>
-              <p>Your cover spread PDF and interior pages PDF are delivered within 24–48h after payment.</p>
-            </details>
-            <details>
-              <summary>
-                <span>Can I print my own book?</span>
-                <svg class="ui-icon faq-chevron" aria-hidden="true"><use href="#icon-chevron"></use></svg>
-              </summary>
-              <p>Yes. The PDF file you receive with the Digital Only version is optimized specifically for printing in a square 22 x 22 cm format.</p>
-            </details>
-            <details>
-              <summary>
-                <span>Where do you ship hardcover books?</span>
-                <svg class="ui-icon faq-chevron" aria-hidden="true"><use href="#icon-chevron"></use></svg>
-              </summary>
-              <p>We are focusing on Europe first for hardcover delivery. The shipping address is collected securely during checkout for print orders.</p>
-            </details>
-            <details>
-              <summary>
-                <span>How long does the hardcover book take?</span>
-                <svg class="ui-icon faq-chevron" aria-hidden="true"><use href="#icon-chevron"></use></svg>
-              </summary>
-              <p>Your digital PDFs are delivered within 24–48h. The physical hardcover book ships separately and can take up to 15 business days to arrive in Europe.</p>
-            </details>
-            <details>
-              <summary>
-                <span>How are my child’s photos used?</span>
-                <svg class="ui-icon faq-chevron" aria-hidden="true"><use href="#icon-chevron"></use></svg>
-              </summary>
-              <p>Your child’s photos and story details are used only to create and review the ordered book.</p>
-            </details>
-            <details>
-              <summary>
-                <span>Will my child’s likeness look the same throughout the book?</span>
-                <svg class="ui-icon faq-chevron" aria-hidden="true"><use href="#icon-chevron"></use></svg>
-              </summary>
-              <p>We build from an anchor likeness and manually review the final book so your child stays recognizable from page to page.</p>
-            </details>
-            <details>
-              <summary>
-                <span>What if the character does not look right?</span>
-                <svg class="ui-icon faq-chevron" aria-hidden="true"><use href="#icon-chevron"></use></svg>
-              </summary>
-              <p>Before delivery, every book is manually reviewed for character likeness. If it clearly misses the mark, we correct it.</p>
-            </details>
-            <details>
-              <summary>
-                <span>What photo works best?</span>
-                <svg class="ui-icon faq-chevron" aria-hidden="true"><use href="#icon-chevron"></use></svg>
-              </summary>
-              <p>A clear, front-facing photo in good light works best. Avoid sunglasses, filters, or covered faces.</p>
-            </details>
-            <details>
-              <summary>
-                <span>Can I preview the book before it’s finalized?</span>
-                <svg class="ui-icon faq-chevron" aria-hidden="true"><use href="#icon-chevron"></use></svg>
-              </summary>
-              <p>The book is manually checked before delivery, and the final PDF is sent digitally for your review and use.</p>
-            </details>
+            <span class="visually-hidden" id="noah-page-count" aria-live="polite">Cover</span>
           </div>
         </div>
       </section>
 
-      <section class="intake section-shell" id="intake">
-        <form class="intake-form reveal" action="#" method="post">
-          <h2>Create your child’s one-of-a-kind storybook</h2>
-          <p class="form-reassurance">
-            Takes about 2 minutes. Secure upload, human quality check, digital PDFs in 24–48h, and optional print fulfillment.
-          </p>
-          <ul class="form-assurance-list" aria-label="Order reassurance">
-            <li>
-              <svg class="ui-icon" aria-hidden="true"><use href="#icon-lock"></use></svg>
-              <span>Photos used only for your book</span>
-            </li>
-            <li>
-              <svg class="ui-icon" aria-hidden="true"><use href="#icon-shield-check"></use></svg>
-              <span>Manually checked before delivery</span>
-            </li>
-            <li>
-              <svg class="ui-icon" aria-hidden="true"><use href="#icon-clock"></use></svg>
-              <span>Digital PDFs in 24–48h</span>
-            </li>
-            <li>
-              <svg class="ui-icon" aria-hidden="true"><use href="#icon-book"></use></svg>
-              <span>Printed book option at checkout</span>
-            </li>
+      <section class="v5-keepsake" aria-labelledby="keepsake-title">
+        <div class="v5-keepsake-media">
+          <img src="assets/v5-hardcover-keepsake.webp" width="1536" height="1024" alt="Elena hardcover personalized storybook" />
+        </div>
+        <div class="v5-keepsake-copy">
+          <p class="v5-kicker">A gift they will not outgrow</p>
+          <h2 id="keepsake-title">A keepsake they’ll treasure forever</h2>
+          <p>Choose hardcover when you want bedtime reading to become something they can hold, gift, and keep.</p>
+          <ul>
+            <li><span class="material-symbols-outlined" aria-hidden="true">menu_book</span><span><strong>Premium hardcover</strong>Durable, full-color, and made for little hands.</span></li>
+            <li><span class="material-symbols-outlined" aria-hidden="true">draw</span><span><strong>Human checked</strong>Every page receives a final quality review.</span></li>
+            <li><span class="material-symbols-outlined" aria-hidden="true">kid_star</span><span><strong>Personalized throughout</strong>The same recognizable child, page after page.</span></li>
           </ul>
-          <p class="form-detail-note">
-            Your child’s name, story details, and dedication guide the personalization, so please double-check spelling before checkout.
-          </p>
+          <a class="v5-button" href="#pricing">See packages</a>
+        </div>
+      </section>
+
+      <section class="v5-trust" aria-labelledby="trust-title">
+        <header class="v5-section-heading v5-section-heading-dark">
+          <p class="v5-kicker">Thoughtful from upload to delivery</p>
+          <h2 id="trust-title">Personal feels better when it also feels safe</h2>
+        </header>
+        <div class="v5-trust-grid">
+          <article><span class="material-symbols-outlined" aria-hidden="true">lock</span><h3>Photos stay private</h3><p>Used only to create and review your child’s book.</p></article>
+          <article><span class="material-symbols-outlined" aria-hidden="true">person_check</span><h3>Reviewed by a person</h3><p>We check likeness and quality before delivery.</p></article>
+          <article><span class="material-symbols-outlined" aria-hidden="true">schedule</span><h3>Digital first</h3><p>Your ready-to-print PDFs arrive in 24–48h.</p></article>
+          <article><span class="material-symbols-outlined" aria-hidden="true">redeem</span><h3>Print when you want it</h3><p>Add a hardcover keepsake with tracked updates.</p></article>
+        </div>
+      </section>
+
+      <section class="v5-pricing" id="pricing" aria-labelledby="pricing-title">
+        <header class="v5-section-heading v5-section-heading-light">
+          <p class="v5-kicker">Simple, transparent pricing</p>
+          <h2 id="pricing-title">Start digital. Add the keepsake.</h2>
+          <p>Every option includes the same personalized story and human quality check.</p>
+        </header>
+        <div class="v5-price-grid">
+          <article class="v5-price-card">
+            <p class="v5-price-label">Digital storybook</p>
+            <h3>€49</h3>
+            <ul><li>Cover and interior PDFs</li><li>Delivered in 24–48h</li><li>Ready to print at 22 × 22 cm</li><li>Human-reviewed before delivery</li></ul>
+            <a class="v5-button v5-button-outline" href="#intake" data-package-target="digital">Choose Digital</a>
+          </article>
+          <article class="v5-price-card v5-price-card-featured">
+            <p class="v5-price-label">Digital + hardcover</p>
+            <h3>€99 <small>+ VAT</small></h3>
+            <ul><li>Everything in Digital</li><li>Premium full-color hardcover</li><li>Gift-ready 22 × 22 cm format</li><li>Tracked print updates by email</li></ul>
+            <a class="v5-button" href="#intake" data-package-target="print">Choose Hardcover</a>
+          </article>
+        </div>
+        <p class="v5-pricing-reassurance">If the likeness clearly misses the mark during our review, we correct it before delivery.</p>
+      </section>
+
+      <section class="v5-faq" id="faq" aria-labelledby="faq-title">
+        <header class="v5-section-heading v5-section-heading-dark">
+          <p class="v5-kicker">Questions, answered</p>
+          <h2 id="faq-title">Before you begin</h2>
+        </header>
+        <div class="v5-faq-list">
+          <details open><summary>What photo works best?<span class="material-symbols-outlined" aria-hidden="true">add</span></summary><p>A clear, front-facing photo in good light works best. Avoid sunglasses, filters, or covered faces.</p></details>
+          <details><summary>How are my child’s photos used?<span class="material-symbols-outlined" aria-hidden="true">add</span></summary><p>Your photos and story details are used only to create and review the ordered book.</p></details>
+          <details><summary>How long does the book take?<span class="material-symbols-outlined" aria-hidden="true">add</span></summary><p>Digital PDFs arrive within 24–48h after payment. Hardcover delivery can take up to 15 business days in Europe.</p></details>
+          <details><summary>What if the likeness does not look right?<span class="material-symbols-outlined" aria-hidden="true">add</span></summary><p>Every book is reviewed before delivery. If the result clearly misses the target, we correct it.</p></details>
+        </div>
+      </section>
+
+      <section class="v5-intake" id="intake" aria-labelledby="intake-title">
+        <div class="v5-intake-intro">
+          <p class="v5-kicker">About two minutes</p>
+          <h2 id="intake-title">Tell us who the story is for</h2>
+          <p>Share a clear photo, what they love, and the world you want us to create. We’ll take care of the rest.</p>
+          <ol class="v5-form-progress" aria-label="Order steps"><li class="is-current">Their details</li><li>Story</li><li>Photo</li><li>Package</li></ol>
+          <div class="v5-intake-assurance"><span class="material-symbols-outlined" aria-hidden="true">lock</span><p><strong>Private by design</strong>Your upload is used only for this book.</p></div>
+        </div>
+        <form class="intake-form" action="#" method="post">
           <div class="form-columns">
             <fieldset>
-              <legend>Parent details</legend>
-              <label>
-                Parent / Guardian Name
-                <input type="text" name="parent-name" placeholder="Enter your name" required />
-              </label>
-              <label>
-                Email Address
-                <input type="email" name="email" placeholder="Enter your email" required />
-              </label>
+              <legend><span>01</span> Parent and child</legend>
+              <div class="v5-field-grid">
+                <label>Parent / Guardian Name<input type="text" name="parent-name" autocomplete="name" placeholder="Your name" required /></label>
+                <label>Email Address<input type="email" name="email" autocomplete="email" placeholder="you@example.com" required /></label>
+                <label>Child’s Name<input type="text" name="child-name" placeholder="Their first name" required /></label>
+                <label>Age<select name="age" required><option value="">Select age</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8+</option></select></label>
+                <label>Gender<select name="gender" required translate="no"><option value="">Select gender</option><option value="Boy">Boy</option><option value="Girl">Girl</option></select></label>
+                <label>Book language<select name="book-language" required><option value="en" selected>English</option><option value="nl">Dutch</option><option value="fr">French</option><option value="de">German</option><option value="es">Spanish</option><option value="it">Italian</option><option value="pt">Portuguese</option></select></label>
+              </div>
             </fieldset>
-
             <fieldset>
-              <legend>Child details</legend>
-              <label>
-                Child’s Name
-                <input type="text" name="child-name" placeholder="Enter child’s name" required />
-              </label>
-              <label>
-                Gender
-                <select name="gender" required translate="no">
-                  <option value="">Select gender</option>
-                  <option value="Boy">Boy</option>
-                  <option value="Girl">Girl</option>
-                </select>
-              </label>
-              <label>
-                Age
-                <select name="age" required>
-                  <option value="">Select age</option>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                  <option>6</option>
-                  <option>7</option>
-                  <option>8+</option>
-                </select>
-              </label>
-              <label>
-                Book language
-                <select name="book-language" required>
-                  <option value="en" selected>English</option>
-                  <option value="nl">Dutch</option>
-                  <option value="fr">French</option>
-                  <option value="de">German</option>
-                  <option value="es">Spanish</option>
-                  <option value="it">Italian</option>
-                  <option value="pt">Portuguese</option>
-                </select>
-                <small class="form-hint">
-                  The story text will be written in this language.
-                </small>
-              </label>
+              <legend><span>02</span> Their story</legend>
+              <label>What should the story be about?<textarea name="theme" rows="3" placeholder="A bedtime adventure, a first day at school, a trip to the zoo…" required></textarea></label>
+              <label>What do they absolutely love?<input type="text" name="interests" placeholder="Animals, colors, toys, places, hobbies…" required /></label>
+              <label>Dedication message<textarea name="dedication" rows="3" placeholder="For Leo, whose courage and imagination light up every room." required></textarea></label>
             </fieldset>
-
             <fieldset>
-              <legend>Story details</legend>
-              <label>
-                What should the story be about?
-                <textarea
-                  name="theme"
-                  rows="2"
-                  placeholder="Example: personal hygiene, bedtime routine, potty training, trip to the zoo..."
-                  required
-                ></textarea>
-                <small class="form-hint">
-                  Suggestions: the everyday lesson, emotional goal, setting, adventure style, or moment you want the story to celebrate.
-                </small>
-              </label>
-              <label>
-                What does your child absolutely love?
-                <input
-                  type="text"
-                  name="interests"
-                  placeholder="Hobbies, toys, activities, animals, colors, favorite places..."
-                  required
-                />
-              </label>
-              <label>
-                Dedication Message
-                <textarea
-                  name="dedication"
-                  rows="2"
-                  placeholder="Example: For Leo, whose courage and imagination light up every room."
-                  required
-                ></textarea>
-                <small class="form-hint">
-                  This appears on the first page exactly as typed, so write it in the selected book language.
-                </small>
-              </label>
-            </fieldset>
-
-            <fieldset>
-              <legend>Upload child photo</legend>
+              <legend><span>03</span> Their photo</legend>
               <label class="upload-card">
-                <svg class="ui-icon upload-cloud" aria-hidden="true"><use href="#icon-upload"></use></svg>
-                <strong data-upload-title>Click to upload</strong>
-                <em data-upload-detail>A clear, front-facing extreme close-up photo of the child with good lighting works best. Your photos are handled securely and used only to create your child's book.</em>
+                <span class="material-symbols-outlined" aria-hidden="true">add_photo_alternate</span>
+                <strong data-upload-title>Choose a clear photo</strong>
+                <em data-upload-detail>Front-facing, well lit, no filters or sunglasses. JPG, PNG, HEIC, or HEIF.</em>
                 <input type="file" name="child-photo" accept="image/*,.heic,.heif" required />
               </label>
               <p class="upload-status" data-upload-status aria-live="polite"></p>
             </fieldset>
-
             <fieldset>
-              <legend>Choose your package</legend>
+              <legend><span>04</span> Choose your package</legend>
               <div class="package-selector" aria-label="Choose a package">
-                <label>
-                  <input type="radio" name="package" value="digital" checked />
-                  <span>
-                    <strong>Digital Only - 49€</strong>
-                    <em>Ready-to-print PDF</em>
-                  </span>
-                </label>
-                <label>
-                  <input type="radio" name="package" value="print" />
-                  <span>
-                    <strong>Digital + Print - 99€ + VAT</strong>
-                    <em>PDFs first, then a keepsake print with tracking</em>
-                  </span>
-                </label>
+                <label><input type="radio" name="package" value="digital" checked /><span><strong>Digital · €49</strong><em>Ready-to-print PDFs in 24–48h</em></span></label>
+                <label><input type="radio" name="package" value="print" /><span><strong>Digital + Hardcover · €99 + VAT</strong><em>PDFs first, then the gift-ready printed book</em></span></label>
               </div>
-              <label class="consent-check">
-                <input type="checkbox" name="photo-consent" value="accepted" required />
-                <span>
-                  I confirm I am the parent/guardian or have permission to upload this
-                  child's photo, and I agree to the
-                  <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a>
-                  and
-                  <a href="terms.html" target="_blank" rel="noopener">Terms</a>.
-                </span>
-              </label>
-              <label class="consent-check details-confirmation">
-                <input type="checkbox" name="details-confirmed" value="accepted" required />
-                <span>
-                  I have double-checked the child’s name, story details, dedication,
-                  and spelling, and confirm everything is correct before checkout.
-                </span>
-              </label>
-              <p class="checkout-reassurance">
-                Takes about 2 minutes. Your photos are used only for your book.
-              </p>
-              <button class="button button-gold form-submit" type="submit">
-                Proceed to Checkout
-              </button>
-              <p class="secure-note">
-                <svg class="ui-icon secure-icon" aria-hidden="true"><use href="#icon-lock"></use></svg>
-                Secure &amp; Private
-              </p>
+              <label class="consent-check"><input type="checkbox" name="photo-consent" value="accepted" required /><span>I am the parent/guardian or have permission to upload this child’s photo, and I agree to the <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a> and <a href="terms.html" target="_blank" rel="noopener">Terms</a>.</span></label>
+              <label class="consent-check"><input type="checkbox" name="details-confirmed" value="accepted" required /><span>I have checked the child’s name, story details, dedication, and spelling.</span></label>
+              <button class="v5-button form-submit" type="submit">Proceed to Secure Checkout</button>
+              <p class="secure-note"><span class="material-symbols-outlined" aria-hidden="true">lock</span>Secure and private</p>
               <p class="form-status" aria-live="polite"></p>
             </fieldset>
           </div>
         </form>
       </section>
 
-      <section class="contact section-shell" id="contact">
-        <div class="contact-card reveal">
-          <div class="contact-copy">
-            <span class="mini-kicker">Contact us</span>
-            <h2>Questions before you create?</h2>
-            <p>
-              We are happy to help with photo choice, story ideas, delivery, or choosing the
-              right package before you begin.
-            </p>
-            <div class="contact-links" aria-label="Contact options">
-              <a href="mailto:hello@mirrortale.com">
-                <svg class="ui-icon" aria-hidden="true"><use href="#icon-mail"></use></svg>
-                <span>
-                  <strong>Email us</strong>
-                  <em>hello@mirrortale.com</em>
-                </span>
-              </a>
-              <a href="#faq">
-                <svg class="ui-icon" aria-hidden="true"><use href="#icon-message"></use></svg>
-                <span>
-                  <strong>Quick answers</strong>
-                  <em>Visit the FAQ</em>
-                </span>
-              </a>
-            </div>
-          </div>
-
-          <form class="contact-form" action="#" method="post">
-            <label>
-              Your Name
-              <input type="text" name="contact-name" placeholder="Enter your name" />
-            </label>
-            <label>
-              Email Address
-              <input type="email" name="contact-email" placeholder="Enter your email" required />
-            </label>
-            <label class="contact-message-field">
-              How can we help?
-              <textarea name="contact-message" placeholder="Ask us anything about creating your child’s book" required></textarea>
-            </label>
-            <button class="button button-gold contact-submit" type="submit">Send Message</button>
-            <p class="contact-note">We will only use your message to reply to your question.</p>
-            <p class="contact-status" aria-live="polite"></p>
-          </form>
-        </div>
+      <section class="v5-contact" id="contact" aria-labelledby="contact-title">
+        <div><p class="v5-kicker">Here if you need us</p><h2 id="contact-title">Questions before you create?</h2><p>Ask about photo choice, story ideas, delivery, or which package fits best.</p></div>
+        <form class="contact-form" action="#" method="post">
+          <label>Your name<input type="text" name="contact-name" placeholder="Your name" /></label>
+          <label>Email address<input type="email" name="contact-email" placeholder="you@example.com" required /></label>
+          <label>How can we help?<textarea name="contact-message" rows="4" placeholder="Ask us anything" required></textarea></label>
+          <button class="v5-button contact-submit" type="submit">Send Message</button>
+          <p class="contact-note">We only use your message to reply.</p><p class="contact-status" aria-live="polite"></p>
+        </form>
       </section>
     </main>
 
-    <a class="v3-mobile-sticky-cta" href="#intake" aria-label="Create my MirrorTale book">
-      <span>
-        <strong>Create Their Book</strong>
-        <em>From €49</em>
-      </span>
-      <svg class="ui-icon" aria-hidden="true"><use href="#icon-arrow"></use></svg>
-    </a>
+    <a class="v5-sticky-cta" href="#intake" aria-label="Create their book from €49"><span><strong>Create Their Book</strong><em>From €49</em></span><span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a>
 
-    <footer class="site-footer">
-      <div class="footer-inner section-shell">
-        <span><svg class="ui-icon trust-icon" aria-hidden="true"><use href="#icon-shield-check"></use></svg> Secure &amp; Private</span>
-        <span><svg class="ui-icon trust-icon" aria-hidden="true"><use href="#icon-star"></use></svg> Made with Care</span>
-        <span><svg class="ui-icon trust-icon" aria-hidden="true"><use href="#icon-clock"></use></svg> Fast Digital Delivery</span>
-        <span><svg class="ui-icon trust-icon" aria-hidden="true"><use href="#icon-book"></use></svg> Premium Quality</span>
-      </div>
-      <nav class="footer-legal" aria-label="Legal links">
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="terms.html">Terms</a>
-      </nav>
-      <p>© 2026 MirrorTale. All rights reserved.</p>
-    </footer>
+    <footer class="v5-footer"><a class="v5-wordmark" href="#top" aria-label="MirrorTale home"><span>Mirror</span><em>Tale</em></a><p>One-of-one stories, made with care.</p><nav aria-label="Legal links"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="#contact">Contact</a></nav><small>© 2026 MirrorTale. All rights reserved.</small></footer>
 
     <script src="analytics.js?v=ga4-consent-1"></script>
     <script src="assets/vendor/page-flip.browser.js"></script>
-    <script src="script.js?v=site-language-analytics-2"></script>
-    <script src="landing-v4.js?v=2"></script>
+    <script src="script.js?v=v5-3"></script>
+    <script src="landing-v5.js?v=2"></script>
   </body>
 </html>
