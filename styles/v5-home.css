@@ -186,6 +186,7 @@ input, select, textarea { width: 100%; border: 1px solid rgba(24, 52, 46, .32); 
 input, select { min-height: 54px; padding: 0 15px; }
 textarea { min-height: 120px; padding: 14px 15px; resize: vertical; }
 input::placeholder, textarea::placeholder { color: #75817d; }
+.form-hint { color: var(--muted-dark); font-size: .9rem; font-weight: 500; line-height: 1.35; }
 .intake-form fieldset > label + label { margin-top: 20px; }
 .upload-card { display: grid !important; min-height: 235px; place-items: center; align-content: center; padding: 36px; border: 1px dashed rgba(24, 52, 46, .45); border-radius: 18px; background: #fffdf8; text-align: center; cursor: pointer; }
 .upload-card .material-symbols-outlined { color: var(--copper); font-size: 44px; }

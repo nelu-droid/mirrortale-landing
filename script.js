@@ -35,6 +35,8 @@ const getSelectedPackageValue = () =>
   form?.querySelector('input[name="package"]:checked')?.value || "";
 const getSelectedBookLanguage = () =>
   form?.querySelector('select[name="book-language"]')?.value || "";
+const getSelectedStoryStyle = () =>
+  form?.querySelector('select[name="story-style"]')?.value || "";
 const apiEndpoints = {
   orders: "/orders",
   contact: "/contact",
@@ -172,6 +174,11 @@ const siteLanguageCopy = {
     "form.age.placeholder": "Select age",
     "form.bookLanguage": "Book language",
     "form.bookLanguage.hint": "The story text will be written in this language.",
+    "form.storyStyle": "Story style",
+    "form.storyStyle.placeholder": "Choose story style",
+    "form.storyStyle.rhyming": "Rhyming",
+    "form.storyStyle.nonRhyming": "Non-rhyming",
+    "form.storyStyle.hint": "Choose rhyming verse or natural non-rhyming prose.",
     "form.story": "Story details",
     "form.story.about": "What should the story be about?",
     "form.story.about.placeholder": "Example: personal hygiene, bedtime routine, potty training, trip to the zoo...",
@@ -374,6 +381,11 @@ const siteLanguageCopy = {
     "form.age.placeholder": "Selecteer leeftijd",
     "form.bookLanguage": "Boektaal",
     "form.bookLanguage.hint": "De verhaaltekst wordt in deze taal geschreven.",
+    "form.storyStyle": "Verhaalstijl",
+    "form.storyStyle.placeholder": "Kies verhaalstijl",
+    "form.storyStyle.rhyming": "Op rijm",
+    "form.storyStyle.nonRhyming": "Niet op rijm",
+    "form.storyStyle.hint": "Kies rijmende verzen of natuurlijk proza zonder rijm.",
     "form.story": "Verhaaldetails",
     "form.story.about": "Waar moet het verhaal over gaan?",
     "form.story.about.placeholder": "Voorbeeld: persoonlijke hygiëne, bedtijdroutine, zindelijkheid, uitstap naar de zoo...",
@@ -576,6 +588,11 @@ const siteLanguageCopy = {
     "form.age.placeholder": "Sélectionner l'âge",
     "form.bookLanguage": "Langue du livre",
     "form.bookLanguage.hint": "Le texte de l'histoire sera écrit dans cette langue.",
+    "form.storyStyle": "Style de récit",
+    "form.storyStyle.placeholder": "Choisir le style",
+    "form.storyStyle.rhyming": "En rimes",
+    "form.storyStyle.nonRhyming": "Sans rimes",
+    "form.storyStyle.hint": "Choisissez des vers rimés ou une prose naturelle sans rimes.",
     "form.story": "Détails de l'histoire",
     "form.story.about": "De quoi doit parler l'histoire ?",
     "form.story.about.placeholder": "Exemple : hygiène, routine du coucher, propreté, sortie au zoo...",
@@ -778,6 +795,11 @@ const siteLanguageCopy = {
     "form.age.placeholder": "Alter wählen",
     "form.bookLanguage": "Buchsprache",
     "form.bookLanguage.hint": "Der Storytext wird in dieser Sprache geschrieben.",
+    "form.storyStyle": "Erzählstil",
+    "form.storyStyle.placeholder": "Erzählstil wählen",
+    "form.storyStyle.rhyming": "Reimend",
+    "form.storyStyle.nonRhyming": "Nicht reimend",
+    "form.storyStyle.hint": "Wählen Sie gereimte Verse oder natürliche Prosa ohne Reime.",
     "form.story": "Storydetails",
     "form.story.about": "Worum soll die Geschichte gehen?",
     "form.story.about.placeholder": "Beispiel: Hygiene, Abendroutine, Töpfchentraining, Ausflug in den Zoo...",
@@ -1129,6 +1151,11 @@ const siteLanguageBindings = [
   { key: "form.age.placeholder", selector: 'select[name="age"] option[value=""]' },
   { key: "form.bookLanguage", labelFor: 'select[name="book-language"]' },
   { key: "form.bookLanguage.hint", selector: 'select[name="book-language"] + .form-hint' },
+  { key: "form.storyStyle", labelFor: 'select[name="story-style"]' },
+  { key: "form.storyStyle.placeholder", selector: 'select[name="story-style"] option[value=""]' },
+  { key: "form.storyStyle.rhyming", selector: 'select[name="story-style"] option[value="rhyming"]' },
+  { key: "form.storyStyle.nonRhyming", selector: 'select[name="story-style"] option[value="non_rhyming"]' },
+  { key: "form.storyStyle.hint", selector: 'select[name="story-style"] + .form-hint' },
   { key: "form.story", selector: ".form-columns fieldset:nth-child(3) legend" },
   { key: "form.story.about", labelFor: 'textarea[name="theme"]' },
   { key: "form.story.about.placeholder", selector: 'textarea[name="theme"]', attr: "placeholder" },
@@ -1287,6 +1314,11 @@ const v5SiteLanguageBindings = [
   { key: "form.gender.boy", selector: 'select[name="gender"] option[value="Boy"]' },
   { key: "form.gender.girl", selector: 'select[name="gender"] option[value="Girl"]' },
   { key: "form.bookLanguage", labelFor: 'select[name="book-language"]' },
+  { key: "form.storyStyle", labelFor: 'select[name="story-style"]' },
+  { key: "form.storyStyle.placeholder", selector: 'select[name="story-style"] option[value=""]' },
+  { key: "form.storyStyle.rhyming", selector: 'select[name="story-style"] option[value="rhyming"]' },
+  { key: "form.storyStyle.nonRhyming", selector: 'select[name="story-style"] option[value="non_rhyming"]' },
+  { key: "form.storyStyle.hint", selector: 'select[name="story-style"] + .form-hint' },
   { key: "form.story.about", labelFor: 'textarea[name="theme"]' },
   { key: "form.story.about.placeholder", selector: 'textarea[name="theme"]', attr: "placeholder" },
   { key: "form.story.loves", labelFor: 'input[name="interests"]' },
@@ -2993,6 +3025,7 @@ form?.addEventListener("submit", async (event) => {
   const checkoutAnalyticsParams = {
     package: getSelectedPackageValue(),
     book_language: getSelectedBookLanguage(),
+    story_style: getSelectedStoryStyle(),
     site_language: currentSiteLanguage,
   };
   trackAnalyticsEvent("checkout_started", checkoutAnalyticsParams);
